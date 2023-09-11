@@ -1,3 +1,9 @@
+---
+name: User Story Template
+about: Use this template for creating new User Stories.
+title: "As a _____, I/We want _____"
+---
+
 <!-- Title : As a _____, I/We want _____-->
 
 **GIVEN** (something that is assumed or already exists)
