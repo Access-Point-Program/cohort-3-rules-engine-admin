@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/cohort-3-rules-engine-admin.iml" filepath="$PROJECT_DIR$/.idea/cohort-3-rules-engine-admin.iml" />
-      <module fileurl="file://$PROJECT_DIR$/rules-engine/rules-engine.iml" filepath="$PROJECT_DIR$/rules-engine/rules-engine.iml" />
-    </modules>
-  </component>
-</project>
