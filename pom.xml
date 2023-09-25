@@ -51,13 +51,51 @@
 	</dependencies>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>${project.basedir}/front-end/build</directory>
+				<filtering>false</filtering>
+				<targetPath>public/</targetPath>
+			</resource>
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>${frontend-maven-plugin.version}</version>
+				<configuration>
+					<nodeVersion>v16.17.1</nodeVersion>
+					<npmVersion>8.15.0</npmVersion>
+					<workingDirectory>${frontend-src-dir}</workingDirectory>
+					<installDirectory>${project.build.directory}</installDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<id>install-frontend-tools</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>build-frontend</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>prepare-package</phase>
+						<configuration>
+							<arguments>run build</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
-
 </project>
