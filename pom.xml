@@ -14,7 +14,7 @@
 	<name>rules-engine</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>20</java.version>
+		<java.version>17</java.version>
 		<frontend-src-dir>${project.basedir}/front-end</frontend-src-dir>
 		<frontend-maven-plugin.version>1.13.4</frontend-maven-plugin.version>
 	</properties>
