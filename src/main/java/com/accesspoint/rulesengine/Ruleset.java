@@ -3,7 +3,6 @@ package com.accesspoint.rulesengine;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 import lombok.Getter;
@@ -13,11 +12,9 @@ import lombok.Setter;
 @Entity
 public class Ruleset {
 
-    @Getter @Setter private @Id @GeneratedValue Long id;
+    @Getter @Setter private @Id Long id;
 
     @Getter @Setter private String name;
-
-    Ruleset() {}
 
     Ruleset(String name) {
         this.name = name;
