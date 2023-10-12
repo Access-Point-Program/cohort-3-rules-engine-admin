@@ -27,6 +27,8 @@ public class Ruleset {
     @CreationTimestamp
     @Getter @Setter private Timestamp creation_date;
 
+    Ruleset() {}
+
     Ruleset(String name) {
         this.name = name;
     }

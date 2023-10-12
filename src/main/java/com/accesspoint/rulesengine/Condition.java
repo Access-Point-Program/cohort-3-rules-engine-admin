@@ -17,6 +17,7 @@ public class Condition {
 
     @Getter @Setter private ValueType value_type;
 
+    Condition() {}
     Condition(FactType fact_type, ValueType value_type) {
         this.fact_type = fact_type;
         this.value_type = value_type;

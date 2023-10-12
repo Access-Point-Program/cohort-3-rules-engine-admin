@@ -24,6 +24,8 @@ public class Rule {
 
     @Getter @Setter private EventType event;
 
+    Rule() {}
+
     Rule(double priority, EventType event_type) {
         this.priority = priority;
         this.event = event;
