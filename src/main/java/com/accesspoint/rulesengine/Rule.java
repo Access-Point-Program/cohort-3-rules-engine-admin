@@ -16,7 +16,7 @@ public class Rule {
 
     @ManyToOne
     @JoinColumn(name = "ruleset_id")
-    @Getter @Setter private Ruleset ruleset_id;
+    @Getter @Setter private Ruleset ruleset;
 
     @Getter @Setter private double priority;
 
@@ -31,18 +31,18 @@ public class Rule {
             return false;
         Rule rule = (Rule) r;
         return Objects.equals(this.id, rule.id)
-                && Objects.equals(this.ruleset_id, rule.ruleset_id)
+                && Objects.equals(this.ruleset, rule.ruleset)
                 && Objects.equals(this.priority, rule.priority)
                 && Objects.equals(this.event_type, rule.event_type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.ruleset_id, this.priority, this.event_type);
+        return Objects.hash(this.id, this.ruleset, this.priority, this.event_type);
     }
 
     @Override
     public String toString() {
-        return "Rule{" + "id=" + this.id + ", ruleset_id=" + this.ruleset_id + ", priority=" + this.priority + ", event_type=" + this.event_type;
+        return "Rule{" + "id=" + this.id + ", ruleset_id=" + this.ruleset + ", priority=" + this.priority + ", event_type=" + this.event_type;
     }
 }
