@@ -6,3 +6,6 @@ CREATE TABLE ruleset (
 -- Manual insert
 --INSERT INTO public.ruleset VALUES
 --	(DEFAULT, 'Test2');
+
+CREATE TYPE event_type AS ENUM('FORWARD', 'RIGHT', 'LEFT')
+
