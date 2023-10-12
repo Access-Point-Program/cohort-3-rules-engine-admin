@@ -22,13 +22,13 @@ public class Rule {
 
     @Getter @Setter private double priority;
 
-    @Getter @Setter private EventType event;
+    @Getter @Setter private EventType event_type;
 
     Rule() {}
 
     Rule(double priority, EventType event_type) {
         this.priority = priority;
-        this.event = event;
+        this.event_type = event_type;
         // if stuff breaks, add secondary key here
     }
 
@@ -43,16 +43,16 @@ public class Rule {
         return Objects.equals(this.id, rule.id)
                 && Objects.equals(this.ruleset, rule.ruleset)
                 && Objects.equals(this.priority, rule.priority)
-                && Objects.equals(this.event, rule.event);
+                && Objects.equals(this.event_type, rule.event_type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.ruleset, this.priority, this.event);
+        return Objects.hash(this.id, this.ruleset, this.priority, this.event_type);
     }
 
     @Override
     public String toString() {
-        return "Rule{" + "id=" + this.id + ", ruleset_id=" + this.ruleset + ", priority=" + this.priority + ", event_type=" + this.event;
+        return "Rule{" + "id=" + this.id + ", ruleset_id=" + this.ruleset + ", priority=" + this.priority + ", event_type=" + this.event_type;
     }
 }
