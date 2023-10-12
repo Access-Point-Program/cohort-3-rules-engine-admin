@@ -1,17 +1,26 @@
 package com.accesspoint.rulesengine;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Table(name = "ruleset")
 public class Ruleset {
 
     @Getter @Setter private @Id Long id;
+
+    @OneToMany(mappedBy = "ruleset")
+    private Set<Rule> Rules = new HashSet<>();
 
     @Getter @Setter private String name;
 
