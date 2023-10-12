@@ -1,5 +1,3 @@
--- CTRL ALT SHIFT H
-
 CREATE TABLE ruleset (
     id BIGSERIAL PRIMARY KEY,
     name TEXT NOT NULL,
@@ -7,7 +5,6 @@ CREATE TABLE ruleset (
 );
 
 CREATE TYPE EventType AS ENUM('FORWARD', 'RIGHT', 'LEFT');
-
 CREATE TABLE rule (
     id BIGSERIAL PRIMARY KEY,
     ruleset_id BIGSERIAL NOT NULL,
@@ -18,7 +15,6 @@ CREATE TABLE rule (
 
 CREATE TYPE FactType AS ENUM('FRONT', 'RIGHT', 'LEFT', 'BEHIND');
 CREATE TYPE ValueType AS ENUM('WALL', 'EMPTY', 'END');
-
 CREATE TABLE condition (
     id BIGSERIAL PRIMARY KEY,
     rule_id BIGSERIAL NOT NULL,
