@@ -22,6 +22,12 @@ public class Rule {
 
     @Getter @Setter private EventType event_type;
 
+    Rule(double priority, EventType event_type) {
+        this.priority = priority;
+        this.event_type = event_type;
+        // if stuff breaks, add secondary key here
+    }
+
     @Override
     public boolean equals(Object r) {
 
