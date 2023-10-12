@@ -1,7 +1,7 @@
 -- CTRL ALT SHIFT H
 
 CREATE TABLE ruleset (
-    PRIMARY KEY id BIGSERIAL,
+    id BIGSERIAL PRIMARY KEY,
     name TEXT NOT NULL,
 	creation_date TIMESTAMP NOT NULL
 );
@@ -12,7 +12,7 @@ CREATE TABLE rule (
     id BIGSERIAL PRIMARY KEY,
     ruleset_id BIGSERIAL NOT NULL,
 	FOREIGN KEY(ruleset_id) REFERENCES ruleset(id),
-    priority DOUBLE PRECISION NOT NULL,
+    priority DOUBLE PRECISION NOT NULL UNIQUE,
 	event_type EventType NOT NULL
 );
 
