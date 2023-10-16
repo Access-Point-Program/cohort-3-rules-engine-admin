@@ -1,6 +1,9 @@
 package com.accesspoint.rulesengine;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +13,8 @@ import lombok.Setter;
 public class Rule {
 
     @Getter @Setter private @Id Long id;
+    @OneToMany(mappedBy = "rule")
+    private Set<Condition> Conditions = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "ruleset_id")
@@ -18,6 +23,8 @@ public class Rule {
     @Getter @Setter private double priority;
 
     @Getter @Setter private EventType event_type;
+
+    Rule() {}
 
     Rule(double priority, EventType event_type) {
         this.priority = priority;
