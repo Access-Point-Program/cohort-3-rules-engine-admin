@@ -1,4 +1,4 @@
-package com.accesspoint.rulesengine;
+package com.accesspoint.rulesengine.entity;
 
 public enum FactType {
     FRONT,

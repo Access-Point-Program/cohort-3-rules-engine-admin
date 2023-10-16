@@ -1,7 +1,8 @@
-package com.accesspoint.rulesengine;
+package com.accesspoint.rulesengine.modelassembler;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
+import com.accesspoint.rulesengine.entity.Ruleset;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,4 @@ public class RulesetModelAssembler implements RepresentationModelAssembler<Rules
 
         return rulesetModel;
     }
-
-
 }
