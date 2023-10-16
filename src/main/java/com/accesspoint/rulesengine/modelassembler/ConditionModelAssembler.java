@@ -9,7 +9,7 @@ import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ConditionModelAssembler implements RepresentationModelAssembler<Ruleset, EntityModel<Ruleset>>{
+public class ConditionModelAssembler implements RepresentationModelAssembler<Condition, EntityModel<Condition>>{
 
     @Override
     public EntityModel<Condition> toModel(Condition condition) {
