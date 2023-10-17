@@ -1,4 +1,4 @@
-package com.accesspoint.rulesengine;
+package com.accesspoint.rulesengine.entity;
 
 import java.sql.Timestamp;
 import java.util.HashSet;

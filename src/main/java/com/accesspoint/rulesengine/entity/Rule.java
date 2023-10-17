@@ -1,4 +1,4 @@
-package com.accesspoint.rulesengine;
+package com.accesspoint.rulesengine.entity;
 
 import java.util.HashSet;
 import java.util.Objects;
