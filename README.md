@@ -30,51 +30,9 @@ This application will be responsible for creating a User Interface that will all
   - 1 POST endpoint for creating a new Ruleset and Rules.
   - 1 PUT endpoint for updating the Ruleset and Rules.
 
-# Setting Up pgAdmin 4 Database
+# Setting Up PostgreSQL Tables in pgAdmin
 
-**EVERYTHING NOT MENTIONED, LEAVE AS DEFAULT**
-
-Creating Database
-- Right-click PostgreSQL 15 server -> Create -> Database
-- General: Database = rules-engine
-- Save
-
-Creating User
-- Right-click Login/Group Roles -> Create -> Login/Group role
-- General: Name = rules-engine-admin
-- Definition: 
-  - Password = check discord *pinned to team information* 
-  - Connection limit = -1
-- Privileges = Can login, Inherit rights from the parent roles
-- Save
-
-Environmental Variables
-- In Windows search bar, type "Environmental variables"
-- Click "Edit the system environmental variables"
-- Click "Environmental Variables..." button (towards bottom right of screen)
-- Under "System variables" click "New..." button
-  For our Username
-  - Variable name = rules_engine_username
-  - Variable value = our database username (rules-engine-admin)
-  For our Password
-  - Variable name = rules_engine_password
-  - Variable value = same password as before
-MAKE SURE TO PUSH OK TWICE
-
-Creating Server
-- Right-click Servers -> Register -> Server...
-- General: Name = rules-engine
-- Connection:
-  - Host name/address = localhost
-  - LEAVE PORT AS DEFAULT!!!
-  - Maintenance database = postgres
-  - Username = rules-engine-admin
-  - Password = same password as before
-  - Check "Save password?"
-- Save
-
-Creating Tables
-- Right-click rules-engine (database) -> Query Tool
+- Right-click database -> Query Tool
 - Paste:
 
 CREATE TABLE ruleset (
@@ -103,6 +61,6 @@ CREATE TABLE condition (
 );
 
 - Click play button  (Execute/Refresh)
-- Right-click rules-engine (database) -> Refresh
+- Right-click database -> Refresh
 - Verify that ruleset, rule, and condition table are under the Tables tab.
 - Verify that eventtype, facttype and valuetype are under the Types tab. 
