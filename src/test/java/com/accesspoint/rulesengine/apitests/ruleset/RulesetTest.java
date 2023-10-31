@@ -36,14 +36,14 @@ public class RulesetTest {
     }
 
     @Test
-    public void StatusCode200() {
+    public void whenRulesetGETEndpointIsCalled_thenResponseStatusCodeIs200() {
         given()
         .when().get("/ruleset")
         .then().log().all().statusCode(200);
     }
 
     @Test
-    public void RequestBody() {
+    public void whenRulesetGETEndpointCalled_thenResponseBodyContainsCorrectDataAndFormat() {
 
         Ruleset testRuleset = new Ruleset("test");
         testRuleset.setId(100L);
@@ -67,7 +67,7 @@ public class RulesetTest {
     }
 
     @Test
-    public void isResponseTypeJson(){
+    public void whenRulesetGETEndpointCalled_thenResponseBodyIsContentTypeJSON(){
         given()
         .when().get("/ruleset")
         .then().log().headers()
