@@ -15,8 +15,7 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
-		<frontend-src-dir>${project.basedir}/front-end</frontend-src-dir>
-		<frontend-maven-plugin.version>1.13.4</frontend-maven-plugin.version>
+		<frontend-dir>${project.basedir}/front-end</frontend-dir>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -61,47 +60,64 @@
 			<artifactId>rest-assured</artifactId>
 			<version>5.3.1</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>
 		<resources>
+			<!-- Specifying when bundling, include the "front-end/dist/" directory, which is the output build from angular -->
 			<resource>
-				<directory>${project.basedir}/front-end/build</directory>
+				<directory>${frontend-dir}/dist/front-end</directory>
 				<filtering>false</filtering>
 				<targetPath>public/</targetPath>
 			</resource>
+			<!-- Specifying when bundling, include the application.properties file -->
 			<resource>
 				<directory>${project.basedir}/src/main/resources</directory>
 				<filtering>false</filtering>
 			</resource>
 		</resources>
+
 		<plugins>
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
-				<version>${frontend-maven-plugin.version}</version>
+				<version>1.14.2</version>
 				<configuration>
 					<nodeVersion>v16.17.1</nodeVersion>
-					<npmVersion>8.15.0</npmVersion>
-					<workingDirectory>${frontend-src-dir}</workingDirectory>
+					<!--The workingDirectory specifies where the package.json is -->
+					<workingDirectory>${frontend-dir}</workingDirectory>
+					<!--
+						The installDirectory specifies where installed packages should go.
+					 	In this instance, it will make node and npm install into the target folder instead of outside.
+					 -->
 					<installDirectory>${project.build.directory}</installDirectory>
 				</configuration>
 				<executions>
 					<execution>
-						<id>install-frontend-tools</id>
+						<id>install-npm</id>
 						<goals>
 							<goal>install-node-and-npm</goal>
 						</goals>
+						<!--
+							Setting phase to be "initialize" so it runs before resources are generated.
+							Required to change phase for installing node and npm, because we are executing a npm command during initialization.
+						-->
+						<phase>initialize</phase>
 					</execution>
 					<execution>
 						<id>build-frontend</id>
 						<goals>
 							<goal>npm</goal>
 						</goals>
-						<phase>prepare-package</phase>
+						<!--
+						Setting phase to be "initialize" so it runs before resources are generated, instead of "prepare-package".
+						The purpose of this is so that the front-end angular will be build and the "dist" directory is created
+							before the resources are generated and the "dist" directory is processed, otherwise the build
+							needs to be done before doing a clean installation.
+						-->
+						<phase>initialize</phase>
 						<configuration>
-							<arguments>run build</arguments>
+							<arguments>run ng build</arguments>
 						</configuration>
 					</execution>
 				</executions>

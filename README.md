@@ -38,3 +38,11 @@ This application will be responsible for creating a User Interface that will all
 - Right-click database -> Refresh
 - Verify that ruleset, rule, and condition table are under the Tables tab.
 - Verify that eventtype, facttype and valuetype are under the Types tab. 
+
+# Running the entire application
+
+1. Clone down the repository
+2. Run sql code to create the required tables
+3. Open the project and __navigate into the `front-end` directory__, then run `npm install`
+4. After it has finished installing, __navigate back to the root directory__, and run `mvn clean install`
+5. Once the project has finished building, then you can run the executable jar file like so `java -jar .\target\rules-engine-0.0.1-SNAPSHOT.jar`
