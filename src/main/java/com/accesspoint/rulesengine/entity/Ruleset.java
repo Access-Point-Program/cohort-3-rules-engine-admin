@@ -5,10 +5,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +14,7 @@ import lombok.Setter;
 @Table(name = "ruleset")
 public class Ruleset {
 
-    @Getter @Setter private @Id Long id;
+    @Getter @Setter private @Id @GeneratedValue(strategy=GenerationType.IDENTITY) Long id ;
 
     @OneToMany(mappedBy = "ruleset")
     private Set<Rule> Rules = new HashSet<>();
@@ -29,7 +26,7 @@ public class Ruleset {
 
     Ruleset() {}
 
-    Ruleset(String name) {
+    public Ruleset(String name) {
         this.name = name;
     }
 
@@ -53,6 +50,6 @@ public class Ruleset {
 
     @Override
     public String toString() {
-        return "Ruleset{" + "id=" + this.id + ", name=" + this.name + ", creation date=" + this.creation_date;
+        return "Ruleset{" + "id=" + this.id + ", name=" + this.name + ", creation date=" + this.creation_date + "}";
     }
 }
