@@ -43,8 +43,6 @@ This application will be responsible for creating a User Interface that will all
 
 1. Clone down the repository
 2. Run sql code to create the required tables
-3. Open the project and navigate into the `front-end` directory, then run `npm install`
-4. After it has finished installing, navigate back to the root, and run `mvn clean install`
-5. Once the project has finished building, then you can run the executable jar file
-   1. `java -jar .\target\rules-engine-0.0.1-SNAPSHOT.jar`
-   2. `mvn spring-boot:run`
+3. Open the project and __navigate into the `front-end` directory__, then run `npm install`
+4. After it has finished installing, __navigate back to the root directory__, and run `mvn clean install`
+5. Once the project has finished building, then you can run the executable jar file like so `java -jar .\target\rules-engine-0.0.1-SNAPSHOT.jar`
