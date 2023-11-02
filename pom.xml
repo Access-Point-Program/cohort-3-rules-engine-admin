@@ -60,10 +60,23 @@
 			<artifactId>rest-assured</artifactId>
 			<version>5.3.1</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>
+		<resources>
+			<!-- Specifying when bundling, include the "front-end/dist/" directory, which is the output build from angular -->
+			<resource>
+				<directory>${frontend-dir}/dist/front-end</directory>
+				<filtering>false</filtering>
+				<targetPath>public/</targetPath>
+			</resource>
+			<!-- Specifying when bundling, include the application.properties file -->
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+
 		<plugins>
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
@@ -114,17 +127,5 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<resources>
-			<!-- Specifying when bundling, include the "front-end/dist/" directory, which is the output build from angular -->
-			<resource>
-				<directory>${frontend-dir}/dist</directory>
-				<filtering>false</filtering>
-			</resource>
-			<!-- Specifying when bundling, include the application.properties file -->
-			<resource>
-				<directory>${project.basedir}/src/main/resources</directory>
-				<filtering>false</filtering>
-			</resource>
-		</resources>
 	</build>
 </project>
