@@ -26,8 +26,10 @@ public class Ruleset {
 
     Ruleset() {}
 
-    public Ruleset(String name) {
+    public Ruleset(Long id, String name, Timestamp creation_date) {
         this.name = name;
+        this.id = id;
+        this.creation_date = creation_date;
     }
 
     @Override
