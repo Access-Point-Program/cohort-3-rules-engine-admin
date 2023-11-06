@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { WhenComponent } from './conditions/when/when.component';
 import { IsComponent } from './conditions/is/is.component';
 import { ThenComponent } from './conditions/then/then.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   imports: [
     BrowserModule,
-    NgbModule
+    NgbDropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

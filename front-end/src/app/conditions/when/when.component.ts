@@ -8,4 +8,8 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 })
 export class WhenComponent {
   constructor(private whenConditionDropDown: NgbDropdownModule) {}
+
+  public checkIfDropdownOpen(isOpen: boolean): void {
+    isOpen ? console.log("True") : console.log("False");
+  }
 }

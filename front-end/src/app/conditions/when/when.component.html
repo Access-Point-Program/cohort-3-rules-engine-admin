@@ -1,15 +1,22 @@
 <p>when works!</p>
-
+<button type="button" class="btn btn-outline-primary" id="dropdownBasic2" (click)="myDrop.isOpen()">
+  Hello
+</button> 
+<button type="button" class="btn btn-outline-primary" id="dropdownBasic2" (click)="checkIfDropdownOpen(myDrop.isOpen())">
+  Hello2
+</button> 
+<br>
+<br>
 <div class="row">
 	<div class="col">
-		<div ngbDropdown class="d-inline-block">
-			<button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+		<div ngbDropdown #myDrop="ngbDropdown" class="d-inline-block">
+      <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
 				Toggle dropdown
 			</button>
 			<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-				<button ngbDropdownItem>Action - 1</button>
-				<button ngbDropdownItem>Another Action</button>
-				<button ngbDropdownItem>Something else is here</button>
+				<button ngbDropdownItem>Hello</button>
+				<button ngbDropdownItem>World</button>
 			</div>
 		</div>
 	</div>
+</div>
