@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'when-condition-selector',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./when.component.css']
 })
 export class WhenComponent {
-
+  constructor(private whenConditionDropDown: NgbDropdownModule) {}
 }
