@@ -9,9 +9,6 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 })
 export class WhenComponent {
 
-
-  // constructor(public factType: FactType) {}
-
   factType: Array<string> = [
     "FRONT",
     "RIGHT",
@@ -22,11 +19,7 @@ export class WhenComponent {
   returnedValue: string = '';
 
   public setReturnedValue(returnedValue: string): void {
+    console.log(returnedValue);
     this.returnedValue = returnedValue;
   };
-
-
-  public checkIfDropdownOpen(isOpen: boolean): void {
-    isOpen ? console.log("True") : console.log("False");
-  }
 }

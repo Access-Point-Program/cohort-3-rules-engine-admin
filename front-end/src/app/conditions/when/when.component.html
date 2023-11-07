@@ -1,23 +1,10 @@
 <p>when works!</p>
-<button type="button" class="btn btn-outline-primary" id="dropdownBasic2" (click)="myDrop.isOpen()">
-  Hello
-</button> 
-<button type="button" class="btn btn-outline-primary" id="dropdownBasic2" (click)="checkIfDropdownOpen(myDrop.isOpen())">
-    Location
-</button> 
-<br>
-<br>
-<div class="row">
-	<div class="col">
-		<div ngbDropdown #myDrop="ngbDropdown" class="d-inline-block">
-      <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
-				Location
-			</button>
-			<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-				<button *ngFor="let fact of factType | keyvalue" ngbDropdownItem >{{fact.value}}</button>
-			</div>
-		</div>
-	</div>
-</div>
 
-<!-- (click)="setReturnedValue(fact)" -->
+
+<select #selectedValue (change)="setReturnedValue(selectedValue.value)">
+  <option *ngFor="let fact of factType" >
+      {{ fact }}
+  </option>
+</select>
+
+<button>Submit</button>
