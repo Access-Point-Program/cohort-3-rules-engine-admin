@@ -1,8 +1,8 @@
 <div class="whenComponent">
-  <span class="when">When </span>
+  <span class="when">When</span>
   <select id="whenSelectBox" #selectedValue (change)="setReturnedValue(selectedValue.value)">
     <option value="" disabled selected hidden>Select the Location</option>
-    <option class="whenDropdownOptions" *ngFor="let fact of factType" >
+    <option class="whenDropdownOptions" *ngFor="let fact of factType" id="whenFact{{fact}}">
         {{ fact }}
     </option>
   </select>

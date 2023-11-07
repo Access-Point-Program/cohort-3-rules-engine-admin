@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { WhenComponent } from './when.component';
 
 describe('WhenComponent', () => {
@@ -44,4 +44,32 @@ describe('WhenComponent', () => {
       expect(compiled.querySelectorAll('.whenDropdownOptions').length).toEqual(4);
     });
   });
+
+  describe('when dropdown option is selected, it should pass the correct fact', () => {
+    it('\"FRONT\" is clicked, returnedValue is \"FRONT\"', () => {
+      (document.getElementById('whenSelectBox') as HTMLElement).click();
+      (document.getElementById('whenFactFRONT') as HTMLElement).click();
+      waitForAsync( async () => {expect(component.returnedValue).toBe('FRONT')});
+    });
+    it('\"RIGHT\" is clicked, returnedValue is \"RIGHT\"', () => {
+      (document.getElementById('whenSelectBox') as HTMLElement).click();
+      (document.getElementById('whenFactRIGHT') as HTMLElement).click();
+      waitForAsync( async () => {expect(component.returnedValue).toBe('RIGHT')});
+    });
+    it('\"LEFT\" is clicked, returnedValue is \"LEFT\"', () => {
+      (document.getElementById('whenSelectBox') as HTMLElement).click();
+      (document.getElementById('whenFactLEFT') as HTMLElement).click();
+      waitForAsync( async () => {expect(component.returnedValue).toBe('LEFT')});
+    });
+    it('\"BEHIND\" is clicked, returnedValue is \"BEHIND\"', () => {
+      (document.getElementById('whenSelectBox') as HTMLElement).click();
+      (document.getElementById('whenFactBEHIND') as HTMLElement).click();
+      waitForAsync( async () => {expect(component.returnedValue).toBe('BEHIND')});
+    });
+  });
+  
+  it('\"When\" should be rendered on the screen', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.when')?.textContent).toContain('When');
+  })
 });
