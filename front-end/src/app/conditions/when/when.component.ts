@@ -19,7 +19,6 @@ export class WhenComponent {
   returnedValue: string = '';
 
   public setReturnedValue(returnedValue: string): void {
-    console.log(returnedValue);
     this.returnedValue = returnedValue;
   };
 }
