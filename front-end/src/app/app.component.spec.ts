@@ -1,9 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { WhenComponent } from './conditions/when/when.component';
+import { IsComponent } from './conditions/is/is.component';
+import { ThenComponent } from './then/then.component';
+import { ConditionsComponent } from './conditions/conditions.component';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    declarations: [AppComponent]
+    declarations: [AppComponent,
+      WhenComponent,
+      IsComponent,
+      ThenComponent,
+      ConditionsComponent
+    ]
   }));
 
   it('should create the app', () => {
@@ -22,6 +31,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('front-end app is running!');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, This is Cyclones!');
   });
 });

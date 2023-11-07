@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { WhenComponent } from './when/when.component';
+import { IsComponent } from './is/is.component';
 
 import { ConditionsComponent } from './conditions.component';
 
@@ -8,7 +10,7 @@ describe('ConditionsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ConditionsComponent]
+      declarations: [ConditionsComponent, WhenComponent, IsComponent]
     });
     fixture = TestBed.createComponent(ConditionsComponent);
     component = fixture.componentInstance;
