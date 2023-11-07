@@ -1,1 +1,9 @@
-<p>then works!</p>
+<div class="isComponent">
+    <span class="is">Then</span>
+    <select id="isSelectBox" #selectedValue (change)="setReturnedValue(selectedValue.value)">
+      <option value="" disabled selected hidden>Select the Action</option>
+      <option *ngFor="let event of eventType" >
+          {{ event }}
+      </option>
+    </select>
+  </div>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'is-condition',
+  selector: 'is-value',
   templateUrl: './is.component.html',
   styleUrls: ['./is.component.css']
 })
