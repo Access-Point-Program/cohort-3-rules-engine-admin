@@ -12,8 +12,8 @@ import lombok.Setter;
 @Table(name = "rule")
 public class Rule {
 
-    @Getter @Setter private @Id Long id;
-    @OneToMany(mappedBy = "rule")
+    @Getter @Setter private @Id @GeneratedValue(strategy=GenerationType.IDENTITY) Long id;
+    @OneToMany(mappedBy = "rule", fetch = FetchType.EAGER)
     private Set<Condition> Conditions = new HashSet<>();
 
     @ManyToOne
@@ -26,10 +26,12 @@ public class Rule {
 
     Rule() {}
 
-    Rule(double priority, EventType event_type) {
+    public Rule(Long id, Ruleset ruleset, double priority, EventType event_type) {
+        this.id = id;
         this.priority = priority;
         this.event_type = event_type;
         // if stuff breaks, add secondary key here
+        this.ruleset = ruleset;
     }
 
     @Override

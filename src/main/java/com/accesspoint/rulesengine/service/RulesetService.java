@@ -1,5 +1,6 @@
 package com.accesspoint.rulesengine.service;
 
+import com.accesspoint.rulesengine.entity.Rule;
 import com.accesspoint.rulesengine.entity.Ruleset;
 import com.accesspoint.rulesengine.model.RulesetModel;
 import com.accesspoint.rulesengine.repository.RulesetRepository;
@@ -33,10 +34,11 @@ public class RulesetService {
 
     public ResponseEntity<RulesetModel> createRuleset(Ruleset ruleset) {
         Ruleset newRuleset = rulesetRepository
-                .save(new Ruleset(ruleset.getId(), ruleset.getName(), ruleset.getCreation_date()));
+                .save(new Ruleset(ruleset.getId(), ruleset.getName(), ruleset.getCreation_date(),));
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 }
 
+//ruleset service has multiple repositories if you need to break it up

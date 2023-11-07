@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Entity
 public class Condition {
-    @Getter @Setter private @Id Long id;
+    @Getter @Setter private @Id @GeneratedValue(strategy=GenerationType.IDENTITY) Long id;
 
     @ManyToOne
     @JoinColumn(name = "rule_id")

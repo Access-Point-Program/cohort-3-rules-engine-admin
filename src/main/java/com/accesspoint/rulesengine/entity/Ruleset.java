@@ -5,24 +5,28 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.validation.annotation.Validated;
 
 @Entity
+@Validated
 @Table(name = "ruleset")
 public class Ruleset {
 
     @Getter @Setter private @Id @GeneratedValue(strategy=GenerationType.IDENTITY) Long id ;
 
-    @OneToMany(mappedBy = "ruleset")
+    @OneToMany(mappedBy = "ruleset", fetch = FetchType.EAGER)
     private Set<Rule> Rules = new HashSet<>();
 
-    @Getter @Setter private String name;
+    @Getter @Setter @NotNull
+    private String name;
 
     @CreationTimestamp
-    @Getter @Setter private Timestamp creation_date;
+    @Getter @Setter @NotNull private Timestamp creation_date;
 
     Ruleset() {}
 
