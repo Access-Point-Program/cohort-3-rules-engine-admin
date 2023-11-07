@@ -3,7 +3,7 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
-  selector: 'when-condition-selector',
+  selector: 'when-condition',
   templateUrl: './when.component.html',
   styleUrls: ['./when.component.css']
 })

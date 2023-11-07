@@ -1,10 +1,8 @@
-<p>when works!</p>
-
-
-<select #selectedValue (change)="setReturnedValue(selectedValue.value)">
-  <option *ngFor="let fact of factType" >
-      {{ fact }}
-  </option>
-</select>
-
-<button>Submit</button>
+<div class="whenComponent">
+  <span class="when">When </span>
+  <select id="whenSelectBox" #selectedValue (change)="setReturnedValue(selectedValue.value)">
+    <option *ngFor="let fact of factType" >
+        {{ fact }}
+    </option>
+  </select>
+</div>

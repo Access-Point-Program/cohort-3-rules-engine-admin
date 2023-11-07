@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'then-condition-selector',
+  selector: 'app-then',
   templateUrl: './then.component.html',
   styleUrls: ['./then.component.css']
 })

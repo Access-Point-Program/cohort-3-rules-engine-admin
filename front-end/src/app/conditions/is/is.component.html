@@ -1,1 +1,8 @@
-<p>is works!</p>
+<div class="isComponent">
+  <span class="is">Is</span>
+  <select id="isSelectBox" #selectedValue (change)="setReturnedValue(selectedValue.value)">
+    <option *ngFor="let val of valueType" >
+        {{ val }}
+    </option>
+  </select>
+</div>
