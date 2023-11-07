@@ -3,7 +3,7 @@
   Hello
 </button> 
 <button type="button" class="btn btn-outline-primary" id="dropdownBasic2" (click)="checkIfDropdownOpen(myDrop.isOpen())">
-  Hello2
+    Location
 </button> 
 <br>
 <br>
@@ -11,12 +11,13 @@
 	<div class="col">
 		<div ngbDropdown #myDrop="ngbDropdown" class="d-inline-block">
       <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
-				Toggle dropdown
+				Location
 			</button>
 			<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-				<button ngbDropdownItem>Hello</button>
-				<button ngbDropdownItem>World</button>
+				<button *ngFor="let fact of factType | keyvalue" ngbDropdownItem >{{fact.value}}</button>
 			</div>
 		</div>
 	</div>
 </div>
+
+<!-- (click)="setReturnedValue(fact)" -->
