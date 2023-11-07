@@ -19,7 +19,9 @@ public class Condition {
     @Getter @Setter private ValueType value_type;
 
     Condition() {}
-    Condition(FactType fact_type, ValueType value_type) {
+    public Condition(Long id, Rule rule, FactType fact_type, ValueType value_type) {
+        this.id = id;
+        this.rule = rule;
         this.fact_type = fact_type;
         this.value_type = value_type;
         // if stuff breaks, add secondary key here
