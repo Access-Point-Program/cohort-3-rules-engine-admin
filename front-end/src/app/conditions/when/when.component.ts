@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { FactType } from '../../factType'
 
 
 @Component({
@@ -9,12 +10,9 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 })
 export class WhenComponent {
 
-  factType: Array<string> = [
-    "FRONT",
-    "RIGHT",
-    "LEFT",
-    "BEHIND"
-  ];
+  constructor(public factType: FactType) { }
+
+  factTypes = Object.values(this.factType);
 
   returnedValue: string = '';
 
