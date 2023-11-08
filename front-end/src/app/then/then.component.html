@@ -1,8 +1,8 @@
-<div class="isComponent">
-    <span class="is">Then</span>
-    <select id="isSelectBox" #selectedValue (change)="setReturnedValue(selectedValue.value)">
+<div class="thenComponent">
+    <span class="then">Then</span>
+    <select class="form-select" id="thenSelectBox" #selectedValue (change)="setReturnedValue(selectedValue.value)">
       <option value="" disabled selected hidden>Select the Action</option>
-      <option *ngFor="let event of eventType" >
+      <option class="thenDropdownOptions" *ngFor="let event of eventType" id="thenEvent{{event}}">
           {{ event }}
       </option>
     </select>

@@ -16,7 +16,7 @@ import { ConditionsComponent } from './conditions/conditions.component';
     ConditionsComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule    
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,7 +16,6 @@ export class ThenComponent {
   returnedValue: string = '';
 
   public setReturnedValue(returnedValue: string): void {
-    console.log(returnedValue);
     this.returnedValue = returnedValue;
   };
 
