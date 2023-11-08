@@ -1,11 +1,10 @@
 package com.accesspoint.rulesengine.entity;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
-
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnTransformer;
 
 @Data
 @NoArgsConstructor
@@ -22,10 +21,11 @@ public class Rule {
 
     @ManyToOne
     @JoinColumn(name = "ruleset_id")
-    private Long ruleset;
+    private Ruleset ruleset;
 
     private double priority;
 
+    @Enumerated(EnumType.STRING)
+    @ColumnTransformer(write = "?::EventType")
     private EventType event_type;
-
 }

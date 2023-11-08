@@ -1,6 +1,7 @@
 package com.accesspoint.rulesengine.service;
 
 import com.accesspoint.rulesengine.controller.CreateRuleSetRequest;
+import com.accesspoint.rulesengine.entity.EventType;
 import com.accesspoint.rulesengine.entity.Ruleset;
 import com.accesspoint.rulesengine.entity.Rule;
 import com.accesspoint.rulesengine.entity.Condition;
@@ -8,6 +9,7 @@ import com.accesspoint.rulesengine.model.RulesetModel;
 import com.accesspoint.rulesengine.repository.ConditionRepository;
 import com.accesspoint.rulesengine.repository.RuleRepository;
 import com.accesspoint.rulesengine.repository.RulesetRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,49 +36,24 @@ public class RulesetService {
         return rulesetList;
     }
 
-
-    public ResponseEntity<Ruleset> createRuleset(CreateRuleSetRequest ruleset) {
-        Ruleset data = this.rulesetRepository.save(
+    public ResponseEntity<Ruleset> createRuleset(CreateRuleSetRequest incomingRulesetData) {
+        Ruleset rulesetData = this.rulesetRepository.save(
                 Ruleset.builder()
-                .name(ruleset.name)
+                        .name(incomingRulesetData.name)
                 .build()
-            );
-        Rule ruleData = this.ruleRepository.save(
-                Rule.builder()
-                .ruleset(data.getId())
-                .priority(ruleset.rules.priority)
-                .event_type(ruleset.rule.getEvent_type())
-                .build());
-        System.out.println(data);
+        );
 
-
-
-//
-//        Ruleset data = this.rulesetRepository.save(
-//                Ruleset.builder()
-//                        .name(ruleset.name)
-//                        .rules(Set.of(this.ruleRepository.save( //maybe add the rule.save?
-//                                Rule.builder()
-//                                        .ruleset(ruleset.rule.getRuleset())
-//                                        .priority(ruleset.rule.getPriority())
-//                                        .event_type(ruleset.rule.getEvent_type())
-//                                        .build())))
-//                        .build()
-//        );
-
-/*
-        Ruleset newRuleset = new Ruleset(ruleset.getName());
-        rulesetRepository.save(newRuleset);
-
-        //Loop through each Rule to save the data. .map?
-        Rule newRule = new Rule(rule.getRuleset(), rule.getPriority(), rule.getEvent_type());
-        ruleRepository.save(newRule);
-
-        //Loop through each Rule and it's conditions to save the data.
-        Condition newCondition = new Condition(condition.getRule(), condition.getFact_type(), condition.getValue_type());
-        conditionRepository.save(newCondition);
-*/
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        incomingRulesetData.rule.stream().forEach(rule -> {
+            this.ruleRepository.save(
+                    Rule.builder()
+                            .priority(rule.getPriority())
+                            .event_type(rule.getEvent_type())
+                            .ruleset(rulesetData)
+                    .build());
+        });
+        System.out.println(this.rulesetRepository.findAll());
+        System.out.println(this.rulesetRepository.getReferenceById(rulesetData.getId()));
+        System.out.println(ruleRepository.findAll());
+        return ResponseEntity.ok().body(this.rulesetRepository.getReferenceById(rulesetData.getId()));
     }
-
 }
