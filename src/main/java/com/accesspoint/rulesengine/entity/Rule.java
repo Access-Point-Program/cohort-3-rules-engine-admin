@@ -22,7 +22,7 @@ public class Rule {
 
     @ManyToOne
     @JoinColumn(name = "ruleset_id")
-    private Ruleset ruleset;
+    private Long ruleset;
 
     private double priority;
 

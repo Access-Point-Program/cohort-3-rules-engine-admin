@@ -1,9 +1,9 @@
 package com.accesspoint.rulesengine.service;
 
 import com.accesspoint.rulesengine.controller.CreateRuleSetRequest;
-import com.accesspoint.rulesengine.entity.Condition;
-import com.accesspoint.rulesengine.entity.Rule;
 import com.accesspoint.rulesengine.entity.Ruleset;
+import com.accesspoint.rulesengine.entity.Rule;
+import com.accesspoint.rulesengine.entity.Condition;
 import com.accesspoint.rulesengine.model.RulesetModel;
 import com.accesspoint.rulesengine.repository.ConditionRepository;
 import com.accesspoint.rulesengine.repository.RuleRepository;
@@ -34,25 +34,35 @@ public class RulesetService {
         return rulesetList;
     }
 
-    ;
-
-//    public void createRuleset(Ruleset ruleset){
-//        rulesetRepository.save(ruleset);
-//    }
-
 
     public ResponseEntity<Ruleset> createRuleset(CreateRuleSetRequest ruleset) {
         Ruleset data = this.rulesetRepository.save(
                 Ruleset.builder()
                 .name(ruleset.name)
-                      .rules(Set.of(Rule.builder()
-                              .ruleset(ruleset.rule.getRuleset())
-                              .priority(ruleset.rule.getPriority())
-                              .event_type(ruleset.rule.getEvent_type())
-                              .build()))
                 .build()
             );
+        Rule ruleData = this.ruleRepository.save(
+                Rule.builder()
+                .ruleset(data.getId())
+                .priority(ruleset.rules.priority)
+                .event_type(ruleset.rule.getEvent_type())
+                .build());
+        System.out.println(data);
 
+
+
+//
+//        Ruleset data = this.rulesetRepository.save(
+//                Ruleset.builder()
+//                        .name(ruleset.name)
+//                        .rules(Set.of(this.ruleRepository.save( //maybe add the rule.save?
+//                                Rule.builder()
+//                                        .ruleset(ruleset.rule.getRuleset())
+//                                        .priority(ruleset.rule.getPriority())
+//                                        .event_type(ruleset.rule.getEvent_type())
+//                                        .build())))
+//                        .build()
+//        );
 
 /*
         Ruleset newRuleset = new Ruleset(ruleset.getName());
