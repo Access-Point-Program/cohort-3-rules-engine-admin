@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EventType } from '../types/eventType';
 
 @Component({
   selector: 'then-event',
@@ -7,16 +8,10 @@ import { Component } from '@angular/core';
 })
 export class ThenComponent {
 
-  eventType: Array<string> = [
-    "FORWARD",
-    "RIGHT",
-    "LEFT"
-  ];
-  
-  returnedValue: string = '';
+  public eventType = Object.values(EventType);
+  public returnedValue: string = '';
 
   public setReturnedValue(returnedValue: string): void {
     this.returnedValue = returnedValue;
   };
-
 }

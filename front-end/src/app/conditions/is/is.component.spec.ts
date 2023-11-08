@@ -15,19 +15,19 @@ describe('IsComponent', () => {
   });
 
   describe('dropdown should contain the correct enums', () => {
-    it('First dropdown item should be \"WALL\"', () => {
+    it('First dropdown item should be \"Wall\"', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.querySelectorAll('.isDropdownOptions').item(0).textContent).toContain("WALL");
+      expect(compiled.querySelectorAll('.isDropdownOptions').item(0).textContent).toContain("Wall");
     });
 
-    it('Second dropdown item should be \"EMPTY\"', () => {
+    it('Second dropdown item should be \"Empty\"', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.querySelectorAll('.isDropdownOptions').item(1).textContent).toContain("EMPTY");
+      expect(compiled.querySelectorAll('.isDropdownOptions').item(1).textContent).toContain("Empty");
     });
 
-    it('Third dropdown item should be \"END\"', () => {
+    it('Third dropdown item should be \"End\"', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.querySelectorAll('.isDropdownOptions').item(2).textContent).toContain("END");
+      expect(compiled.querySelectorAll('.isDropdownOptions').item(2).textContent).toContain("End");
     });
 
     it('Dropdown only contains 3 options', () => {
@@ -37,20 +37,20 @@ describe('IsComponent', () => {
   });
 
   describe('when dropdown option is selected, it should pass the correct fact', () => {
-    it('\"WALL\" is clicked, returnedValue is \"WALL\"', () => {
+    it('\"WALL\" is clicked, returnedValue is \"Wall\"', () => {
       (document.getElementById('isSelectBox') as HTMLElement).click();
-      (document.getElementById('isValueWALL') as HTMLElement).click();
-      waitForAsync( async () => {expect(component.returnedValue).toBe('WALL')});
+      (document.getElementById('isValueWall') as HTMLElement).click();
+      waitForAsync( async () => {expect(component.returnedValue).toBe('Wall')});
     });
-    it('\"EMPTY\" is clicked, returnedValue is \"EMPTY\"', () => {
+    it('\"EMPTY\" is clicked, returnedValue is \"Empty\"', () => {
       (document.getElementById('isSelectBox') as HTMLElement).click();
-      (document.getElementById('isValueEMPTY') as HTMLElement).click();
-      waitForAsync( async () => {expect(component.returnedValue).toBe('EMPTY')});
+      (document.getElementById('isValueEmpty') as HTMLElement).click();
+      waitForAsync( async () => {expect(component.returnedValue).toBe('Empty')});
     });
-    it('\"END\" is clicked, returnedValue is \"END\"', () => {
+    it('\"END\" is clicked, returnedValue is \"End\"', () => {
       (document.getElementById('isSelectBox') as HTMLElement).click();
-      (document.getElementById('isValueEND') as HTMLElement).click();
-      waitForAsync( async () => {expect(component.returnedValue).toBe('END')});
+      (document.getElementById('isValueEnd') as HTMLElement).click();
+      waitForAsync( async () => {expect(component.returnedValue).toBe('End')});
     });
   });
   

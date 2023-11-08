@@ -2,7 +2,7 @@
   <span class="when">When</span>
   <select class="form-select" id="whenSelectBox" #selectedValue (change)="setReturnedValue(selectedValue.value)">
     <option value="" disabled selected hidden>Select the Location</option>
-    <option class="whenDropdownOptions" *ngFor="let fact of factTypes" id="whenFact{{fact}}">
+    <option class="whenDropdownOptions" *ngFor="let fact of factType" id="whenFact{{fact}}">
         {{ fact }}
     </option>
   </select>

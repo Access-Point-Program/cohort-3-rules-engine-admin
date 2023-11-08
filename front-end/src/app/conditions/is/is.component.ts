@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ValueType } from '../../types/valueType';
 
 @Component({
   selector: 'is-value',
@@ -7,13 +8,8 @@ import { Component } from '@angular/core';
 })
 export class IsComponent {
 
-  valueType: Array<string> = [
-    "WALL",
-    "EMPTY",
-    "END",
-  ];
-  
-  returnedValue: string = '';
+  public valueType = Object.values(ValueType);
+  public returnedValue: string = '';
 
   public setReturnedValue(returnedValue: string): void {
     this.returnedValue = returnedValue;

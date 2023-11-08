@@ -19,24 +19,24 @@ describe('WhenComponent', () => {
   });
 
   describe('dropdown should contain the correct enums', () => {
-    it('First dropdown item should be \"FRONT\"', () => {
+    it('First dropdown item should be \"Front\"', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.querySelectorAll('.whenDropdownOptions').item(0).textContent).toContain("FRONT");
+      expect(compiled.querySelectorAll('.whenDropdownOptions').item(0).textContent).toContain("Front");
     });
 
-    it('Second dropdown item should be \"RIGHT\"', () => {
+    it('Second dropdown item should be \"Right\"', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.querySelectorAll('.whenDropdownOptions').item(1).textContent).toContain("RIGHT");
+      expect(compiled.querySelectorAll('.whenDropdownOptions').item(1).textContent).toContain("Right");
     });
 
-    it('Third dropdown item should be \"LEFT\"', () => {
+    it('Third dropdown item should be \"Left\"', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.querySelectorAll('.whenDropdownOptions').item(2).textContent).toContain("LEFT");
+      expect(compiled.querySelectorAll('.whenDropdownOptions').item(2).textContent).toContain("Left");
     });
 
-    it('Fourth dropdown item should be \"BEHIND\"', () => {
+    it('Fourth dropdown item should be \"Behind\"', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.querySelectorAll('.whenDropdownOptions').item(3).textContent).toContain("BEHIND");
+      expect(compiled.querySelectorAll('.whenDropdownOptions').item(3).textContent).toContain("Behind");
     });
 
     it('Dropdown only contains 4 options', () => {
@@ -46,25 +46,25 @@ describe('WhenComponent', () => {
   });
 
   describe('when dropdown option is selected, it should pass the correct fact', () => {
-    it('\"FRONT\" is clicked, returnedValue is \"FRONT\"', () => {
+    it('\"FRONT\" is clicked, returnedValue is \"Front\"', () => {
       (document.getElementById('whenSelectBox') as HTMLElement).click();
-      (document.getElementById('whenFactFRONT') as HTMLElement).click();
-      waitForAsync( async () => {expect(component.returnedValue).toBe('FRONT')});
+      (document.getElementById('whenFactFront') as HTMLElement).click();
+      waitForAsync( async () => {expect(component.returnedValue).toBe('Front')});
     });
-    it('\"RIGHT\" is clicked, returnedValue is \"RIGHT\"', () => {
+    it('\"RIGHT\" is clicked, returnedValue is \"Right\"', () => {
       (document.getElementById('whenSelectBox') as HTMLElement).click();
-      (document.getElementById('whenFactRIGHT') as HTMLElement).click();
-      waitForAsync( async () => {expect(component.returnedValue).toBe('RIGHT')});
+      (document.getElementById('whenFactRight') as HTMLElement).click();
+      waitForAsync( async () => {expect(component.returnedValue).toBe('Right')});
     });
-    it('\"LEFT\" is clicked, returnedValue is \"LEFT\"', () => {
+    it('\"LEFT\" is clicked, returnedValue is \"Left\"', () => {
       (document.getElementById('whenSelectBox') as HTMLElement).click();
-      (document.getElementById('whenFactLEFT') as HTMLElement).click();
-      waitForAsync( async () => {expect(component.returnedValue).toBe('LEFT')});
+      (document.getElementById('whenFactLeft') as HTMLElement).click();
+      waitForAsync( async () => {expect(component.returnedValue).toBe('Left')});
     });
-    it('\"BEHIND\" is clicked, returnedValue is \"BEHIND\"', () => {
+    it('\"BEHIND\" is clicked, returnedValue is \"Behind\"', () => {
       (document.getElementById('whenSelectBox') as HTMLElement).click();
-      (document.getElementById('whenFactBEHIND') as HTMLElement).click();
-      waitForAsync( async () => {expect(component.returnedValue).toBe('BEHIND')});
+      (document.getElementById('whenFactBehind') as HTMLElement).click();
+      waitForAsync( async () => {expect(component.returnedValue).toBe('Behind')});
     });
   });
   

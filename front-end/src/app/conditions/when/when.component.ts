@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { FactType } from '../../factType'
-
+import { FactType } from '../../types/factType';
 
 @Component({
   selector: 'when-condition',
@@ -10,11 +8,8 @@ import { FactType } from '../../factType'
 })
 export class WhenComponent {
 
-  constructor(public factType: FactType) { }
-
-  factTypes = Object.values(this.factType);
-
-  returnedValue: string = '';
+  public factType = Object.values(FactType);
+  public returnedValue: string = '';
 
   public setReturnedValue(returnedValue: string): void {
     this.returnedValue = returnedValue;
