@@ -7,10 +7,7 @@ import com.accesspoint.rulesengine.model.RulesetModel;
 import com.accesspoint.rulesengine.service.RulesetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
 import java.util.List;
@@ -27,8 +24,8 @@ public class RulesetController {
     }
 
     @PostMapping("/ruleset")
-    ResponseEntity<Ruleset> newRuleset(@Valid @RequestBody Ruleset ruleset, @Valid @RequestBody Rule rule, @Valid @RequestBody Condition condition) {
-        return rulesetService.createRuleset(ruleset, rule, condition);
+    ResponseEntity<Ruleset> newRuleset(@RequestBody CreateRuleSetRequest request) {
+        return this.rulesetService.createRuleset(request);
     }
 }
 

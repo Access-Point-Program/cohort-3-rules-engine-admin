@@ -1,5 +1,6 @@
 package com.accesspoint.rulesengine.service;
 
+import com.accesspoint.rulesengine.controller.CreateRuleSetRequest;
 import com.accesspoint.rulesengine.entity.Condition;
 import com.accesspoint.rulesengine.entity.Rule;
 import com.accesspoint.rulesengine.entity.Ruleset;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,10 +22,8 @@ public class RulesetService {
 
     @Autowired
     private RulesetRepository rulesetRepository;
-
     @Autowired
     private RuleRepository ruleRepository;
-
     @Autowired
     private ConditionRepository conditionRepository;
 
@@ -41,13 +41,27 @@ public class RulesetService {
 //    }
 
 
-    public ResponseEntity<Ruleset> createRuleset(Ruleset ruleset, Rule rule, Condition condition) {
-        Ruleset newRuleset = rulesetRepository
-                .save(new Ruleset(ruleset.getId(), ruleset.getName(), ruleset.getCreation_date()));
-        Rule newRule = ruleRepository
-                .save(new Rule(rule.getId(), rule.getRuleset_id(), rule.getPriority(), rule.getEvent_type()));
-        Condition newCondition = conditionRepository
-                .save(new Condition(condition.getId(), condition.getRule(), condition.getFact_type(), condition.getValue_type()));
+    public ResponseEntity<Ruleset> createRuleset(CreateRuleSetRequest ruleset) {
+        Ruleset data = this.rulesetRepository.save(
+                Ruleset.builder()
+                .name(ruleset.name)
+                      // .Rules(Set.of(Rule.builder()))
+                .build()
+            );
+
+
+/*
+        Ruleset newRuleset = new Ruleset(ruleset.getName());
+        rulesetRepository.save(newRuleset);
+
+        //Loop through each Rule to save the data. .map?
+        Rule newRule = new Rule(rule.getRuleset(), rule.getPriority(), rule.getEvent_type());
+        ruleRepository.save(newRule);
+
+        //Loop through each Rule and it's conditions to save the data.
+        Condition newCondition = new Condition(condition.getRule(), condition.getFact_type(), condition.getValue_type());
+        conditionRepository.save(newCondition);
+*/
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
