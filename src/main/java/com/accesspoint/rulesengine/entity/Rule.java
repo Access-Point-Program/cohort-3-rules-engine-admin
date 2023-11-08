@@ -5,12 +5,11 @@ import java.util.Objects;
 import java.util.Set;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "rule")
@@ -19,7 +18,7 @@ public class Rule {
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 
     @OneToMany(mappedBy = "rule", fetch = FetchType.EAGER)
-    private Set<Condition> Conditions = new HashSet<>();
+    private Set<Condition> conditions = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "ruleset_id")
@@ -28,4 +27,5 @@ public class Rule {
     private double priority;
 
     private EventType event_type;
+
 }

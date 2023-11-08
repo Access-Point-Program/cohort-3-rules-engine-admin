@@ -12,17 +12,21 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.validation.annotation.Validated;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
+@Entity
 @Table(name = "ruleset")
 public class Ruleset {
    private @Id @GeneratedValue(strategy=GenerationType.IDENTITY) Long id ;
 
     @OneToMany(mappedBy = "ruleset", fetch = FetchType.EAGER)
-    private Set<Rule> Rules = new HashSet<>();
+    private Set<Rule> rules = new HashSet<>();
 
     @NotNull
     private String name;
 
     @CreationTimestamp
     @NotNull private Timestamp creation_date;
+
 }

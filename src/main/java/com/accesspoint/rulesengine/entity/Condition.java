@@ -3,14 +3,14 @@ package com.accesspoint.rulesengine.entity;
 import java.util.Objects;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
+@Table(name = "condition")
 public class Condition {
     private @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
@@ -22,4 +22,5 @@ public class Condition {
     private FactType fact_type;
 
     private ValueType value_type;
+
 }

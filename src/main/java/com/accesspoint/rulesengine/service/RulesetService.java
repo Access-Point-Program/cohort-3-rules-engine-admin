@@ -66,5 +66,3 @@ public class RulesetService {
     }
 
 }
-
-//ruleset service has multiple repositories if you need to break it up
