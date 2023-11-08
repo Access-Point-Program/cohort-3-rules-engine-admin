@@ -10,15 +10,13 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Data
 @Builder
 @Entity
 @Table(name = "rule")
 public class Rule {
 
-    private @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 
     @OneToMany(mappedBy = "rule", fetch = FetchType.EAGER)
     private Set<Condition> Conditions = new HashSet<>();
