@@ -45,7 +45,11 @@ public class RulesetService {
         Ruleset data = this.rulesetRepository.save(
                 Ruleset.builder()
                 .name(ruleset.name)
-                      // .Rules(Set.of(Rule.builder()))
+                      .rules(Set.of(Rule.builder()
+                              .ruleset(ruleset.rule.getRuleset())
+                              .priority(ruleset.rule.getPriority())
+                              .event_type(ruleset.rule.getEvent_type())
+                              .build()))
                 .build()
             );
 
