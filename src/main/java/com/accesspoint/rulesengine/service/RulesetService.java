@@ -37,23 +37,39 @@ public class RulesetService {
     }
 
     public ResponseEntity<Ruleset> createRuleset(CreateRuleSetRequest incomingRulesetData) {
+        String json = "<json object>";
+
+        Rule rule = objectMapper.readValue(json, Rule.class);
+
         Ruleset rulesetData = this.rulesetRepository.save(
                 Ruleset.builder()
                         .name(incomingRulesetData.name)
                 .build()
         );
 
-        incomingRulesetData.rule.stream().forEach(rule -> {
-            this.ruleRepository.save(
-                    Rule.builder()
-                            .priority(rule.getPriority())
-                            .event_type(rule.getEvent_type())
-                            .ruleset(rulesetData)
-                    .build());
+        incomingRulesetData.rules.stream().forEach(rule -> {
+
+            Rule ruleData = this.ruleRepository.save(
+                   Rule.builder()
+                           .priority(rule.priority)
+                           .event_type(rule.getEvent_type())
+                           .ruleset(rulesetData)
+                   .build());
+            incomingRulesetData.condition.stream().forEach(condition -> {
+                this.conditionRepository.save(
+                        Condition.builder()
+                                .fact_type(condition.getFact_type())
+                                .value_type(condition.getValue_type())
+                                .rule(ruleData)
+                                .build());
+            });
         });
+
         System.out.println(this.rulesetRepository.findAll());
         System.out.println(this.rulesetRepository.getReferenceById(rulesetData.getId()));
         System.out.println(ruleRepository.findAll());
+        System.out.println(ruleRepository.findAll());
+        System.out.println(conditionRepository.findAll());
         return ResponseEntity.ok().body(this.rulesetRepository.getReferenceById(rulesetData.getId()));
     }
 }

@@ -28,4 +28,8 @@ public class Rule {
     @Enumerated(EnumType.STRING)
     @ColumnTransformer(write = "?::EventType")
     private EventType event_type;
+
+//    public getConditionsList(Rule rule) {
+//        return rule.getConditions()
+//    }
 }
