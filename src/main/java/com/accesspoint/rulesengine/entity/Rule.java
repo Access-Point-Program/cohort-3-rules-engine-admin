@@ -1,6 +1,6 @@
 package com.accesspoint.rulesengine.entity;
 
-import java.util.HashSet;
+import java.io.Serializable;
 import java.util.Set;
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,19 +9,14 @@ import org.hibernate.annotations.ColumnTransformer;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 @Builder
 @Entity
 @Table(name = "rule")
-public class Rule {
+public class Rule implements Serializable {
 
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
-
-    @OneToMany(mappedBy = "rule", fetch = FetchType.EAGER)
-    private Set<Condition> conditions = new HashSet<>();
-
-    @ManyToOne
-    @JoinColumn(name = "ruleset_id")
-    private Ruleset ruleset;
 
     private double priority;
 
@@ -29,7 +24,12 @@ public class Rule {
     @ColumnTransformer(write = "?::EventType")
     private EventType event_type;
 
-//    public getConditionsList(Rule rule) {
-//        return rule.getConditions()
-//    }
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "ruleset_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Ruleset ruleset;
+
+    @OneToMany(mappedBy = "rule", fetch = FetchType.EAGER)
+    private Set<Condition> conditions;
 }

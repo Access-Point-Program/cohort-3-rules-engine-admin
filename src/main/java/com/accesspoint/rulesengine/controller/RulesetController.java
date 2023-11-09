@@ -1,14 +1,11 @@
 package com.accesspoint.rulesengine.controller;
 
-import com.accesspoint.rulesengine.entity.Condition;
-import com.accesspoint.rulesengine.entity.Rule;
 import com.accesspoint.rulesengine.entity.Ruleset;
 import com.accesspoint.rulesengine.model.RulesetModel;
 import com.accesspoint.rulesengine.service.RulesetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import jakarta.validation.Valid;
 
 import java.util.List;
 
