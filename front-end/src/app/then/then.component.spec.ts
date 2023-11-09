@@ -39,35 +39,32 @@ describe('ThenComponent', () => {
   });
 
   describe('when dropdown option is selected, it should pass the correct fact', () => {
-    // beforeEach(() => {
-    //   (document.getElementById('thenSelectBox') as HTMLElement).click();
-    //   (document.getElementById('thenEventLeft') as HTMLElement).click();
-    // });
     it('\"Forward\" is clicked, returnedValue is \"Forward\"', () => {
-      // (document.getElementById('thenSelectBox') as HTMLElement).click();
-      // (document.getElementById('thenEventForward') as HTMLElement).click();
-      waitForAsync( async () => {expect(component.getReturnedValue()).toBe('Forward')});
+      let selectBox = fixture.debugElement.query(By.css('#thenSelectBox')).nativeElement;
+      fixture.detectChanges();
+
+      selectBox.value = selectBox.options[1].value;
+      selectBox.dispatchEvent(new Event('change'))
+ 
+      expect(component.getReturnedValue()).toBe('Forward');
     });
     it('\"Right\" is clicked, returnedValue is \"Right\"', () => {
-      // (document.getElementById('thenSelectBox') as HTMLElement).click();
-      // (document.getElementById('thenEventRight') as HTMLElement).click();
-      waitForAsync( async () => {expect(component.getReturnedValue()).toBe('s')});
+      let selectBox = fixture.debugElement.query(By.css('#thenSelectBox')).nativeElement;
+      fixture.detectChanges();
+
+      selectBox.value = selectBox.options[2].value;
+      selectBox.dispatchEvent(new Event('change'))
+ 
+      expect(component.getReturnedValue()).toBe('Right');
     });
     it('\"Left\" is clicked, returnedValue is \"Left\"', fakeAsync( () => {
-      let selectBox = fixture.debugElement.query(By.css('#thenSelectBox'));
-      (document.getElementById('thenSelectBox') as HTMLElement).click();
-      selectBox.triggerEventHandler('click', (document.getElementById('thenSelectBox') as HTMLElement));
-      tick();
-      console.log(selectBox);
+      let selectBox = fixture.debugElement.query(By.css('#thenSelectBox')).nativeElement;
+      fixture.detectChanges();
 
-      let selectBoxOption = fixture.debugElement.query(By.css('#thenEventLeft'));
-      selectBoxOption.triggerEventHandler('click', (document.getElementById('thenEventLeft') as HTMLElement));
-      tick();
-      
-      console.log(selectBoxOption);
-
-      expect(() => {
-        return component.getReturnedValue() as string}).toBe('Left');
+      selectBox.value = selectBox.options[3].value;
+      selectBox.dispatchEvent(new Event('change'))
+ 
+      expect(component.getReturnedValue()).toBe('Left');
     }));
   });
   

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IsComponent } from './is.component';
+import { By } from '@angular/platform-browser';
 
 describe('IsComponent', () => {
   let component: IsComponent;
@@ -38,19 +39,31 @@ describe('IsComponent', () => {
 
   describe('when dropdown option is selected, it should pass the correct fact', () => {
     it('\"Wall\" is clicked, returnedValue is \"Wall\"', () => {
-      (document.getElementById('isSelectBox') as HTMLElement).click();
-      (document.getElementById('isValueWall') as HTMLElement).click();
-      waitForAsync( async () => {expect(component.returnedValue).toBe('Wall')});
+      let selectBox = fixture.debugElement.query(By.css('#isSelectBox')).nativeElement;
+      fixture.detectChanges();
+
+      selectBox.value = selectBox.options[1].value;
+      selectBox.dispatchEvent(new Event('change'))
+ 
+      expect(component.getReturnedValue()).toBe('Wall');
     });
     it('\"Empty\" is clicked, returnedValue is \"Empty\"', () => {
-      (document.getElementById('isSelectBox') as HTMLElement).click();
-      (document.getElementById('isValueEmpty') as HTMLElement).click();
-      waitForAsync( async () => {expect(component.returnedValue).toBe('Empty')});
+      let selectBox = fixture.debugElement.query(By.css('#isSelectBox')).nativeElement;
+      fixture.detectChanges();
+
+      selectBox.value = selectBox.options[2].value;
+      selectBox.dispatchEvent(new Event('change'))
+ 
+      expect(component.getReturnedValue()).toBe('Empty');
     });
     it('\"End\" is clicked, returnedValue is \"End\"', () => {
-      (document.getElementById('isSelectBox') as HTMLElement).click();
-      (document.getElementById('isValueEnd') as HTMLElement).click();
-      waitForAsync( async () => {expect(component.returnedValue).toBe('End')});
+      let selectBox = fixture.debugElement.query(By.css('#isSelectBox')).nativeElement;
+      fixture.detectChanges();
+
+      selectBox.value = selectBox.options[3].value;
+      selectBox.dispatchEvent(new Event('change'))
+ 
+      expect(component.getReturnedValue()).toBe('End');
     });
   });
   

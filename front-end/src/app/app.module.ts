@@ -5,6 +5,7 @@ import { WhenComponent } from './conditions/when/when.component';
 import { IsComponent } from './conditions/is/is.component';
 import { ThenComponent } from './then/then.component';
 import { ConditionsComponent } from './conditions/conditions.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { ConditionsComponent } from './conditions/conditions.component';
     WhenComponent,
     IsComponent,
     ThenComponent,
-    ConditionsComponent
+    ConditionsComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule    

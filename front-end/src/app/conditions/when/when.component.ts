@@ -14,4 +14,7 @@ export class WhenComponent {
   public setReturnedValue(returnedValue: string): void {
     this.returnedValue = returnedValue;
   };
+  public getReturnedValue(): string {
+    return this.returnedValue;
+  };
 }

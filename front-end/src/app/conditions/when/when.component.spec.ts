@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { WhenComponent } from './when.component';
+import { By } from '@angular/platform-browser';
 
 describe('WhenComponent', () => {
   let component: WhenComponent;
@@ -47,24 +48,40 @@ describe('WhenComponent', () => {
 
   describe('when dropdown option is selected, it should pass the correct fact', () => {
     it('\"Front\" is clicked, returnedValue is \"Front\"', () => {
-      (document.getElementById('whenSelectBox') as HTMLElement).click();
-      (document.getElementById('whenFactFront') as HTMLElement).click();
-      waitForAsync( async () => {expect(component.returnedValue).toBe('Front')});
+      let selectBox = fixture.debugElement.query(By.css('#whenSelectBox')).nativeElement;
+      fixture.detectChanges();
+
+      selectBox.value = selectBox.options[1].value;
+      selectBox.dispatchEvent(new Event('change'))
+ 
+      expect(component.getReturnedValue()).toBe('Front');
     });
     it('\"Right\" is clicked, returnedValue is \"Right\"', () => {
-      (document.getElementById('whenSelectBox') as HTMLElement).click();
-      (document.getElementById('whenFactRight') as HTMLElement).click();
-      waitForAsync( async () => {expect(component.returnedValue).toBe('Right')});
+      let selectBox = fixture.debugElement.query(By.css('#whenSelectBox')).nativeElement;
+      fixture.detectChanges();
+
+      selectBox.value = selectBox.options[2].value;
+      selectBox.dispatchEvent(new Event('change'))
+ 
+      expect(component.getReturnedValue()).toBe('Right');
     });
     it('\"Left\" is clicked, returnedValue is \"Left\"', () => {
-      (document.getElementById('whenSelectBox') as HTMLElement).click();
-      (document.getElementById('whenFactLeft') as HTMLElement).click();
-      waitForAsync( async () => {expect(component.returnedValue).toBe('Left')});
+      let selectBox = fixture.debugElement.query(By.css('#whenSelectBox')).nativeElement;
+      fixture.detectChanges();
+
+      selectBox.value = selectBox.options[3].value;
+      selectBox.dispatchEvent(new Event('change'))
+ 
+      expect(component.getReturnedValue()).toBe('Left');
     });
     it('\"Behind\" is clicked, returnedValue is \"Behind\"', () => {
-      (document.getElementById('whenSelectBox') as HTMLElement).click();
-      (document.getElementById('whenFactBehind') as HTMLElement).click();
-      waitForAsync( async () => {expect(component.returnedValue).toBe('Behind')});
+      let selectBox = fixture.debugElement.query(By.css('#whenSelectBox')).nativeElement;
+      fixture.detectChanges();
+
+      selectBox.value = selectBox.options[4].value;
+      selectBox.dispatchEvent(new Event('change'))
+ 
+      expect(component.getReturnedValue()).toBe('Behind');
     });
   });
   

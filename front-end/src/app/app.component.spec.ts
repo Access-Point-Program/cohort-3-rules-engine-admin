@@ -21,10 +21,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'front-end'`, () => {
+  it(`should have as title 'Rules Engine Admin'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('front-end');
+    expect(app.title).toEqual('Rules Engine Admin');
   });
 
   it('should render title', () => {
