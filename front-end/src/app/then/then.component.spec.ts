@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 
 import { ThenComponent } from './then.component';
+import { By } from '@angular/platform-browser';
 
 describe('ThenComponent', () => {
   let component: ThenComponent;
@@ -38,21 +39,36 @@ describe('ThenComponent', () => {
   });
 
   describe('when dropdown option is selected, it should pass the correct fact', () => {
-    it('\"FORWARD\" is clicked, returnedValue is \"Forward\"', () => {
-      (document.getElementById('thenSelectBox') as HTMLElement).click();
-      (document.getElementById('thenEventForward') as HTMLElement).click();
-      waitForAsync( async () => {expect(component.returnedValue).toBe('Forward')});
+    // beforeEach(() => {
+    //   (document.getElementById('thenSelectBox') as HTMLElement).click();
+    //   (document.getElementById('thenEventLeft') as HTMLElement).click();
+    // });
+    it('\"Forward\" is clicked, returnedValue is \"Forward\"', () => {
+      // (document.getElementById('thenSelectBox') as HTMLElement).click();
+      // (document.getElementById('thenEventForward') as HTMLElement).click();
+      waitForAsync( async () => {expect(component.getReturnedValue()).toBe('Forward')});
     });
-    it('\"RIGHT\" is clicked, returnedValue is \"Right\"', () => {
-      (document.getElementById('thenSelectBox') as HTMLElement).click();
-      (document.getElementById('thenEventRight') as HTMLElement).click();
-      waitForAsync( async () => {expect(component.returnedValue).toBe('Right')});
+    it('\"Right\" is clicked, returnedValue is \"Right\"', () => {
+      // (document.getElementById('thenSelectBox') as HTMLElement).click();
+      // (document.getElementById('thenEventRight') as HTMLElement).click();
+      waitForAsync( async () => {expect(component.getReturnedValue()).toBe('s')});
     });
-    it('\"LEFT\" is clicked, returnedValue is \"Left\"', () => {
+    it('\"Left\" is clicked, returnedValue is \"Left\"', fakeAsync( () => {
+      let selectBox = fixture.debugElement.query(By.css('#thenSelectBox'));
       (document.getElementById('thenSelectBox') as HTMLElement).click();
-      (document.getElementById('thenEventLeft') as HTMLElement).click();
-      waitForAsync( async () => {expect(component.returnedValue).toBe('Left')});
-    });
+      selectBox.triggerEventHandler('click', (document.getElementById('thenSelectBox') as HTMLElement));
+      tick();
+      console.log(selectBox);
+
+      let selectBoxOption = fixture.debugElement.query(By.css('#thenEventLeft'));
+      selectBoxOption.triggerEventHandler('click', (document.getElementById('thenEventLeft') as HTMLElement));
+      tick();
+      
+      console.log(selectBoxOption);
+
+      expect(() => {
+        return component.getReturnedValue() as string}).toBe('Left');
+    }));
   });
   
   it('\"Then\" should be rendered on the screen', () => {

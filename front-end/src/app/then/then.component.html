@@ -1,9 +1,17 @@
-<div class="thenComponent">
-    <span class="then">Then</span>
-    <select class="form-select" id="thenSelectBox" #selectedValue (change)="setReturnedValue(selectedValue.value)">
-      <option value="" disabled selected hidden>Select the Action</option>
-      <option class="thenDropdownOptions" *ngFor="let event of eventType" id="thenEvent{{event}}">
-          {{ event }}
-      </option>
-    </select>
+<div class="align-items-center row g-3">
+  <div class="col-sm-6">
+    <div class="thenComponent row">
+      <div class="col-1">
+        <label class="then" for="thenSelectBox">Then</label>
+      </div>
+      <div class="col-11">
+        <select class="form-select" id="thenSelectBox" #selectedValue (change)="setReturnedValue(selectedValue.value)">
+          <option value="" disabled selected hidden>Action</option>
+          <option class="thenDropdownOptions" *ngFor="let event of eventType" id="thenEvent{{event}}">
+              {{ event }}
+          </option>
+        </select>
+      </div>
+    </div>
   </div>
+</div>

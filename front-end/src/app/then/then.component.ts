@@ -9,9 +9,12 @@ import { EventType } from '../types/eventType';
 export class ThenComponent {
 
   public eventType = Object.values(EventType);
-  public returnedValue: string = '';
+  private returnedValue: string = '';
 
   public setReturnedValue(returnedValue: string): void {
     this.returnedValue = returnedValue;
+  };
+  public getReturnedValue(): string {
+    return this.returnedValue;
   };
 }

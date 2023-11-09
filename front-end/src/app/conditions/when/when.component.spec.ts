@@ -46,22 +46,22 @@ describe('WhenComponent', () => {
   });
 
   describe('when dropdown option is selected, it should pass the correct fact', () => {
-    it('\"FRONT\" is clicked, returnedValue is \"Front\"', () => {
+    it('\"Front\" is clicked, returnedValue is \"Front\"', () => {
       (document.getElementById('whenSelectBox') as HTMLElement).click();
       (document.getElementById('whenFactFront') as HTMLElement).click();
       waitForAsync( async () => {expect(component.returnedValue).toBe('Front')});
     });
-    it('\"RIGHT\" is clicked, returnedValue is \"Right\"', () => {
+    it('\"Right\" is clicked, returnedValue is \"Right\"', () => {
       (document.getElementById('whenSelectBox') as HTMLElement).click();
       (document.getElementById('whenFactRight') as HTMLElement).click();
       waitForAsync( async () => {expect(component.returnedValue).toBe('Right')});
     });
-    it('\"LEFT\" is clicked, returnedValue is \"Left\"', () => {
+    it('\"Left\" is clicked, returnedValue is \"Left\"', () => {
       (document.getElementById('whenSelectBox') as HTMLElement).click();
       (document.getElementById('whenFactLeft') as HTMLElement).click();
       waitForAsync( async () => {expect(component.returnedValue).toBe('Left')});
     });
-    it('\"BEHIND\" is clicked, returnedValue is \"Behind\"', () => {
+    it('\"Behind\" is clicked, returnedValue is \"Behind\"', () => {
       (document.getElementById('whenSelectBox') as HTMLElement).click();
       (document.getElementById('whenFactBehind') as HTMLElement).click();
       waitForAsync( async () => {expect(component.returnedValue).toBe('Behind')});

@@ -37,17 +37,17 @@ describe('IsComponent', () => {
   });
 
   describe('when dropdown option is selected, it should pass the correct fact', () => {
-    it('\"WALL\" is clicked, returnedValue is \"Wall\"', () => {
+    it('\"Wall\" is clicked, returnedValue is \"Wall\"', () => {
       (document.getElementById('isSelectBox') as HTMLElement).click();
       (document.getElementById('isValueWall') as HTMLElement).click();
       waitForAsync( async () => {expect(component.returnedValue).toBe('Wall')});
     });
-    it('\"EMPTY\" is clicked, returnedValue is \"Empty\"', () => {
+    it('\"Empty\" is clicked, returnedValue is \"Empty\"', () => {
       (document.getElementById('isSelectBox') as HTMLElement).click();
       (document.getElementById('isValueEmpty') as HTMLElement).click();
       waitForAsync( async () => {expect(component.returnedValue).toBe('Empty')});
     });
-    it('\"END\" is clicked, returnedValue is \"End\"', () => {
+    it('\"End\" is clicked, returnedValue is \"End\"', () => {
       (document.getElementById('isSelectBox') as HTMLElement).click();
       (document.getElementById('isValueEnd') as HTMLElement).click();
       waitForAsync( async () => {expect(component.returnedValue).toBe('End')});
