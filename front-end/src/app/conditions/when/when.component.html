@@ -1,8 +1,8 @@
 <div class="whenComponent row">
-  <div class="col-2">
+  <div class="col-1">
     <label class="when col-form-label" for="whenSelectBox">When</label>
   </div>
-  <div class="col-10">
+  <div class="col-11">
     <select class="form-select" id="whenSelectBox" #selectedValue (change)="setReturnedValue(selectedValue.value)">
       <option value="" disabled selected hidden>Location</option>
       <option class="whenDropdownOptions" *ngFor="let fact of factType" id="whenFact{{fact}}">

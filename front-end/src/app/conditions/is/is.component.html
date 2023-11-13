@@ -2,7 +2,7 @@
   <div class="col-1">
     <label class="is col-form-label" for="isSelectBox">is</label>
   </div>
-  <div class="col-10">
+  <div class="col-11">
     <select class="form-select" id="isSelectBox" #selectedValue (change)="setReturnedValue(selectedValue.value)">
       <option value="" disabled selected hidden>State</option>
       <option class="isDropdownOptions"*ngFor="let val of valueType" id="isValue{{val}}">
