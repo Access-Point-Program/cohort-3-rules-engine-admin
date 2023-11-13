@@ -15,14 +15,21 @@ import org.hibernate.annotations.CreationTimestamp;
 @Entity
 @Table(name = "ruleset")
 public class Ruleset implements Serializable {
-    private @Id @GeneratedValue(strategy=GenerationType.IDENTITY) Long id ;
+
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
 
     @NotNull
     private String name;
 
-    @CreationTimestamp
-    @NotNull private Timestamp creation_date;
+    @CreationTimestamp @NotNull
+    private Timestamp creation_date;
 
-    @OneToMany(mappedBy = "ruleset", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "ruleset", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Set<Rule> rules;
+
+    @PrePersist
+    private void prePersist() {
+        rules.forEach( c -> c.setRuleset(this));
+    }
 }

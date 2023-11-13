@@ -2,6 +2,8 @@ package com.accesspoint.rulesengine.entity;
 
 import java.io.Serializable;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnTransformer;
@@ -16,20 +18,30 @@ import org.hibernate.annotations.ColumnTransformer;
 @Table(name = "rule")
 public class Rule implements Serializable {
 
-    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    @NotNull
     private double priority;
 
     @Enumerated(EnumType.STRING)
     @ColumnTransformer(write = "?::EventType")
+    @NotNull
     private EventType event_type;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "ruleset_id")
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "ruleset_id", nullable=false, updatable=false)
+    @ColumnTransformer(write = "?::bigint")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Ruleset ruleset;
 
-    @OneToMany(mappedBy = "rule", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "rule", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Set<Condition> conditions;
+
+    @PrePersist
+    private void prePersist() {
+        conditions.forEach( c -> c.setRule(this));
+    }
 }

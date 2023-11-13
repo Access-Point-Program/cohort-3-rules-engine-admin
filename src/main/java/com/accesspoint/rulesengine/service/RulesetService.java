@@ -2,8 +2,6 @@ package com.accesspoint.rulesengine.service;
 
 import com.accesspoint.rulesengine.controller.CreateRuleSetRequest;
 import com.accesspoint.rulesengine.entity.Ruleset;
-import com.accesspoint.rulesengine.entity.Rule;
-import com.accesspoint.rulesengine.entity.Condition;
 import com.accesspoint.rulesengine.model.RulesetModel;
 import com.accesspoint.rulesengine.repository.ConditionRepository;
 import com.accesspoint.rulesengine.repository.RuleRepository;
@@ -32,37 +30,14 @@ public class RulesetService {
     }
 
     public ResponseEntity<Ruleset> createRuleset(CreateRuleSetRequest incomingRulesetData) {
-        System.out.println(Ruleset.builder()
-                .name(incomingRulesetData.name)
-                .rules(incomingRulesetData.rules)
-                .build());
+
         Ruleset rulesetData = this.rulesetRepository.save(
                 Ruleset.builder()
                         .name(incomingRulesetData.name)
                         .rules(incomingRulesetData.rules)
                 .build()
         );
-        System.out.println(rulesetData);
 
-        incomingRulesetData.rules.stream().forEach(rule -> {
-            Rule ruleData = this.ruleRepository.save(
-                   Rule.builder()
-                           .priority(rule.getPriority())
-                           .event_type(rule.getEvent_type())
-                           .ruleset(rulesetData)
-                           .conditions(rule.getConditions())
-                   .build());
-            rule.getConditions().forEach(condition -> {
-                this.conditionRepository.save(
-                        Condition.builder()
-                                .fact_type(condition.getFact_type())
-                                .value_type(condition.getValue_type())
-                                .rule(ruleData)
-                                .build());
-            });
-        });
-
-        System.out.println(this.rulesetRepository.findAll());
         return ResponseEntity.ok().body(this.rulesetRepository.getReferenceById(rulesetData.getId()));
     }
 }
