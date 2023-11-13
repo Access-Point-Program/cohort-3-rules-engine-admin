@@ -6,3 +6,6 @@ body, app-root {
 app-root {
     display: inline-block;
 }
+.nav-pills {
+    --bs-nav-pills-link-active-bg: #7749F8;
+}
