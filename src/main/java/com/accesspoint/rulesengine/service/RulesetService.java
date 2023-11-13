@@ -2,6 +2,7 @@ package com.accesspoint.rulesengine.service;
 
 import com.accesspoint.rulesengine.controller.CreateRuleSetRequest;
 import com.accesspoint.rulesengine.entity.Ruleset;
+import com.accesspoint.rulesengine.exception.BadRequestException;
 import com.accesspoint.rulesengine.exception.PriorityAlreadyExistsException;
 import com.accesspoint.rulesengine.model.RulesetModel;
 import com.accesspoint.rulesengine.repository.ConditionRepository;
@@ -12,9 +13,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static com.accesspoint.rulesengine.entity.EventType.*;
 
 @Service
 public class RulesetService {
@@ -34,15 +38,12 @@ public class RulesetService {
     }
 
     public ResponseEntity<Ruleset> createRuleset(CreateRuleSetRequest incomingRulesetData) {
-
-        // TODO: Exception for ruleset name field is not empty or null
-
-        // TODO: Exception for making sure at least 1 rule is in the incomingRulesetData
-        //  (and it contains a "priority", "event_type", and not null "conditions" field)
-
-        // TODO: Exception for making sure at least 1 condition is in each rule
-        //  (and it contains a "fact_type" and "value_type")
-
+        if (incomingRulesetData.name.isEmpty()) throw new BadRequestException("Name cannot be empty");
+        if (incomingRulesetData.rules == null) throw new BadRequestException("Rules cannot be empty");
+        incomingRulesetData.rules.stream().forEach(rule -> {
+            if (rule.getPriority() == 0.0) throw new BadRequestException("Rule priority cannot be 0");
+            if (rule.getConditions() == null) throw new BadRequestException("Conditions cannot be empty");
+        });
 
         Set<Double> existingPriorities = new HashSet<>();
         // Gather all priority values in the rule database table
