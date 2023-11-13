@@ -1,5 +1,7 @@
 package com.accesspoint.rulesengine.apitests.ruleset;
 
+import com.accesspoint.rulesengine.controller.CreateRuleSetRequest;
+import com.accesspoint.rulesengine.entity.Condition;
 import com.accesspoint.rulesengine.entity.Rule;
 import com.accesspoint.rulesengine.entity.Ruleset;
 import com.accesspoint.rulesengine.repository.RulesetRepository;
@@ -9,6 +11,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONString;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,9 +21,14 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TimeZone;
+
+import static com.accesspoint.rulesengine.entity.EventType.FORWARD;
+import static com.accesspoint.rulesengine.entity.FactType.*;
+import static com.accesspoint.rulesengine.entity.ValueType.*;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.when;
@@ -90,32 +98,44 @@ public class RulesetTest {
 
     @Test
     public void PostRequest() throws JSONException {
-        JSONObject json = new JSONObject().put("name", "Test1").put("rules", " [ {\"priority\": \"111\", \"event_type\": \"BACK\", \"conditions\": [ { \"fact_type\":\"FRONT\",\"value_type\":\"END\"}]},{\"priority\": 111111,\"event_type\": \"FORWARD\",\"conditions\": [{ \"fact_type\":\"FRONT\",\"value_type\":\"EMPTY\"}]},{\"priority\": 111116, \"event_type\": \"LEFT\",\"conditions\": [{\"fact_type\":\"FRONT\",\"value_type\":\"WALL\"},{\"fact_type\":\"RIGHT\",\"value_type\":\"END\"}]}]");
+//        JSONObject json = new JSONObject().put("name", "Test1").put("rules", " [ {\"priority\": \"111\", \"event_type\": \"BACK\", \"conditions\": [ { \"fact_type\":\"FRONT\",\"value_type\":\"END\"}]},{\"priority\": 111111,\"event_type\": \"FORWARD\",\"conditions\": [{ \"fact_type\":\"FRONT\",\"value_type\":\"EMPTY\"}]},{\"priority\": 111116, \"event_type\": \"LEFT\",\"conditions\": [{\"fact_type\":\"FRONT\",\"value_type\":\"WALL\"},{\"fact_type\":\"RIGHT\",\"value_type\":\"END\"}]}]");
 
-//        ObjectMapper mapper = new ObjectMapper();
-//        Ruleset rules = mapper.convertValue(json, new TypeReference<Ruleset>() {
-//        });
+        String json = {"name":"Test1","rules": [ {"priority": 11, "event_type": "FORWARD", "conditions": [{"fact_type":"FRONT","value_type":"END"}]},{"priority": 21, "event_type": "FORWARD","conditions": [{"fact_type":"FRONT","value_type":"EMPTY"}]},{"priority": 31, "event_type": "LEFT","conditions": [{"fact_type":"FRONT","value_type":"WALL"},{"fact_type":"RIGHT","value_type":"END"}]}]}
+
+
+
+        Set<Condition> fakeCondition1 = new HashSet<>();
+        fakeCondition1.add(new Condition(100L, FRONT, END, null));
+
+        Set<Condition> fakeCondition2 = new HashSet<>();
+        fakeCondition2.add(new Condition(200L, FRONT, EMPTY, null));
+        fakeCondition2.add(new Condition(201L, LEFT, EMPTY, null));
+
+        Set<Rule> fakeRules = new HashSet<>();
+        fakeRules.add(new Rule(100L, 11, FORWARD, null, fakeCondition1));
+        fakeRules.add(new Rule(200L, 21, FORWARD, null, fakeCondition2));
 
         Ruleset ruleset =
                 Ruleset.builder()
                         .name("Test1")
-                        .rules(json.get("rules").)
-                        .build();
-        when(rulesetRepository.save(Mockito.any(Ruleset.class))).thenReturn(rules);
+                        .rules(fakeRules)
+                .build();
 
+        when(rulesetRepository.save(Mockito.any(Ruleset.class))).thenReturn(ruleset);
 
         given()
                 .contentType(ContentType.JSON)
-                .body(json.toString())
-                .when()
+                .body(json)
+        .when()
                 .post("/ruleset")
                 .then()
-                .log().all()
+        .log().all()
                 .statusCode(201)
                 .body("name", equalTo("Test1"))
-                .body("rules", equalTo("[ {\"priority\": \"111\", \"event_type\": \"BACK\", \"conditions\": [ { \"fact_type\":\"FRONT\",\"value_type\":\"END\"}]},{\"priority\": 111111,\"event_type\": \"FORWARD\",\"conditions\": [{ \"fact_type\":\"FRONT\",\"value_type\":\"EMPTY\"}]},{\"priority\": 111116, \"event_type\": \"LEFT\",\"conditions\": [{\"fact_type\":\"FRONT\",\"value_type\":\"WALL\"},{\"fact_type\":\"RIGHT\",\"value_type\":\"END\"}]}]"));
+                .body("rules", equalTo(fakeRules));
     }
 
+// "[ {\"priority\": \"111\", \"event_type\": \"BACK\", \"conditions\": [ { \"fact_type\":\"FRONT\",\"value_type\":\"END\"}]},{\"priority\": 111111,\"event_type\": \"FORWARD\",\"conditions\": [{ \"fact_type\":\"FRONT\",\"value_type\":\"EMPTY\"}]},{\"priority\": 111116, \"event_type\": \"LEFT\",\"conditions\": [{\"fact_type\":\"FRONT\",\"value_type\":\"WALL\"},{\"fact_type\":\"RIGHT\",\"value_type\":\"END\"}]}]"
 /*
     POST endpoint tests
     -
