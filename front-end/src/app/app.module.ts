@@ -7,6 +7,10 @@ import { ThenComponent } from './then/then.component';
 import { ConditionsComponent } from './conditions/conditions.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { CreateNewConditionComponent } from './create-new-condition/create-new-condition.component';
+import { DeleteRuleButtonComponent } from './delete-rule-button/delete-rule-button.component';
+import { MoveUpButtonComponent } from './move-up-button/move-up-button.component';
+import { MoveDownButtonComponent } from './move-down-button/move-down-button.component';
+import { AddNewRuleButtonComponent } from './add-new-rule-button/add-new-rule-button.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +20,11 @@ import { CreateNewConditionComponent } from './create-new-condition/create-new-c
     ThenComponent,
     ConditionsComponent,
     SidebarComponent,
-    CreateNewConditionComponent
+    CreateNewConditionComponent,
+    DeleteRuleButtonComponent,
+    MoveUpButtonComponent,
+    MoveDownButtonComponent,
+    AddNewRuleButtonComponent
   ],
   imports: [
     BrowserModule    
