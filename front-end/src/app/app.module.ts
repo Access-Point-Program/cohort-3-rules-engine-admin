@@ -11,6 +11,7 @@ import { DeleteRuleButtonComponent } from './delete-rule-button/delete-rule-butt
 import { MoveUpButtonComponent } from './move-up-button/move-up-button.component';
 import { MoveDownButtonComponent } from './move-down-button/move-down-button.component';
 import { AddNewRuleButtonComponent } from './add-new-rule-button/add-new-rule-button.component';
+import { RulesComponentComponent } from './rules-component/rules-component.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AddNewRuleButtonComponent } from './add-new-rule-button/add-new-rule-bu
     DeleteRuleButtonComponent,
     MoveUpButtonComponent,
     MoveDownButtonComponent,
-    AddNewRuleButtonComponent
+    AddNewRuleButtonComponent,
+    RulesComponentComponent
   ],
   imports: [
     BrowserModule    

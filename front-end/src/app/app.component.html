@@ -1,11 +1,9 @@
 <main class="d-flex flex-nowrap">
     <app-sidebar class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark col-sm-3" style="width: 280px;"></app-sidebar>
     <div class="col-sm-9">
-        <conditions></conditions>
-        <then-event></then-event>
-        <span>
-            <app-create-new-condition></app-create-new-condition>
-            <app-delete-rule-button></app-delete-rule-button>
-        </span>
+        <div>
+            <app-rules-component></app-rules-component>
+        </div>
+        <app-add-new-rule-button></app-add-new-rule-button>
     </div>
 </main>
