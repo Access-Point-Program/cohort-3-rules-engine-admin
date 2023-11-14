@@ -1,6 +1,5 @@
 package com.accesspoint.rulesengine.repository;
 
-
 import com.accesspoint.rulesengine.entity.Ruleset;
 import org.springframework.data.jpa.repository.JpaRepository;
 

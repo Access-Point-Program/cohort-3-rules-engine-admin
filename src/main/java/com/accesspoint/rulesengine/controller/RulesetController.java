@@ -1,13 +1,13 @@
 package com.accesspoint.rulesengine.controller;
 
+import com.accesspoint.rulesengine.entity.Ruleset;
 import com.accesspoint.rulesengine.model.RulesetModel;
 import com.accesspoint.rulesengine.service.RulesetService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 
 @RestController
 public class RulesetController {
@@ -20,5 +20,12 @@ public class RulesetController {
         return rulesetService.getAll();
     }
 
-
+    @PostMapping("/ruleset")
+    ResponseEntity<Ruleset> newRuleset(@RequestBody CreateRuleSetRequest request) {
+        return this.rulesetService.createRuleset(request);
+    }
 }
+
+
+
+// create entities, join by ruleset save ruleset

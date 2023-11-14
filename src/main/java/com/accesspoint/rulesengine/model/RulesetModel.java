@@ -5,11 +5,14 @@ import lombok.Getter;
 
 public class RulesetModel {
 
-    @Getter private Long id;
+    @Getter
+    private Long id;
 
-    @Getter private String name;
+    @Getter
+    private String name;
 
-    @Getter private Timestamp creation_date;
+    @Getter
+    private Timestamp creation_date;
 
     public RulesetModel(Long id, String name, Timestamp creation_date) {
         this.id = id;

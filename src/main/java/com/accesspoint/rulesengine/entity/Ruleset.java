@@ -1,55 +1,35 @@
 package com.accesspoint.rulesengine.entity;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-
+import java.util.List;
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import lombok.Getter;
-import lombok.Setter;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "ruleset")
-public class Ruleset {
+public class Ruleset implements Serializable {
 
-    @Getter @Setter private @Id @GeneratedValue(strategy=GenerationType.IDENTITY) Long id ;
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
 
-    @OneToMany(mappedBy = "ruleset")
-    private Set<Rule> Rules = new HashSet<>();
+    @NotNull
+    private String name;
 
-    @Getter @Setter private String name;
+    @CreationTimestamp @NotNull
+    private Timestamp creation_date;
 
-    @CreationTimestamp
-    @Getter @Setter private Timestamp creation_date;
+    @OneToMany(mappedBy = "ruleset", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private List<Rule> rules;
 
-    Ruleset() {}
-
-    public Ruleset(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public boolean equals(Object rs) {
-
-        if (this == rs)
-            return true;
-        if (!(rs instanceof Ruleset))
-            return false;
-        Ruleset ruleset = (Ruleset) rs;
-        return Objects.equals(this.id, ruleset.id)
-                && Objects.equals(this.name, ruleset.name)
-                && Objects.equals(this.creation_date, ruleset.creation_date);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.id, this.name, this.creation_date);
-    }
-
-    @Override
-    public String toString() {
-        return "Ruleset{" + "id=" + this.id + ", name=" + this.name + ", creation date=" + this.creation_date + "}";
+    @PrePersist
+    private void prePersist() {
+        rules.forEach( c -> c.setRuleset(this));
     }
 }
