@@ -6,5 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./create-new-condition.component.css']
 })
 export class CreateNewConditionComponent {
+  private conditionCounter: string[] = [""];
 
+  public getConditionCounter():string[] {
+    return this.conditionCounter;
+  }
+
+  public addCondition():void {
+    this.conditionCounter.push("");
+  }
+
+  //<conditions *ngFor="let condition of getConditionCounter()"></conditions>
 }
