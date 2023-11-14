@@ -1,7 +1,7 @@
 package com.accesspoint.rulesengine.entity;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import jakarta.persistence.*;
@@ -38,7 +38,7 @@ public class Rule implements Serializable {
     private Ruleset ruleset;
 
     @OneToMany(mappedBy = "rule", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private Set<Condition> conditions;
+    private List<Condition> conditions;
 
     @PrePersist
     private void prePersist() {

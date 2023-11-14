@@ -2,7 +2,7 @@ package com.accesspoint.rulesengine.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Set;
+import java.util.List;
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,7 +26,7 @@ public class Ruleset implements Serializable {
     private Timestamp creation_date;
 
     @OneToMany(mappedBy = "ruleset", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private Set<Rule> rules;
+    private List<Rule> rules;
 
     @PrePersist
     private void prePersist() {

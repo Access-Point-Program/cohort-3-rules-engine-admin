@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.accesspoint.rulesengine.entity.EventType.*;
@@ -38,6 +35,7 @@ public class RulesetService {
     }
 
     public ResponseEntity<Ruleset> createRuleset(CreateRuleSetRequest incomingRulesetData) {
+
         if (incomingRulesetData.name.isEmpty()) throw new BadRequestException("Name cannot be empty");
         if (incomingRulesetData.rules == null) throw new BadRequestException("Rules cannot be empty");
         incomingRulesetData.rules.stream().forEach(rule -> {
@@ -45,7 +43,7 @@ public class RulesetService {
             if (rule.getConditions() == null) throw new BadRequestException("Conditions cannot be empty");
         });
 
-        Set<Double> existingPriorities = new HashSet<>();
+        List<Double> existingPriorities = new ArrayList<>();
         // Gather all priority values in the rule database table
         this.ruleRepository.findAll().forEach(rule -> existingPriorities.add(rule.getPriority()));
         // If the priority of an incoming rule already exists in the database, throw exception
