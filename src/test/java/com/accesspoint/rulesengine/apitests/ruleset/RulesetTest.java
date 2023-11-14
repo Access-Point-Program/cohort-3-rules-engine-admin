@@ -1,23 +1,16 @@
 package com.accesspoint.rulesengine.apitests.ruleset;
 
-import com.accesspoint.rulesengine.controller.CreateRuleSetRequest;
 import com.accesspoint.rulesengine.entity.Condition;
 import com.accesspoint.rulesengine.entity.Rule;
 import com.accesspoint.rulesengine.entity.Ruleset;
 import com.accesspoint.rulesengine.repository.ConditionRepository;
 import com.accesspoint.rulesengine.repository.RuleRepository;
 import com.accesspoint.rulesengine.repository.RulesetRepository;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONString;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -249,5 +242,161 @@ public class RulesetTest {
                 .body("rules[1].conditions[1].value_type", equalTo(("EMPTY")));
     }
 
-    // TODO: tests to ensure the error handling is executed how it should be from the service
+    @Test
+    public void givenRuleset_whenPOSTNameIsEmpty_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
+        Condition fakeCon1_1 = new Condition(100L, FRONT, END, null);
+        Condition fakeCon2_1 = new Condition(200L, FRONT, EMPTY, null);
+        Condition fakeCon2_2 = new Condition(201L, LEFT, EMPTY, null);
+        List<Condition> fakeCondition1 = new ArrayList<>();
+        fakeCondition1.add(fakeCon1_1);
+        List<Condition> fakeCondition2 = new ArrayList<>();
+        fakeCondition2.add(fakeCon2_1);
+        fakeCondition2.add(fakeCon2_2);
+        Rule fakeRule1 = new Rule(100L, 11, FORWARD, null, fakeCondition1);
+        Rule fakeRule2 = new Rule(200L, 21, FORWARD, null, fakeCondition2);
+        List<Rule> fakeRules = new ArrayList<>();
+        fakeRules.add(fakeRule1);
+        fakeRules.add(fakeRule2);
+        Ruleset ruleset =
+                Ruleset.builder()
+                        .name("")
+                        .rules(fakeRules)
+                        .id(100L)
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        // Mock ALL repository methods that get called in the service
+        when(rulesetRepository.save(Mockito.any(Ruleset.class))).thenReturn(ruleset);
+        when(rulesetRepository.getReferenceById(Mockito.any(Long.class))).thenReturn(ruleset);
+        when(ruleRepository.save(Mockito.eq(fakeRule1))).thenReturn(fakeRule1);
+        when(conditionRepository.save(Mockito.eq(fakeCon1_1))).thenReturn(fakeCon1_1);
+
+        // Given the ruleset, when post request, then response body is as expected
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset)
+                .when()
+                .post("/ruleset")
+                .then()
+                .assertThat()
+                .statusCode(400)
+                .body(equalTo("Name cannot be empty"));
+    }
+
+    @Test
+    public void givenRuleset_whenPOSTRulesIsEmpty_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
+
+        Ruleset ruleset =
+                Ruleset.builder()
+                        .name("Test1")
+                        .rules(null)
+                        .id(100L)
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        // Mock ALL repository methods that get called in the service
+        when(rulesetRepository.save(Mockito.any(Ruleset.class))).thenReturn(ruleset);
+        when(rulesetRepository.getReferenceById(Mockito.any(Long.class))).thenReturn(ruleset);
+//        when(ruleRepository.save(Mockito.eq(fakeRule1))).thenReturn(fakeRule1);
+//        when(conditionRepository.save(Mockito.eq(fakeCon1_1))).thenReturn(fakeCon1_1);
+
+        // Given the ruleset, when post request, then response body is as expected
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset)
+                .when()
+                .post("/ruleset")
+                .then()
+                .assertThat()
+                .statusCode(400)
+                .body(equalTo("Rules cannot be empty"));
+    }
+
+    @Test
+    public void givenRuleset_whenPOSTRulesPriorityIsEmpty_thenCustomErrorIsCalled() {
+
+        // Building out the mock ruleset
+    Condition fakeCon1_1 = new Condition(100L, FRONT, END, null);
+    Condition fakeCon2_1 = new Condition(200L, FRONT, EMPTY, null);
+    Condition fakeCon2_2 = new Condition(201L, LEFT, EMPTY, null);
+    List<Condition> fakeCondition1 = new ArrayList<>();
+        fakeCondition1.add(fakeCon1_1);
+    List<Condition> fakeCondition2 = new ArrayList<>();
+        fakeCondition2.add(fakeCon2_1);
+        fakeCondition2.add(fakeCon2_2);
+    Rule fakeRule1 = new Rule(100L, 11, FORWARD, null, fakeCondition1);
+    Rule fakeRule2 = new Rule(200L, 0, FORWARD, null, fakeCondition2);
+    List<Rule> fakeRules = new ArrayList<>();
+        fakeRules.add(fakeRule1);
+        fakeRules.add(fakeRule2);
+    Ruleset ruleset =
+            Ruleset.builder()
+                    .name("Test1")
+                    .rules(fakeRules)
+                    .id(100L)
+                    .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                    .build();
+
+    // Mock ALL repository methods that get called in the service
+    when(rulesetRepository.save(Mockito.any(Ruleset.class))).thenReturn(ruleset);
+    when(rulesetRepository.getReferenceById(Mockito.any(Long.class))).thenReturn(ruleset);
+    when(ruleRepository.save(Mockito.eq(fakeRule1))).thenReturn(fakeRule1);
+    when(conditionRepository.save(Mockito.eq(fakeCon1_1))).thenReturn(fakeCon1_1);
+
+    // Given the ruleset, when post request, then response body is as expected
+    given()
+                .contentType(ContentType.JSON)
+                .body(ruleset)
+                .when()
+                .post("/ruleset")
+                .then()
+                .assertThat()
+                .statusCode(400)
+                .body(equalTo("Rule priority cannot be 0"));
+}
+
+    @Test
+    public void givenRuleset_whenPOSTRulesConditionsIsEmpty_thenCustomErrorIsCalled() {
+
+        // Building out the mock ruleset
+        Condition fakeCon1_1 = null;
+        Condition fakeCon2_1 = new Condition(200L, FRONT, EMPTY, null);
+        Condition fakeCon2_2 = new Condition(201L, LEFT, EMPTY, null);
+        List<Condition> fakeCondition1 = new ArrayList<>();
+        fakeCondition1.add(fakeCon1_1);
+        List<Condition> fakeCondition2 = new ArrayList<>();
+        fakeCondition2.add(fakeCon2_1);
+        fakeCondition2.add(fakeCon2_2);
+        Rule fakeRule1 = new Rule(100L, 11, FORWARD, null, null);
+        Rule fakeRule2 = new Rule(200L, 0, FORWARD, null, fakeCondition2);
+        List<Rule> fakeRules = new ArrayList<>();
+        fakeRules.add(fakeRule1);
+        fakeRules.add(fakeRule2);
+        Ruleset ruleset =
+                Ruleset.builder()
+                        .name("Test1")
+                        .rules(fakeRules)
+                        .id(100L)
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        // Mock ALL repository methods that get called in the service
+        when(rulesetRepository.save(Mockito.any(Ruleset.class))).thenReturn(ruleset);
+        when(rulesetRepository.getReferenceById(Mockito.any(Long.class))).thenReturn(ruleset);
+        when(ruleRepository.save(Mockito.eq(fakeRule1))).thenReturn(fakeRule1);
+        when(conditionRepository.save(Mockito.eq(fakeCon1_1))).thenReturn(fakeCon1_1);
+
+        // Given the ruleset, when post request, then response body is as expected
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset)
+                .when()
+                .post("/ruleset")
+                .then()
+                .assertThat()
+                .statusCode(400)
+                .body(equalTo("Conditions cannot be empty"));
+    }
 }
