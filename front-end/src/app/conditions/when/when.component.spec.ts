@@ -15,7 +15,7 @@ describe('WhenComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create "when" component', () => {
     expect(component).toBeTruthy();
   });
 

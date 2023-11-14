@@ -16,9 +16,10 @@ describe('SidebarComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create "sidebar" component', () => {
     expect(component).toBeTruthy();
   });
+
   it('sidebar should be rendered', () => {
     fixture.detectChanges();
     const rendered = fixture.debugElement.nativeElement.querySelector('#sidebar-title');
@@ -41,7 +42,6 @@ describe('SidebarComponent', () => {
     });
     it('should render "Sign Out"', () => {
       const signOut = fixture.debugElement.query(By.css('#signOut')).nativeElement;
-      
       expect(signOut.innerHTML).toBe('Sign Out');
     });
   });

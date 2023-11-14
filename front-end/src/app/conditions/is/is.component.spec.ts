@@ -15,6 +15,10 @@ describe('IsComponent', () => {
     fixture.detectChanges();
   });
 
+  it('should create "is" component', () => {
+    expect(component).toBeTruthy();
+  });
+
   describe('dropdown should contain the correct enums', () => {
     it('First dropdown item should be \"Wall\"', () => {
       const compiled = fixture.nativeElement as HTMLElement;

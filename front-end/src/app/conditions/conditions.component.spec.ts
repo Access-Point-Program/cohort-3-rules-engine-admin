@@ -17,7 +17,7 @@ describe('ConditionsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create "conditions" component', () => {
     expect(component).toBeTruthy();
   });
 });
