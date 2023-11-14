@@ -2,7 +2,7 @@
     <app-sidebar class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark col-sm-3" style="width: 280px;"></app-sidebar>
     <div class="col-sm-9">
         <div>
-            <app-rules-component></app-rules-component>
+            <app-rules-component *ngFor="let rule of ruleset" [priority]="ruleset.indexOf(rule)"></app-rules-component>
         </div>
         <app-add-new-rule-button></app-add-new-rule-button>
     </div>
