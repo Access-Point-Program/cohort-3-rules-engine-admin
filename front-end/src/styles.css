@@ -9,3 +9,6 @@ app-root {
 .nav-pills {
     --bs-nav-pills-link-active-bg: #7749F8;
 }
+.btn-primary {
+    --bs-btn-bg: #7749F8;
+}
