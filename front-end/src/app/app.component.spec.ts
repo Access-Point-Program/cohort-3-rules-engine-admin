@@ -5,6 +5,9 @@ import { IsComponent } from './conditions/is/is.component';
 import { ThenComponent } from './then/then.component';
 import { ConditionsComponent } from './conditions/conditions.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { By } from '@angular/platform-browser';
+import { AddNewRuleButtonComponent } from './add-new-rule-button/add-new-rule-button.component';
+
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -13,7 +16,8 @@ describe('AppComponent', () => {
       IsComponent,
       ThenComponent,
       ConditionsComponent, 
-      SidebarComponent
+      SidebarComponent,
+      AddNewRuleButtonComponent,
     ]
   }));
 
@@ -27,5 +31,12 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('front-end');
+  });
+  it(`clicking "Add New Rule" should increase the amount of rules`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    fixture.debugElement.query(By.css('#wordgrah')).nativeElement.click();
+
+    expect(app.ruleset.length).toBe(2);
   });
 });

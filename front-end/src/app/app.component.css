@@ -1,3 +1,8 @@
 main {
     height:100vh;
 }
+
+app-sidebar {
+    position: -webkit-sticky;
+    position: sticky;
+}
