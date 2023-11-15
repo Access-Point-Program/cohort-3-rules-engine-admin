@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { RulesComponentComponent } from '../rules-component/rules-component.component';
+import { Injector } from '@angular/core';
+import { ConditionsComponent } from '../conditions/conditions.component';
 
 @Component({
   selector: 'app-create-new-condition',
@@ -8,13 +11,18 @@ import { Component } from '@angular/core';
 export class CreateNewConditionComponent {
   private conditionCounter: string[] = [""];
 
+  public _parent: RulesComponentComponent;
+
+  constructor(private _injector: Injector) { 
+    const _parent: RulesComponentComponent = this._injector.get<RulesComponentComponent>(RulesComponentComponent);
+    this._parent = _parent;
+  }
+
   public getConditionCounter():string[] {
     return this.conditionCounter;
   }
 
   public addCondition():void {
-    this.conditionCounter.push("");
+    this._parent.conditionCounter.push(new ConditionsComponent);
   }
-
-  //<conditions *ngFor="let condition of getConditionCounter()"></conditions>
 }
