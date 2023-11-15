@@ -48,7 +48,7 @@ describe('AppComponent', () => {
 
     expect(app.ruleset.length).toBe(2);
   });
-  fit('button should be rendered', () => {
+  it('button should be rendered', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     const button = fixture.debugElement.query(By.css('#ruleButton'));
