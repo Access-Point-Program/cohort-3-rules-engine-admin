@@ -55,4 +55,20 @@ describe('AppComponent', () => {
 
     expect(button).toBeTruthy();
   });
+  it('clicking "Add New Rule" should display all of the conditions and buttons for them', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    expect(fixture.debugElement.nativeElement.querySelectorAll('#rulesComponent').length).toBe(1);
+    fixture.debugElement.query(By.css('#ruleButton')).nativeElement.click();
+    fixture.detectChanges();
+    expect(fixture.debugElement.nativeElement.querySelectorAll('#rulesComponent').length).toBe(2);
+  });
+  it('all buttons should be displayed on screen', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    expect(fixture.debugElement.nativeElement.querySelector('#conditionButton')).toBeTruthy();
+    expect(fixture.debugElement.nativeElement.querySelector('#deleteButton')).toBeTruthy();
+    expect(fixture.debugElement.nativeElement.querySelector('#moveUpButton')).toBeTruthy();
+    expect(fixture.debugElement.nativeElement.querySelector('#moveDownButton')).toBeTruthy();
+  });
 });
