@@ -8,10 +8,6 @@ import { Injector } from '@angular/core';
   styleUrls: ['./move-up-button.component.css']
 })
 export class MoveUpButtonComponent {
-/*needs to be called with the rule that this belongs to*/ 
-
-  // constructor(private _parent: RulesComponentComponent) { this._parent.setPriority(1); }
-
   public _parent: RulesComponentComponent;
 
   constructor(private _injector: Injector) { 

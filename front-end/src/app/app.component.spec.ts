@@ -5,9 +5,13 @@ import { IsComponent } from './conditions/is/is.component';
 import { ThenComponent } from './then/then.component';
 import { ConditionsComponent } from './conditions/conditions.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { By } from '@angular/platform-browser';
+import { RulesComponentComponent } from './rules-component/rules-component.component';
+import { CreateNewConditionComponent } from './create-new-condition/create-new-condition.component';
 import { AddNewRuleButtonComponent } from './add-new-rule-button/add-new-rule-button.component';
-
+import { DeleteRuleButtonComponent } from './delete-rule-button/delete-rule-button.component';
+import { MoveDownButtonComponent } from './move-down-button/move-down-button.component';
+import { MoveUpButtonComponent } from './move-up-button/move-up-button.component';
+import { By } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -17,7 +21,12 @@ describe('AppComponent', () => {
       ThenComponent,
       ConditionsComponent, 
       SidebarComponent,
+      RulesComponentComponent,
+      CreateNewConditionComponent,
       AddNewRuleButtonComponent,
+      DeleteRuleButtonComponent,
+      MoveDownButtonComponent,
+      MoveUpButtonComponent
     ]
   }));
 
