@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-new-rule-button.component.css']
 })
 export class AddNewRuleButtonComponent {
-
+  public addNewRule() {
+  }
 }
