@@ -12,7 +12,8 @@ import { MoveUpButtonComponent } from './move-up-button/move-up-button.component
 import { MoveDownButtonComponent } from './move-down-button/move-down-button.component';
 import { AddNewRuleButtonComponent } from './add-new-rule-button/add-new-rule-button.component';
 import { RulesComponentComponent } from './rules-component/rules-component.component';
-import { DashboardPathComponentComponent } from './dashboard-path-component/dashboard-path-component.component';
+import { DashboardPathComponent } from './dashboard-path/dashboard-path.component';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { DashboardPathComponentComponent } from './dashboard-path-component/dash
     MoveDownButtonComponent,
     AddNewRuleButtonComponent,
     RulesComponentComponent,
-    DashboardPathComponentComponent
+    DashboardPathComponent,
   ],
   imports: [
     BrowserModule    
