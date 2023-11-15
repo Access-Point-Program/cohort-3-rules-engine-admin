@@ -18,10 +18,6 @@ export class CreateNewConditionComponent {
     this._parent = _parent;
   }
 
-  public getConditionCounter():string[] {
-    return this.conditionCounter;
-  }
-
   public addCondition():void {
     this._parent.conditionCounter.push(new ConditionsComponent);
   }
