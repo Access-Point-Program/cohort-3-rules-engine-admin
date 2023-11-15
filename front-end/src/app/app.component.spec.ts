@@ -35,8 +35,15 @@ describe('AppComponent', () => {
   it(`clicking "Add New Rule" should increase the amount of rules`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    fixture.debugElement.query(By.css('#wordgrah')).nativeElement.click();
+    fixture.debugElement.query(By.css('#ruleButton')).nativeElement.click();
 
     expect(app.ruleset.length).toBe(2);
+  });
+  fit('button should be rendered', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    const button = fixture.debugElement.query(By.css('#ruleButton'));
+
+    expect(button).toBeTruthy();
   });
 });

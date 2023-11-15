@@ -4,6 +4,6 @@
         <div>
             <app-rules-component *ngFor="let rule of ruleset" [priority]="ruleset.indexOf(rule)"></app-rules-component>
         </div>
-        <app-add-new-rule-button id="wordgrah" (click)="onAddRuleClick()"></app-add-new-rule-button>
+        <app-add-new-rule-button id="ruleButton" (click)="onAddRuleClick()"></app-add-new-rule-button>
     </div>
 </main>
