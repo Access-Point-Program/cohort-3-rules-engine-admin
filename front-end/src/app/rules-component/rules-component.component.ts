@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-
+import { CreateNewConditionComponent } from '../create-new-condition/create-new-condition.component';
+import { ConditionsComponent } from '../conditions/conditions.component';
 @Component({
   selector: 'app-rules-component',
   templateUrl: './rules-component.component.html',
@@ -20,4 +21,6 @@ export class RulesComponentComponent {
   public setPriority(priority: number){
     this.priority = priority;
   }
+
+  public conditionCounter: ConditionsComponent[] = [new ConditionsComponent];
 }
