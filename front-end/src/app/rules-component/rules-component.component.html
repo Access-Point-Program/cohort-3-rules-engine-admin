@@ -1,8 +1,12 @@
-<conditions #condition class="conditionsComponent" *ngFor="let condition of conditionCounter"></conditions>
-<then-event></then-event>
-<span>
-    <app-create-new-condition id="conditionButton"></app-create-new-condition>
-    <app-delete-rule-button id="deleteButton"></app-delete-rule-button>
-    <app-move-up-button id="moveUpButton"></app-move-up-button>
-    <app-move-down-button id="moveDownButton"></app-move-down-button>
-</span>
+<div class="rounded p-3 m-3" style="border: 1px solid #DEE2E6">
+    <div>
+        <conditions #condition class="conditionsComponent" *ngFor="let condition of conditionCounter"></conditions>
+    </div>
+    <then-event></then-event>
+    <div class="container" style="margin-top: 10px; display: grid; grid-template-columns: repeat(4, 4fr); gap: 10px;">
+        <app-create-new-condition id="conditionButton"></app-create-new-condition>
+        <app-delete-rule-button id="deleteButton"></app-delete-rule-button>
+        <app-move-up-button id="moveUpButton"></app-move-up-button>
+        <app-move-down-button id="moveDownButton"></app-move-down-button>
+    </div>
+</div>

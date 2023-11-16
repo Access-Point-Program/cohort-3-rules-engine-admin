@@ -1,25 +1,31 @@
-<main class="d-flex flex-nowrap">
-    <app-sidebar class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark col-sm-3 col-12" style="max-width: 280px;"></app-sidebar>
-    <div class="row justify-content-around col-sm-9 " >
-        <ng-container>
-            <div class="col-sm-8" style="display:flexbox; background-color: white; border-radius: 8px; box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.22); height:fit-content; padding: 30px; margin-top: 20px;">
-                <p>Rules</p>
-                <hr>
-                <div>
-                    <app-rules-component id="rulesComponent" *ngFor="let rule of ruleset" [priority]="ruleset.indexOf(rule)"></app-rules-component>
+<main class="d-flex flex-nowrap" style="height: fit-content; min-height: 100%;">
+    <app-sidebar class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark col-sm-3 col-12 sidebar" style="max-width: 280px; height: 100vh;"></app-sidebar>
+    <div class="container p-4">
+        <div class="row g-4" >
+            <ng-container>
+                <div class="col-8" style="height:fit-content; ">
+                    <div class="rounded shadow p-5" style="border: 1px solid #DEE2E6">
+                        <p>Rules</p>
+                        <hr>
+                        <div class="p-2" style="height:fit-content;">
+                            <app-rules-component id="rulesComponent" *ngFor="let rule of ruleset" [priority]="ruleset.indexOf(rule)"></app-rules-component>
+                        </div>
+                        <app-add-new-rule-button id="ruleButton" (click)="onAddRuleClick()"></app-add-new-rule-button>
+                    </div>
                 </div>
-                <app-add-new-rule-button id="ruleButton" (click)="onAddRuleClick()"></app-add-new-rule-button>
-            </div>
-        </ng-container>
-        <ng-container>
-            <div class="col-sm-4" style="display:flexbox; background-color: white; border-radius: 8px; box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.22); height:fit-content; padding: 30px; margin-top: 20px;">
-                <p>Settings</p>
-                <hr>
-                <app-ruleset-name></app-ruleset-name>
-                <div>
-                    <app-save-button></app-save-button>
+            </ng-container>
+            <ng-container>
+                <div class="col-4">
+                    <div class="rounded shadow p-5 sticky-top" style="border: 1px solid #DEE2E6">
+                        <p>Settings</p>
+                        <hr>
+                        <app-ruleset-name></app-ruleset-name>
+                        <div>
+                            <app-save-button></app-save-button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </ng-container>
+            </ng-container>
+        </div>
     </div>
 </main>
