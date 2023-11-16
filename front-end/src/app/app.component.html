@@ -1,14 +1,18 @@
 <main class="d-flex flex-nowrap">
     <app-sidebar class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark col-sm-3" style="width: 280px;"></app-sidebar>
-    <!-- <div class="col-sm-9">
-        <div>
-            <app-rules-component id="rulesComponent" *ngFor="let rule of ruleset" [priority]="ruleset.indexOf(rule)"></app-rules-component>
+    <div class="row col-sm-9">
+        <div class="col-sm-8">
+            <div>
+                <app-rules-component id="rulesComponent" *ngFor="let rule of ruleset" [priority]="ruleset.indexOf(rule)"></app-rules-component>
+            </div>
+            <app-add-new-rule-button id="ruleButton" (click)="onAddRuleClick()"></app-add-new-rule-button>
         </div>
-        <app-add-new-rule-button id="ruleButton" (click)="onAddRuleClick()"></app-add-new-rule-button>
-    </div> -->
-    <div>
-        <p>Settings</p>
-        <app-ruleset-name></app-ruleset-name>
-        <app-save-button></app-save-button>
+        <div class="col-sm-4">
+            <p>Settings</p>
+            <app-ruleset-name></app-ruleset-name>
+            <div>
+                <app-save-button></app-save-button>
+            </div>
+        </div>
     </div>
 </main>
