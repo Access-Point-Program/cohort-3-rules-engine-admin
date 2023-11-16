@@ -9,7 +9,7 @@ import { EventType } from '../types/eventType';
 export class ThenComponent {
 
   public eventType = Object.values(EventType);
-  private returnedValue: string = 'asfds';
+  private returnedValue: string = '';
 
   public setReturnedValue(returnedValue: string): void {
     this.returnedValue = returnedValue;
