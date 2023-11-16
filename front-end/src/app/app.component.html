@@ -3,7 +3,7 @@
     <div class="row">
         <app-dashboard-path></app-dashboard-path>
     </div>
-    <div class="col-sm-9">
+    <div class="col-sm-8">
         <div>
             <app-rules-component *ngFor="let rule of ruleset" [priority]="ruleset.indexOf(rule)"></app-rules-component>
         </div>
