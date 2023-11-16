@@ -1,6 +1,6 @@
 <main class="d-flex flex-nowrap">
-    <app-sidebar class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark col-sm-3" style="width: 280px;"></app-sidebar>
-    <div class="row col-sm-9 g-1" style="display: flex; flex:content">
+    <app-sidebar class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark col-sm-3 col-12" style="max-width: 280px;"></app-sidebar>
+    <div class="row justify-content-around col-sm-9 " >
         <ng-container>
             <div class="col-sm-8" style="display:flexbox; background-color: white; border-radius: 8px; box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.22); height:fit-content; padding: 30px; margin-top: 20px;">
                 <p>Rules</p>
@@ -11,13 +11,15 @@
                 <app-add-new-rule-button id="ruleButton" (click)="onAddRuleClick()"></app-add-new-rule-button>
             </div>
         </ng-container>
-        <div class="col-sm-4">
-            <p>Settings</p>
-            <hr>
-            <app-ruleset-name></app-ruleset-name>
-            <div>
-                <app-save-button></app-save-button>
+        <ng-container>
+            <div class="col-sm-4" style="display:flexbox; background-color: white; border-radius: 8px; box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.22); height:fit-content; padding: 30px; margin-top: 20px;">
+                <p>Settings</p>
+                <hr>
+                <app-ruleset-name></app-ruleset-name>
+                <div>
+                    <app-save-button></app-save-button>
+                </div>
             </div>
-        </div>
+        </ng-container>
     </div>
 </main>
