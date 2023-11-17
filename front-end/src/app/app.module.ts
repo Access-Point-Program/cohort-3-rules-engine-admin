@@ -14,6 +14,7 @@ import { AddNewRuleButtonComponent } from './add-new-rule-button/add-new-rule-bu
 import { RulesComponentComponent } from './rules-component/rules-component.component';
 import { RulesetNameComponent } from './ruleset-name/ruleset-name.component';
 import { SaveButtonComponent } from './save-button/save-button.component';
+import { DashboardPathComponent } from './dashboard-path/dashboard-path.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SaveButtonComponent } from './save-button/save-button.component';
     AddNewRuleButtonComponent,
     RulesComponentComponent,
     RulesetNameComponent,
-    SaveButtonComponent
+    SaveButtonComponent,
+    DashboardPathComponent
   ],
   imports: [
     BrowserModule    
