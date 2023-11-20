@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FactType } from '../../types/factType';
 
 @Component({
@@ -8,13 +8,20 @@ import { FactType } from '../../types/factType';
 })
 export class WhenComponent {
 
+  @Input() whenValue!: string;
+  @Output() whenValueChange = new EventEmitter<string>();
+  @Input() neverEntry!: boolean;
+  @Output() neverEntryChange = new EventEmitter<boolean>();
   public factType = Object.values(FactType);
-  public returnedValue: string = '';
 
-  public setReturnedValue(returnedValue: string): void {
-    this.returnedValue = returnedValue;
-  };
-  public getReturnedValue(): string {
-    return this.returnedValue;
+  selectedOption(option: string): boolean {
+    return this.whenValue === option;
+  }
+
+  public setWhenValue(returnedValue: string): void {
+    this.neverEntry = false;
+    this.neverEntryChange.emit(this.neverEntry);
+    this.whenValue = returnedValue;
+    this.whenValueChange.emit(this.whenValue);
   };
 }

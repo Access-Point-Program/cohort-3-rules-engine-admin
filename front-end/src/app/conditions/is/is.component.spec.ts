@@ -49,7 +49,7 @@ describe('IsComponent', () => {
       selectBox.value = selectBox.options[1].value;
       selectBox.dispatchEvent(new Event('change'))
  
-      expect(component.getReturnedValue()).toBe('Wall');
+      expect(component.isValue).toBe('Wall');
     });
     it('\"Empty\" is clicked, returnedValue is \"Empty\"', () => {
       let selectBox = fixture.debugElement.query(By.css('#isSelectBox')).nativeElement;
@@ -58,7 +58,7 @@ describe('IsComponent', () => {
       selectBox.value = selectBox.options[2].value;
       selectBox.dispatchEvent(new Event('change'))
  
-      expect(component.getReturnedValue()).toBe('Empty');
+      expect(component.isValue).toBe('Empty');
     });
     it('\"End\" is clicked, returnedValue is \"End\"', () => {
       let selectBox = fixture.debugElement.query(By.css('#isSelectBox')).nativeElement;
@@ -67,7 +67,7 @@ describe('IsComponent', () => {
       selectBox.value = selectBox.options[3].value;
       selectBox.dispatchEvent(new Event('change'))
  
-      expect(component.getReturnedValue()).toBe('End');
+      expect(component.isValue).toBe('End');
     });
   });
   

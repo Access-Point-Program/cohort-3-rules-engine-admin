@@ -1,4 +1,4 @@
 <div class="condition align-items-center row g-2">
-  <when-condition style="margin-bottom: 10px;" class="col-sm-6"></when-condition>
-  <is-value style="margin-bottom: 10px;" class="col-sm-6"></is-value>
+  <when-condition style="margin-bottom: 10px;" class="col-sm-6" [(whenValue)]="conditionWhenValue" [(neverEntry)]="conditionNeverEntry"></when-condition>
+  <is-value style="margin-bottom: 10px;" class="col-sm-6" [(isValue)]="conditionIsValue" [(neverIsEntry)]="conditionNeverIsEntry"></is-value>
 </div>

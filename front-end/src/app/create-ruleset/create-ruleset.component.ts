@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, QueryList, ViewChildren, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { RulesComponentComponent } from '../rules-component/rules-component.component';
 
 @Component({
@@ -6,12 +6,49 @@ import { RulesComponentComponent } from '../rules-component/rules-component.comp
   templateUrl: './create-ruleset.component.html',
   styleUrls: ['./create-ruleset.component.css']
 })
-export class CreateRulesetComponent {
+export class CreateRulesetComponent implements AfterViewInit, AfterViewChecked {
 
-  public ruleset: RulesComponentComponent[] = [new RulesComponentComponent()] //dont forget to add this back
+  @ViewChildren(RulesComponentComponent) viewChildren!: QueryList<RulesComponentComponent>;
+  public ruleset: RulesComponentComponent[] = [new RulesComponentComponent()]
+
+  ngAfterViewInit(): void {
+    this.ruleset = this.viewChildren.toArray();
+  }
+
+  ngAfterViewChecked() {
+    for(let i = 0; i < this.ruleset.length; i++){
+      if(this.ruleset[i].priority == undefined){
+        this.ruleset[i].priority = this.viewChildren.toArray()[i].priority;
+      }
+    }
+    console.log("After View checked Ruleset");
+    console.log(this.ruleset);
+    console.log(this.viewChildren.toArray());
+  }
+
+  forceUpdateRuleset() {
+    this.ruleset = this.viewChildren.toArray();
+    this.ruleset.forEach(rule => {
+      rule.childrenConditions = rule.viewChildren.toArray();
+    })
+  }
 
   onAddRuleClick() {
     this.ruleset.push(new RulesComponentComponent());
   }
 
+  priorityMoveUp() {
+    this.forceUpdateRuleset();
+  }
+  priorityMoveDown() {
+    this.forceUpdateRuleset();
+  }
+
+  public updateRuleset() {
+    this.ruleset.sort(function(a, b) {
+      const priorityA = a.priority;
+      const priorityB = b.priority;
+      return (priorityA < priorityB) ? -1 : (priorityA > priorityB) ? 1 : 0;
+    });
+  }
 }

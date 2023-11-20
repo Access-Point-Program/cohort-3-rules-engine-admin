@@ -9,7 +9,6 @@ import { ConditionsComponent } from '../conditions/conditions.component';
   styleUrls: ['./create-new-condition.component.css']
 })
 export class CreateNewConditionComponent {
-  private conditionCounter: string[] = [""];
 
   public _parent: RulesComponentComponent;
 
@@ -19,6 +18,6 @@ export class CreateNewConditionComponent {
   }
 
   public addCondition():void {
-    this._parent.conditionCounter.push(new ConditionsComponent);
+    this._parent.childrenConditions.push(new ConditionsComponent);
   }
 }

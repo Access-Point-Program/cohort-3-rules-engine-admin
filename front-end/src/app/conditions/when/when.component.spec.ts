@@ -54,7 +54,7 @@ describe('WhenComponent', () => {
       selectBox.value = selectBox.options[1].value;
       selectBox.dispatchEvent(new Event('change'))
  
-      expect(component.getReturnedValue()).toBe('Front');
+      expect(component.whenValue).toBe('Front');
     });
     it('\"Right\" is clicked, returnedValue is \"Right\"', () => {
       let selectBox = fixture.debugElement.query(By.css('#whenSelectBox')).nativeElement;
@@ -63,7 +63,7 @@ describe('WhenComponent', () => {
       selectBox.value = selectBox.options[2].value;
       selectBox.dispatchEvent(new Event('change'))
  
-      expect(component.getReturnedValue()).toBe('Right');
+      expect(component.whenValue).toBe('Right');
     });
     it('\"Left\" is clicked, returnedValue is \"Left\"', () => {
       let selectBox = fixture.debugElement.query(By.css('#whenSelectBox')).nativeElement;
@@ -72,7 +72,7 @@ describe('WhenComponent', () => {
       selectBox.value = selectBox.options[3].value;
       selectBox.dispatchEvent(new Event('change'))
  
-      expect(component.getReturnedValue()).toBe('Left');
+      expect(component.whenValue).toBe('Left');
     });
     it('\"Behind\" is clicked, returnedValue is \"Behind\"', () => {
       let selectBox = fixture.debugElement.query(By.css('#whenSelectBox')).nativeElement;
@@ -81,7 +81,7 @@ describe('WhenComponent', () => {
       selectBox.value = selectBox.options[4].value;
       selectBox.dispatchEvent(new Event('change'))
  
-      expect(component.getReturnedValue()).toBe('Behind');
+      expect(component.whenValue).toBe('Behind');
     });
   });
   
