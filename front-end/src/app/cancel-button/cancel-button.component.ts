@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./cancel-button.component.css']
 })
 export class CancelButtonComponent {
-
+  onCancelClick(){}
 }
