@@ -8,6 +8,7 @@ import com.accesspoint.rulesengine.model.RulesetModel;
 import com.accesspoint.rulesengine.repository.ConditionRepository;
 import com.accesspoint.rulesengine.repository.RuleRepository;
 import com.accesspoint.rulesengine.repository.RulesetRepository;
+import org.apache.tomcat.util.digester.Rules;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,13 @@ public class RulesetService {
     public List<RulesetModel> getAll() {
         List<RulesetModel> rulesetList = rulesetRepository.findAll().stream()
                 .map(ruleset -> new RulesetModel(ruleset.getId(), ruleset.getName(), ruleset.getCreation_date()))
+                .collect(Collectors.toList());
+        return rulesetList;
+    }
+
+    public List<Ruleset> getById(Long id){
+        List<Ruleset> rulesetList = rulesetRepository.findById(id).stream()
+                .map(ruleset -> new Ruleset(ruleset.getId(), ruleset.getName(), ruleset.getCreation_date()))
                 .collect(Collectors.toList());
         return rulesetList;
     }
