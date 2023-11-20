@@ -9,7 +9,6 @@ import com.accesspoint.rulesengine.repository.ConditionRepository;
 import com.accesspoint.rulesengine.repository.RuleRepository;
 import com.accesspoint.rulesengine.repository.RulesetRepository;
 
-import org.apache.tomcat.util.digester.Rules;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.accesspoint.rulesengine.entity.EventType.*;
 
 @Service
 public class RulesetService {
