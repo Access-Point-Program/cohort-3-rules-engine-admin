@@ -8,10 +8,4 @@ import { RulesComponentComponent } from './rules-component/rules-component.compo
 })
 export class AppComponent {
   title = 'front-end';
-
-  public ruleset: RulesComponentComponent[] = [new RulesComponentComponent()] //dont forget to add this back
-
-  onAddRuleClick() {
-    this.ruleset.push(new RulesComponentComponent());
-  }
 }

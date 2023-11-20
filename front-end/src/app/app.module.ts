@@ -15,6 +15,7 @@ import { RulesComponentComponent } from './rules-component/rules-component.compo
 import { RulesetNameComponent } from './ruleset-name/ruleset-name.component';
 import { SaveButtonComponent } from './save-button/save-button.component';
 import { DashboardPathComponent } from './dashboard-path/dashboard-path.component';
+import { CreateRulesetComponent } from './create-ruleset/create-ruleset.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { DashboardPathComponent } from './dashboard-path/dashboard-path.componen
     RulesComponentComponent,
     RulesetNameComponent,
     SaveButtonComponent,
-    DashboardPathComponent
+    DashboardPathComponent,
+    CreateRulesetComponent
   ],
   imports: [
     BrowserModule    
