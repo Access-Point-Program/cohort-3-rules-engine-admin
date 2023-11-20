@@ -22,7 +22,7 @@ public class RulesetController {
     }
 
     @GetMapping("/ruleset/{id}")
-    public List<Ruleset> one(@PathVariable Long id){return rulesetService.getById(id);}
+    public ResponseEntity<Ruleset> one(@PathVariable Long id){return rulesetService.getById(id);}
 
     @PostMapping("/ruleset")
     ResponseEntity<Ruleset> newRuleset(@RequestBody CreateRuleSetRequest request) {

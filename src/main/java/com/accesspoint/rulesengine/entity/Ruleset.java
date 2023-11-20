@@ -28,9 +28,6 @@ public class Ruleset implements Serializable {
     @OneToMany(mappedBy = "ruleset", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<Rule> rules;
 
-    public Ruleset(Long id, String name, Timestamp creation_date) {
-    }
-
     @PrePersist
     private void prePersist() {
         rules.forEach( c -> c.setRuleset(this));
