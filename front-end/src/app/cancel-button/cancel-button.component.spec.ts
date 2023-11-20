@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { By } from '@angular/platform-browser'
 import { CancelButtonComponent } from './cancel-button.component';
 
 describe('CancelButtonComponent', () => {
@@ -18,4 +18,10 @@ describe('CancelButtonComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('cancel button should be rendered on the screen', () => {
+    const cancelButton = fixture.debugElement.query(By.css('#cancelButton'));
+    expect(cancelButton).toBeTruthy();
+  })
+
 });
