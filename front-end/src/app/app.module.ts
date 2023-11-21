@@ -18,6 +18,8 @@ import { DashboardPathComponent } from './dashboard-path/dashboard-path.componen
 import { CreateRulesetComponent } from './create-ruleset/create-ruleset.component';
 import { CancelButtonComponent } from './cancel-button/cancel-button.component';
 import { AppRoutingModule } from './app-routing.module';
+import { RouterModule } from "@angular/router";
+
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule    
+    AppRoutingModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

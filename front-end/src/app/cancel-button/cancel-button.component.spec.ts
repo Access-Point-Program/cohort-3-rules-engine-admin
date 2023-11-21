@@ -26,7 +26,7 @@ describe('CancelButtonComponent', () => {
     expect(cancelButton).toBeTruthy();
   });
 
-  fit('when cancel button is clicked, redirect method is called', async () => {
+  it('when cancel button is clicked, redirect method is called', async () => {
     fixture.detectChanges();
     spyOn(component, 'redirectToDashboard');
     fixture.debugElement.nativeElement.querySelector('#cancelButton').click();
