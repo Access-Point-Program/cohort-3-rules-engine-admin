@@ -469,7 +469,6 @@ public class RulesetTest {
                 .body(equalTo("Conditions cannot be empty"));
     }
 
-    // TODO: deletes ruleset
     @Test
     public void givenRuleset_whenDELETE_thenCorrectDataIsPassed() {
 
@@ -497,10 +496,6 @@ public class RulesetTest {
 
         // Mock ALL repository methods that get called in the service
 
-        when(rulesetRepository.save(Mockito.any(Ruleset.class))).thenReturn(ruleset);
-        when(rulesetRepository.getReferenceById(Mockito.any(Long.class))).thenReturn(ruleset);
-        when(ruleRepository.save(Mockito.eq(fakeRule1))).thenReturn(fakeRule1);
-        when(conditionRepository.save(Mockito.eq(fakeCon1_1))).thenReturn(fakeCon1_1);
         when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset));
 
         // Given the ruleset, when post request, then response body is as expected
@@ -513,7 +508,6 @@ public class RulesetTest {
                 .assertThat()
                 .statusCode(204);
     }
-    // TODO: if id doesn't exist, throw error
     @Test
     public void givenRuleset_whenDELETERulesetwithInvalidID_thenCustomErrorIsThrown() {
 
@@ -541,10 +535,6 @@ public class RulesetTest {
 
         // Mock ALL repository methods that get called in the service
 
-        when(rulesetRepository.save(Mockito.any(Ruleset.class))).thenReturn(ruleset);
-        when(rulesetRepository.getReferenceById(Mockito.any(Long.class))).thenReturn(ruleset);
-        when(ruleRepository.save(Mockito.eq(fakeRule1))).thenReturn(fakeRule1);
-        when(conditionRepository.save(Mockito.eq(fakeCon1_1))).thenReturn(fakeCon1_1);
         when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset));
 
         // Given the ruleset, when post request, then response body is as expected
