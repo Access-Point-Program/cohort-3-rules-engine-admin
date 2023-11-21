@@ -26,13 +26,11 @@ describe('CancelButtonComponent', () => {
     expect(cancelButton).toBeTruthy();
   });
 
-  fit('link should be opened in separate tab', async () => {
+  fit('when cancel button is clicked, redirect method is called', async () => {
     fixture.detectChanges();
-    // spyOn(window, 'open');
-    const link = fixture.debugElement.nativeElement.querySelector('a');
-    // link.click();
-    fixture.whenStable().then(() => {
-        expect("http://localhost:4200/dashboard").toBe('http://localhost:4200/dashboard');
-    });
+    spyOn(component, 'redirectToDashboard');
+    fixture.debugElement.nativeElement.querySelector('#cancelButton').click();
+    fixture.detectChanges();
+    expect(component.redirectToDashboard).toHaveBeenCalled();
   });
 });

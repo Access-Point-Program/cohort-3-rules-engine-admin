@@ -4,9 +4,8 @@ import {CreateRulesetComponent} from './create-ruleset/create-ruleset.component'
 import {AppComponent} from './app.component'
 
 const routes: Routes = [
-  // { path: '**', redirectTo: '/ruleset', pathMatch: 'full' },
-  { path: 'dashboard', component: CreateRulesetComponent},
   { path: 'ruleset', component: CreateRulesetComponent},
+  { path: '', redirectTo: '/ruleset', pathMatch: 'full' }
 ];
 
 @NgModule({
