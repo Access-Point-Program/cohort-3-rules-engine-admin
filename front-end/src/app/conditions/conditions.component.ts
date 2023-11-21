@@ -16,9 +16,11 @@ export class ConditionsComponent implements OnInit {
 
   // When conditions component is initialized, it will update the whenValue and NeverEntry based on the previous instance
   ngOnInit() {
-    this.conditionWhenValue = this.givenCondition.conditionWhenValue;
-    this.conditionNeverEntry = this.givenCondition.conditionNeverEntry;
-    this.conditionIsValue = this.givenCondition.conditionIsValue;
-    this.conditionNeverIsEntry = this.givenCondition.conditionNeverIsEntry;
+    if(this.givenCondition != undefined){
+      this.conditionWhenValue = this.givenCondition.conditionWhenValue;
+      this.conditionNeverEntry = this.givenCondition.conditionNeverEntry;
+      this.conditionIsValue = this.givenCondition.conditionIsValue;
+      this.conditionNeverIsEntry = this.givenCondition.conditionNeverIsEntry;
+    }
   }
 }
