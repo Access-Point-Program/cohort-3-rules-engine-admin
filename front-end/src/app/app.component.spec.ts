@@ -16,6 +16,7 @@ import { DashboardPathComponent } from './dashboard-path/dashboard-path.componen
 import { RulesetNameComponent } from './ruleset-name/ruleset-name.component';
 import { SaveButtonComponent } from './save-button/save-button.component';
 
+
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
     declarations: [AppComponent,
@@ -33,7 +34,8 @@ describe('AppComponent', () => {
       CreateRulesetComponent,
       DashboardPathComponent,
       RulesetNameComponent,
-      SaveButtonComponent
+      SaveButtonComponent,
+      
     ]
   }));
 

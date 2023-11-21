@@ -15,6 +15,7 @@ import { MoveUpButtonComponent } from '../move-up-button/move-up-button.componen
 import { DashboardPathComponent } from '../dashboard-path/dashboard-path.component';
 import { RulesetNameComponent } from '../ruleset-name/ruleset-name.component';
 import { SaveButtonComponent } from '../save-button/save-button.component';
+import { CancelButtonComponent } from '../cancel-button/cancel-button.component';
 
 
 describe('CreateRulesetComponent', () => {
@@ -36,8 +37,10 @@ describe('CreateRulesetComponent', () => {
         MoveUpButtonComponent,
         DashboardPathComponent,
         RulesetNameComponent,
-        SaveButtonComponent]
+        SaveButtonComponent,
+        CancelButtonComponent]
     });
+
     fixture = TestBed.createComponent(CreateRulesetComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
