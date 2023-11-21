@@ -17,7 +17,7 @@ describe('CancelButtonComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create "cancel button" component', () => {
     expect(component).toBeTruthy();
   });
 
