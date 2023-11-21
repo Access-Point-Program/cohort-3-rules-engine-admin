@@ -28,6 +28,13 @@ public class Ruleset implements Serializable {
     @OneToMany(mappedBy = "ruleset", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH}, orphanRemoval = true)
     private List<Rule> rules;
 
+    public void addRule(Rule rule){
+        rules.add(rule);
+    }
+    public void removeRule(Rule rule){
+        rules.remove(rule);
+    }
+
     @PrePersist
     private void prePersist() {
         rules.forEach( c -> c.setRuleset(this));

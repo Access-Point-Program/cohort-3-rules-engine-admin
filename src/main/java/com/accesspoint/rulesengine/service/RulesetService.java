@@ -1,6 +1,7 @@
 package com.accesspoint.rulesengine.service;
 
 import com.accesspoint.rulesengine.controller.CreateRuleSetRequest;
+import com.accesspoint.rulesengine.entity.Rule;
 import com.accesspoint.rulesengine.entity.Ruleset;
 import com.accesspoint.rulesengine.exception.BadRequestException;
 import com.accesspoint.rulesengine.exception.PriorityAlreadyExistsException;
@@ -85,10 +86,34 @@ public class RulesetService {
         Ruleset updatedRuleset = this.rulesetRepository.findById(id)
                 .orElseThrow(() -> new BadRequestException("id not found"));
         Ruleset updatedRuleset2 = rulesetRepository.findById(id) //
-                .map(cruleset -> {
-                    cruleset.setName(newRuleset.getName());
-                    cruleset.setRules(newRuleset.getRules());
-                    return rulesetRepository.save(cruleset);
+                .map(ruleset -> {
+                    if (ruleset.getName() != newRuleset.getName()) {
+                        System.out.println("Different Names");
+                        ruleset.setName(newRuleset.getName());
+                    }
+                    if (ruleset.getRules() != newRuleset.getRules()) {
+                        System.out.println("Different Rules");
+                        List<Long> rulesetRuleIds = ruleset.getRules().stream().map(rule -> rule.getId()).toList();
+                        System.out.println(rulesetRuleIds);
+                        List<Long> newRulesetRuleIds = newRuleset.getRules().stream().map(rule -> rule.getId()).toList();
+                        System.out.println(newRulesetRuleIds);
+                        
+                        for(Rule rule : newRuleset.getRules()){
+                            if (!ruleset.getRules().contains(rule)){
+                                // ruleset rules DOES NOT contain current newRuleset rules rule
+                                ruleset.addRule(rule);
+                            } else {
+                                // ruleset rules DOES contain current newRuleset rules rule
+                                // TODO: Check to see if the conditions are different
+                                    // for each condition in conditions ?
+                            }
+                        }
+                        
+                        // TODO: Somehow need to remove the rules that are not included inside the newRuleset (by id?)
+                        
+                        ruleset.setRules(newRuleset.getRules());
+                    }
+                    return rulesetRepository.save(ruleset);
                 }) //
                 .orElseGet(() -> {
                     newRuleset.setId(id);
