@@ -57,7 +57,6 @@ public class RulesetService {
         for (int i = 0; i < incomingRulesetData.rules.size(); i++){
             incomingRulesetData.rules.stream().forEach(rule -> {
                 if (existingPriorities.contains(rule.getPriority())){
-                    System.out.println("Priority Error Thrown");
                     throw new PriorityAlreadyExistsException(rule);
                 }
             });
@@ -71,5 +70,34 @@ public class RulesetService {
         );
 
         return ResponseEntity.ok().body(this.rulesetRepository.getReferenceById(rulesetData.getId()));
+    }
+
+    public ResponseEntity<Ruleset> updateRuleset(Long id, Ruleset newRuleset){
+
+//        if (incomingRulesetData.name.isEmpty()) throw new BadRequestException("Name cannot be empty");
+//        if (incomingRulesetData.rules == null) throw new BadRequestException("Rules cannot be empty");
+//        incomingRulesetData.rules.stream().forEach(rule -> {
+//            if (rule.getPriority() == 0.0) throw new BadRequestException("Rule priority cannot be 0");
+//            if (rule.getConditions() == null) throw new BadRequestException("Conditions cannot be empty");
+//        });
+
+
+        Ruleset updatedRuleset = this.rulesetRepository.findById(id)
+                .orElseThrow(() -> new BadRequestException("id not found"));
+        Ruleset updatedRuleset2 = rulesetRepository.findById(id) //
+                .map(cruleset -> {
+                    cruleset.setName(newRuleset.getName());
+                    cruleset.setRules(newRuleset.getRules());
+                    return rulesetRepository.save(cruleset);
+                }) //
+                .orElseGet(() -> {
+                    newRuleset.setId(id);
+                    return rulesetRepository.save(newRuleset);
+                });
+        System.out.println(updatedRuleset2);
+//        updatedRuleset.setName(ruleset.getName());
+//        updatedRuleset.setRules(ruleset.getRules());
+
+        return new ResponseEntity<>(updatedRuleset2, HttpStatus.OK);
     }
 }

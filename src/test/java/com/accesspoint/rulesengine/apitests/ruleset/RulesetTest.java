@@ -560,4 +560,5 @@ public class RulesetTest {
                 .statusCode(400)
                 .body(equalTo("Id not found"));
     }
+
 }

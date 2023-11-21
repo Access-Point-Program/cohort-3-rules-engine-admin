@@ -29,6 +29,9 @@ public class RulesetController {
         return this.rulesetService.createRuleset(request);
     }
 
+    @PutMapping("/ruleset/{id}")
+    ResponseEntity<Ruleset> updateRuleset(@PathVariable Long id, @RequestBody Ruleset ruleset){return rulesetService.updateRuleset(id, ruleset);}
+
 
 }
 
