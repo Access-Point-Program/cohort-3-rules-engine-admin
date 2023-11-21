@@ -30,7 +30,7 @@ describe('CreateNewConditionComponent', () => {
   it('When clicked, new conditions component is added to array of conditions', () => {
     let addConditionButton = fixture.debugElement.query(By.css('.addConditionButton')).nativeElement;
     addConditionButton.click();
-    expect(component._parent.conditionCounter.length).toBe(2);
+    expect(component._parent.childrenConditions.length).toBe(2);
   });
 
 });
