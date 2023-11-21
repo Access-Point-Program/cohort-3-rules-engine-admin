@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, fakeAsync, } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
+
 import { ThenComponent } from './then.component';
-import { RulesComponentComponent } from '../rules-component/rules-component.component';
 import { By } from '@angular/platform-browser';
 
 describe('ThenComponent', () => {
@@ -9,8 +9,7 @@ describe('ThenComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ThenComponent],
-      providers: [RulesComponentComponent]
+      declarations: [ThenComponent]
     });
     fixture = TestBed.createComponent(ThenComponent);
     component = fixture.componentInstance;
@@ -51,7 +50,7 @@ describe('ThenComponent', () => {
       selectBox.value = selectBox.options[1].value;
       selectBox.dispatchEvent(new Event('change'))
  
-      expect(component.thenValue).toBe('Forward');
+      expect(component.getReturnedValue()).toBe('Forward');
     });
     it('\"Right\" is clicked, returnedValue is \"Right\"', () => {
       let selectBox = fixture.debugElement.query(By.css('#thenSelectBox')).nativeElement;
@@ -60,7 +59,7 @@ describe('ThenComponent', () => {
       selectBox.value = selectBox.options[2].value;
       selectBox.dispatchEvent(new Event('change'))
  
-      expect(component.thenValue).toBe('Right');
+      expect(component.getReturnedValue()).toBe('Right');
     });
     it('\"Left\" is clicked, returnedValue is \"Left\"', fakeAsync( () => {
       let selectBox = fixture.debugElement.query(By.css('#thenSelectBox')).nativeElement;
@@ -69,7 +68,7 @@ describe('ThenComponent', () => {
       selectBox.value = selectBox.options[3].value;
       selectBox.dispatchEvent(new Event('change'))
  
-      expect(component.thenValue).toBe('Left');
+      expect(component.getReturnedValue()).toBe('Left');
     }));
   });
   
