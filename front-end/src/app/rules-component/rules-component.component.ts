@@ -16,8 +16,10 @@ export class RulesComponentComponent implements OnInit, AfterViewInit {
   neverThenEntry: boolean = true;
 
   ngOnInit() {
-    this.thenValue = this.givenRule.thenValue;
-    this.neverThenEntry = this.givenRule.neverThenEntry;
+    if (this.givenRule != undefined){
+      this.thenValue = this.givenRule.thenValue;
+      this.neverThenEntry = this.givenRule.neverThenEntry;
+    }
   }
 
   ngAfterViewInit(): void {

@@ -7,7 +7,6 @@
         <app-create-new-condition id="conditionButton"></app-create-new-condition>
         <app-delete-rule-button id="deleteButton"></app-delete-rule-button>
         <app-move-up-button id="moveUpButton" [rulePriority]="priority" (rulePriorityChange)="setPriority($event)"></app-move-up-button>
-        <app-move-down-button id="moveDownButton" [rulesetLength]="ruleset.length" [rulePriority]="priority" (rulePriorityChange)="setPriority($event)"></app-move-down-button>
-        <a>{{priority}}</a>
+        <app-move-down-button id="moveDownButton" [rulesetLength]="ruleset ? ruleset.length : 0" [rulePriority]="priority" (rulePriorityChange)="setPriority($event)"></app-move-down-button>
     </div>
 </div>

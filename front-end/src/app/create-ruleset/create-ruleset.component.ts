@@ -1,4 +1,4 @@
-import { Component, QueryList, ViewChildren, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, QueryList, ViewChildren, AfterViewInit, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { RulesComponentComponent } from '../rules-component/rules-component.component';
 
 @Component({
@@ -11,8 +11,11 @@ export class CreateRulesetComponent implements AfterViewInit, AfterViewChecked {
   @ViewChildren(RulesComponentComponent) viewChildren!: QueryList<RulesComponentComponent>;
   public ruleset: RulesComponentComponent[] = [new RulesComponentComponent()]
 
+  constructor(private changeDetectorRef: ChangeDetectorRef){}
+
   ngAfterViewInit(): void {
     this.ruleset = this.viewChildren.toArray();
+    this.changeDetectorRef.detectChanges();
   }
 
   ngAfterViewChecked() {
@@ -21,9 +24,10 @@ export class CreateRulesetComponent implements AfterViewInit, AfterViewChecked {
         this.ruleset[i].priority = this.viewChildren.toArray()[i].priority;
       }
     }
-    console.log("After View checked Ruleset");
-    console.log(this.ruleset);
-    console.log(this.viewChildren.toArray());
+    // Console logs to be used for save button logic
+    // console.log("After View checked Ruleset");
+    // console.log(this.ruleset);
+    // console.log(this.viewChildren.toArray());
   }
 
   forceUpdateRuleset() {
