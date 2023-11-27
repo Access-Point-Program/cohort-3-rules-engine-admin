@@ -20,6 +20,7 @@ export class SaveButtonComponent {
     this._parentRuleset = _parent_parent;
   }
 
+
   // makePostRequest(url: string, body: any) {
   //   return this.http.post(url, body);
   // }
@@ -39,7 +40,7 @@ export class SaveButtonComponent {
         acc.rules.push({ priority, event_type, conditions });
 
         return acc;
-      }, { name: 'PUT NAME HERE', rules:[] });
+      }, { name: this._parentRuleset.getName() , rules:[] });
 
 
     

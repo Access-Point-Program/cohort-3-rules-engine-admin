@@ -26,8 +26,8 @@ export class CreateRulesetComponent implements AfterViewInit, AfterViewChecked {
       }
     }
     // Console logs to be used for save button logic
-    console.log("After View checked Ruleset");
-    console.log(this.ruleset);
+    // console.log("After View checked Ruleset");
+    // console.log(this.ruleset);
     // console.log(this.viewChildren.toArray());
   }
 
@@ -52,6 +52,10 @@ export class CreateRulesetComponent implements AfterViewInit, AfterViewChecked {
   saveButtonClick():RulesComponentComponent[]{
     this.forceUpdateRuleset();
     return this.ruleset;
+  }
+
+  getName():string{
+    return this.name;
   }
 
   public updateRuleset() {
