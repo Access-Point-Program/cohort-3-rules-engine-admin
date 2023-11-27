@@ -16,6 +16,7 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 import java.sql.Timestamp;
 import java.util.*;
@@ -25,6 +26,7 @@ import static com.accesspoint.rulesengine.entity.FactType.*;
 import static com.accesspoint.rulesengine.entity.ValueType.*;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
@@ -467,7 +469,87 @@ public class RulesetTest {
                 .statusCode(400)
                 .body(equalTo("Conditions cannot be empty"));
     }
-    // TODO: should test that the getById
+
+    @Test
+    public void givenRuleset_whenDELETE_thenCorrectDataIsPassed() {
+
+        // Building out the mock ruleset
+        Condition fakeCon1_1 = null;
+        Condition fakeCon2_1 = new Condition(200L, FRONT, EMPTY, null);
+        Condition fakeCon2_2 = new Condition(201L, LEFT, EMPTY, null);
+        List<Condition> fakeCondition1 = new ArrayList<>();
+        fakeCondition1.add(fakeCon1_1);
+        List<Condition> fakeCondition2 = new ArrayList<>();
+        fakeCondition2.add(fakeCon2_1);
+        fakeCondition2.add(fakeCon2_2);
+        Rule fakeRule1 = new Rule(100L, 11, FORWARD, null, null);
+        Rule fakeRule2 = new Rule(200L, 0, FORWARD, null, fakeCondition2);
+        List<Rule> fakeRules = new ArrayList<>();
+        fakeRules.add(fakeRule1);
+        fakeRules.add(fakeRule2);
+        Ruleset ruleset =
+                Ruleset.builder()
+                        .name("Test1")
+                        .rules(fakeRules)
+                        .id(100L)
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        // Mock ALL repository methods that get called in the service
+
+        when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset));
+
+        // Given the ruleset, when post request, then response body is as expected
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset)
+                .when()
+                .delete("/ruleset/100")
+                .then()
+                .assertThat()
+                .statusCode(204);
+    }
+    @Test
+    public void givenRuleset_whenDELETERulesetwithInvalidID_thenCustomErrorIsThrown() {
+
+        // Building out the mock ruleset
+        Condition fakeCon1_1 = null;
+        Condition fakeCon2_1 = new Condition(200L, FRONT, EMPTY, null);
+        Condition fakeCon2_2 = new Condition(201L, LEFT, EMPTY, null);
+        List<Condition> fakeCondition1 = new ArrayList<>();
+        fakeCondition1.add(fakeCon1_1);
+        List<Condition> fakeCondition2 = new ArrayList<>();
+        fakeCondition2.add(fakeCon2_1);
+        fakeCondition2.add(fakeCon2_2);
+        Rule fakeRule1 = new Rule(100L, 11, FORWARD, null, null);
+        Rule fakeRule2 = new Rule(200L, 0, FORWARD, null, fakeCondition2);
+        List<Rule> fakeRules = new ArrayList<>();
+        fakeRules.add(fakeRule1);
+        fakeRules.add(fakeRule2);
+        Ruleset ruleset =
+                Ruleset.builder()
+                        .name("Test1")
+                        .rules(fakeRules)
+                        .id(100L)
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        // Mock ALL repository methods that get called in the service
+
+        when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset));
+
+        // Given the ruleset, when post request, then response body is as expected
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset)
+                .when()
+                .delete("/ruleset/101")
+                .then()
+                .assertThat()
+                .statusCode(400)
+                .body(equalTo("Id does not exist"));
+
+      // TODO: should test that the getById
     @Test
     public void givenRuleset_whenGetById_thenReturnCorrectContent() {
         // Building out the mock ruleset

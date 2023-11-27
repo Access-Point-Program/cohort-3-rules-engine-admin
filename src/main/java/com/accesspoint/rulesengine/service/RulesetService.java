@@ -13,10 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
 
 @Service
 public class RulesetService {
@@ -71,5 +71,14 @@ public class RulesetService {
         );
 
         return ResponseEntity.ok().body(this.rulesetRepository.getReferenceById(rulesetData.getId()));
+    }
+
+    public ResponseEntity<HttpStatus> deleteRulesetById(Long id) {
+        if (rulesetRepository.findById(id).isEmpty()) {
+            throw new BadRequestException("Id does not exist");
+        } else {
+            rulesetRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
     }
 }

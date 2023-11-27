@@ -25,7 +25,7 @@ public class Ruleset implements Serializable {
     @CreationTimestamp @NotNull
     private Timestamp creation_date;
 
-    @OneToMany(mappedBy = "ruleset", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "ruleset", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Rule> rules;
 
     @PrePersist

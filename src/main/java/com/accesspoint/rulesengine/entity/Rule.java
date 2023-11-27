@@ -37,7 +37,7 @@ public class Rule implements Serializable {
     @ToString.Exclude
     private Ruleset ruleset;
 
-    @OneToMany(mappedBy = "rule", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "rule", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Condition> conditions;
 
     @PrePersist
