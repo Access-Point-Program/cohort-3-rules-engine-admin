@@ -101,31 +101,58 @@ public class RulesetService {
 
                         for(Rule rule : newRuleset.getRules()){
                             System.out.println(rule);
-                            if (!ruleset.getRules().contains(rule)){
+                            if (rule.getId() == null){
                                 // ruleset rules DOES NOT contain current newRuleset rules rule
                                 System.out.println("RULE RECOGNIZED AS NEW RULE");
                                 rule.setRuleset(ruleset);
                                 this.ruleRepository.save(rule);
                                 ruleset.addRuleToList(rule);
-                            } //else {
-//                                for (Condition condition : rule.getConditions()) {
-//                                    if (!rule.getConditions().contains(condition)){
-//                                        rule.addCondition(condition);
-//                                        System.out.println(condition);
-//                                    }
-//                                }
+                            } else {
+                                Optional<Rule> updatedRule = ruleRepository.findById(rule.getId())
+                                        .map(oldRule -> {
+                                            if (oldRule.getPriority() != rule.getPriority()){
+                                                System.out.println("Different Rule Priority");
+                                                oldRule.setPriority(rule.getPriority());
+                                            }
+                                            if (oldRule.getEvent_type() != rule.getEvent_type()){
+                                                System.out.println("Different Rule Event Type");
+                                                oldRule.setEvent_type(rule.getEvent_type());
+                                            }
+                                            if (oldRule.getConditions() != rule.getConditions()){
+                                                for(Condition condition : rule.getConditions()){
+                                                    if (condition.getId() == null){
+                                                        // ruleset rules DOES NOT contain current newRuleset rules rule
+                                                        System.out.println("CONDITION RECOGNIZED AS NEW CONDITION");
+                                                        condition.setRule(rule);
+                                                        this.conditionRepository.save(condition);
+                                                        rule.addConditionToList(condition);
+                                                    } else {
+                                                        Optional<Condition> updatedCondition = conditionRepository.findById(condition.getId())
+                                                                .map(oldCondition -> {
+                                                                    if (oldCondition.getFact_type() != condition.getFact_type()){
+                                                                        System.out.println("Different Rule Priority");
+                                                                        oldCondition.setFact_type(condition.getFact_type());
+                                                                    }
+                                                                    if (oldCondition.getValue_type() != condition.getValue_type()){
+                                                                        System.out.println("Different Rule Event Type");
+                                                                        oldCondition.setValue_type(condition.getValue_type());
+                                                                    }
 
-                                // ruleset rules DOES contain current newRuleset rules rule
-                                // TODO: Check to see if the conditions are different
-                                    // for each condition in conditions ?
+                                                                    return oldCondition;
+                                                                });
+                                                    }
+                                                }
+                                            }
+                                            return oldRule;
+                                        });
                             }
-                        //}
+                        }
 
                         // TODO: Somehow need to remove the rules that are not included inside the newRuleset (by id?)
                     }
                     System.out.println(ruleset);
                     return rulesetRepository.save(ruleset);
-                }) //
+                })
                 .orElseThrow(() -> new BadRequestException("id not found"));
         System.out.println(updatedRuleset2);
 

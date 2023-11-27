@@ -43,10 +43,7 @@ public class Rule implements Serializable {
 
     @PrePersist
     private void prePersist() {
-        System.out.println("PrePersist Rule");
-        System.out.println(this);
         conditions.forEach( c -> {
-            System.out.println("sssssssssssssssssssssss" + c);
             c.setRule(this);
         });
     }
