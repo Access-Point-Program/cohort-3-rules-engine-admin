@@ -548,8 +548,7 @@ public class RulesetTest {
                 .assertThat()
                 .statusCode(400)
                 .body(equalTo("Id does not exist"));
-
-      // TODO: should test that the getById
+    }
     @Test
     public void givenRuleset_whenGetById_thenReturnCorrectContent() {
         // Building out the mock ruleset

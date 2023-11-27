@@ -23,16 +23,20 @@ public class RulesetController {
     }
 
     @GetMapping("/ruleset/{id}")
-    public ResponseEntity<Ruleset> one(@PathVariable Long id){return rulesetService.getById(id);}
+    public ResponseEntity<Ruleset> one(@PathVariable Long id) {
+        return rulesetService.getById(id);
+    }
 
     @PostMapping("/ruleset")
     ResponseEntity<Ruleset> newRuleset(@RequestBody CreateRuleSetRequest request) {
         return this.rulesetService.createRuleset(request);
     }
 
-    @DeleteMapping("/ruleset/{id}") ResponseEntity<HttpStatus> deleteRuleset(@PathVariable Long id) {
+    @DeleteMapping("/ruleset/{id}")
+    ResponseEntity<HttpStatus> deleteRuleset(@PathVariable Long id) {
         return rulesetService.deleteRulesetById(id);
     }
+}
 
 
 
