@@ -1,6 +1,5 @@
 import { Component, Injector } from '@angular/core';
 import { CreateRulesetComponent } from '../create-ruleset/create-ruleset.component';
-import { RulesComponentComponent } from '../rules-component/rules-component.component';
 import { HttpClient } from '@angular/common/http';
 import { ConditionsComponent } from '../conditions/conditions.component';
 
@@ -14,18 +13,15 @@ export class SaveButtonComponent {
 
   
   public _parentRuleset: CreateRulesetComponent;
-//private http: HttpClient
-  constructor(private _injector: Injector) { 
+
+  constructor(private _injector: Injector, private http: HttpClient) { 
     const _parent_parent: CreateRulesetComponent = this._injector.get<CreateRulesetComponent>(CreateRulesetComponent);
     this._parentRuleset = _parent_parent;
   }
 
 
-  // makePostRequest(url: string, body: any) {
-  //   return this.http.post(url, body);
-  // }
-
   saveData(){
+    
     const mapToConditions = (condition: ConditionsComponent): ruleCondition => {
       const {conditionIsValue: value_type, conditionWhenValue: fact_type} = condition;
 
@@ -42,14 +38,12 @@ export class SaveButtonComponent {
         return acc;
       }, { name: this._parentRuleset.getName() , rules:[] });
 
-
-    
+    const data = JSON.stringify(jsonDataToUse, null, 2);
     console.log("HERE!!!!!")
-    console.log(jsonDataToUse);
-    console.log(JSON.stringify(jsonDataToUse, null, 2));
+    console.log(data);
 
 
-    // this.makePostRequest('http://localhost:4200/ruleset', data);
+    return this.http.post(`http://localhost:8080/ruleset`, data);
   }
 
 

@@ -19,6 +19,7 @@ import { CreateRulesetComponent } from './create-ruleset/create-ruleset.componen
 import { CancelButtonComponent } from './cancel-button/cancel-button.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from "@angular/router";
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { RouterModule } from "@angular/router";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
