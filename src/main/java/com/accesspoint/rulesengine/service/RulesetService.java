@@ -1,6 +1,7 @@
 package com.accesspoint.rulesengine.service;
 
 import com.accesspoint.rulesengine.controller.CreateRuleSetRequest;
+import com.accesspoint.rulesengine.entity.Rule;
 import com.accesspoint.rulesengine.entity.Ruleset;
 import com.accesspoint.rulesengine.exception.BadRequestException;
 import com.accesspoint.rulesengine.exception.PriorityAlreadyExistsException;
@@ -41,32 +42,31 @@ public class RulesetService {
         return new ResponseEntity<>(ruleset, HttpStatus.OK);
     }
 
-    public ResponseEntity<Ruleset> createRuleset(CreateRuleSetRequest incomingRulesetData) {
+    public ResponseEntity<Ruleset> createRuleset(Ruleset incomingRulesetData) {
 
-        if (incomingRulesetData.name.isEmpty()) throw new BadRequestException("Name cannot be empty");
-        if (incomingRulesetData.rules == null) throw new BadRequestException("Rules cannot be empty");
-        incomingRulesetData.rules.stream().forEach(rule -> {
+        if (incomingRulesetData.getName().isEmpty()) throw new BadRequestException("Name cannot be empty");
+        if (incomingRulesetData.getRules() == null) throw new BadRequestException("Rules cannot be empty");
+        incomingRulesetData.getRules().stream().forEach(rule -> {
             if (rule.getPriority() == 0.0) throw new BadRequestException("Rule priority cannot be 0");
             if (rule.getConditions() == null) throw new BadRequestException("Conditions cannot be empty");
         });
-
         List<Double> existingPriorities = new ArrayList<>();
-        // Gather all priority values in the rule database table
-        this.ruleRepository.findAll().forEach(rule -> existingPriorities.add(rule.getPriority()));
-        // If the priority of an incoming rule already exists in the database, throw exception
-        for (int i = 0; i < incomingRulesetData.rules.size(); i++){
-            incomingRulesetData.rules.stream().forEach(rule -> {
-                if (existingPriorities.contains(rule.getPriority())){
-                    System.out.println("Priority Error Thrown");
-                    throw new PriorityAlreadyExistsException(rule);
-                }
-            });
-        }
+
+        // Gather all priority values from the incoming ruleset
+        incomingRulesetData.getRules().forEach(rule -> {
+            // Throw error if duplicate priorities
+            if(existingPriorities.contains(rule.getPriority())){
+                System.out.println("Priority Error Thrown");
+                throw new PriorityAlreadyExistsException(rule);
+            } else {
+                existingPriorities.add(rule.getPriority());
+            }
+        });
 
         Ruleset rulesetData = this.rulesetRepository.save(
                 Ruleset.builder()
-                        .name(incomingRulesetData.name)
-                        .rules(incomingRulesetData.rules)
+                        .name(incomingRulesetData.getName())
+                        .rules(incomingRulesetData.getRules())
                 .build()
         );
 
