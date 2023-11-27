@@ -1,6 +1,6 @@
 export enum FactType{
-    FRONT = "Front",
-    RIGHT = "Right",
-    LEFT = "Left",
-    BEHIND = "Behind"
+    FRONT = "FRONT",
+    RIGHT = "RIGHT",
+    LEFT = "LEFT",
+    BEHIND = "BEHIND"
 }

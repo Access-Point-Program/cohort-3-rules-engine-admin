@@ -10,6 +10,7 @@ export class CreateRulesetComponent implements AfterViewInit, AfterViewChecked {
 
   @ViewChildren(RulesComponentComponent) viewChildren!: QueryList<RulesComponentComponent>;
   public ruleset: RulesComponentComponent[] = [new RulesComponentComponent()]
+  public name:string = '';
 
   constructor(private changeDetectorRef: ChangeDetectorRef){}
 
