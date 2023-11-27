@@ -42,6 +42,16 @@ public class Rule implements Serializable {
 
     @PrePersist
     private void prePersist() {
-        conditions.forEach( c -> c.setRule(this));
+        conditions.forEach( c -> {
+            System.out.println("sssssssssssssssssssssss" + c);
+            c.setRule(this);
+        });
+    }
+
+    public void addCondition(Condition condition) {
+        conditions.add(condition);
+    }
+    public void removeCondition(Condition condition) {
+        conditions.remove(condition);
     }
 }

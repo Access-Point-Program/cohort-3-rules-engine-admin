@@ -37,4 +37,6 @@ public class Condition implements Serializable {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Rule rule;
+
+
 }
