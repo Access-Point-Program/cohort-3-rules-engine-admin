@@ -31,7 +31,7 @@ public class Condition implements Serializable {
     private ValueType value_type;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rule_id", nullable=false, updatable=false)
     @ColumnTransformer(write = "?::bigint")
     @EqualsAndHashCode.Exclude

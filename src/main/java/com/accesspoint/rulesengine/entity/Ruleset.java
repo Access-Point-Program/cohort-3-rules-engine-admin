@@ -2,6 +2,7 @@ package com.accesspoint.rulesengine.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import jakarta.persistence.*;
@@ -28,11 +29,13 @@ public class Ruleset implements Serializable {
     @OneToMany(mappedBy = "ruleset", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH}, orphanRemoval = true)
     private List<Rule> rules;
 
-    public void addRule(Rule rule){
+    public void addRuleToList(Rule rule){
         rules.add(rule);
+        rule.setRuleset(this);
     }
-    public void removeRule(Rule rule){
+    public void removeRuleFromList(Rule rule){
         rules.remove(rule);
+//        rule.setRuleset(this);
     }
 
     @PrePersist

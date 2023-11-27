@@ -30,7 +30,9 @@ public class RulesetController {
     }
 
     @PutMapping("/ruleset/{id}")
-    ResponseEntity<Ruleset> updateRuleset(@PathVariable Long id, @RequestBody Ruleset ruleset){return rulesetService.updateRuleset(id, ruleset);}
+    ResponseEntity<Ruleset> updateRuleset(@PathVariable Long id, @RequestBody Ruleset ruleset) {
+        return rulesetService.updateRuleset(id, ruleset);
+    }
 
 
 }

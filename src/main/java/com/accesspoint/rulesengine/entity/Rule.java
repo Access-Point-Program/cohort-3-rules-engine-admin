@@ -1,6 +1,7 @@
 package com.accesspoint.rulesengine.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
@@ -30,7 +31,7 @@ public class Rule implements Serializable {
     private EventType event_type;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ruleset_id", nullable=false, updatable=false)
     @ColumnTransformer(write = "?::bigint")
     @EqualsAndHashCode.Exclude
@@ -42,16 +43,20 @@ public class Rule implements Serializable {
 
     @PrePersist
     private void prePersist() {
+        System.out.println("PrePersist Rule");
+        System.out.println(this);
         conditions.forEach( c -> {
             System.out.println("sssssssssssssssssssssss" + c);
             c.setRule(this);
         });
     }
 
-    public void addCondition(Condition condition) {
+    public void addConditionToList(Condition condition) {
         conditions.add(condition);
+        condition.setRule(this);
     }
-    public void removeCondition(Condition condition) {
+    public void removeConditionFromList(Condition condition) {
         conditions.remove(condition);
+//        condition.setRule(this);
     }
 }

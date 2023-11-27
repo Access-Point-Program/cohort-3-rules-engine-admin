@@ -103,25 +103,10 @@ public class RulesetService {
                             System.out.println(rule);
                             if (!ruleset.getRules().contains(rule)){
                                 // ruleset rules DOES NOT contain current newRuleset rules rule
-                                System.out.println(rule.getConditions());
-                                List<Condition> conditionsList = new ArrayList<>();
-
-                                for(Condition condition : rule.getConditions()){
-                                    Condition buildCondition =
-                                            Condition.builder()
-                                                    .fact_type(condition.getFact_type())
-                                                    .value_type(condition.getValue_type())
-                                                    .build();
-                                    conditionsList.add(buildCondition);
-                                }
-
-                                Rule buildRule =
-                                        Rule.builder()
-                                                .priority(rule.getPriority())
-                                                .event_type(rule.getEvent_type())
-                                                .conditions(conditionsList)
-                                                .build();
-                                ruleset.addRule(buildRule);
+                                System.out.println("RULE RECOGNIZED AS NEW RULE");
+                                rule.setRuleset(ruleset);
+                                this.ruleRepository.save(rule);
+                                ruleset.addRuleToList(rule);
                             } //else {
 //                                for (Condition condition : rule.getConditions()) {
 //                                    if (!rule.getConditions().contains(condition)){
@@ -129,24 +114,20 @@ public class RulesetService {
 //                                        System.out.println(condition);
 //                                    }
 //                                }
-//
-//                                // ruleset rules DOES contain current newRuleset rules rule
-//                                // TODO: Check to see if the conditions are different
-//                                    // for each condition in conditions ?
-//                            }
-                        }
+
+                                // ruleset rules DOES contain current newRuleset rules rule
+                                // TODO: Check to see if the conditions are different
+                                    // for each condition in conditions ?
+                            }
+                        //}
 
                         // TODO: Somehow need to remove the rules that are not included inside the newRuleset (by id?)
-
-//                        ruleset.setRules(newRuleset.getRules());
                     }
                     System.out.println(ruleset);
-                    return this.rulesetRepository.save(ruleset);
+                    return rulesetRepository.save(ruleset);
                 }) //
                 .orElseThrow(() -> new BadRequestException("id not found"));
         System.out.println(updatedRuleset2);
-//        updatedRuleset.setName(ruleset.getName());
-//        updatedRuleset.setRules(ruleset.getRules());
 
         return new ResponseEntity<>(updatedRuleset2, HttpStatus.OK);
     }
