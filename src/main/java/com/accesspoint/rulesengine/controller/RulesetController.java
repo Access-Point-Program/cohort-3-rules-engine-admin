@@ -1,5 +1,6 @@
 package com.accesspoint.rulesengine.controller;
 
+import com.accesspoint.rulesengine.entity.Rule;
 import com.accesspoint.rulesengine.entity.Ruleset;
 import com.accesspoint.rulesengine.model.RulesetModel;
 import com.accesspoint.rulesengine.service.RulesetService;
@@ -28,7 +29,7 @@ public class RulesetController {
     }
 
     @PostMapping("/ruleset")
-    ResponseEntity<Ruleset> newRuleset(@RequestBody CreateRuleSetRequest request) {
+    ResponseEntity<Ruleset> newRuleset(@RequestBody Ruleset request) {
         return this.rulesetService.createRuleset(request);
     }
 

@@ -360,7 +360,6 @@ public class RulesetTest {
                 .body(equalTo("Rule priority cannot be 0"));
 }
 
-    //TODO: if priority already exists
     @Test
     public void givenRuleset_whenPOSTPriorityAlreadyExists_thenCustomErrorIsCalled() {
 
@@ -373,7 +372,7 @@ public class RulesetTest {
         List<Condition> fakeCondition2 = new ArrayList<>();
         fakeCondition2.add(fakeCon2_1);
         fakeCondition2.add(fakeCon2_2);
-        Rule fakeRule1 = new Rule(100L, 11, FORWARD, null, fakeCondition1);
+        Rule fakeRule1 = new Rule(100L, 1, FORWARD, null, fakeCondition1);
         Rule fakeRule2 = new Rule(200L, 1, FORWARD, null, fakeCondition2);
         List<Rule> fakeRules = new ArrayList<>();
         fakeRules.add(fakeRule1);
@@ -386,45 +385,20 @@ public class RulesetTest {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
-        Condition fakeCon3_1 = new Condition(300L, FRONT, END, null);
-        Condition fakeCon4_1 = new Condition(4200L, FRONT, EMPTY, null);
-        Condition fakeCon4_2 = new Condition(401L, LEFT, EMPTY, null);
-        List<Condition> fakeCondition3 = new ArrayList<>();
-        fakeCondition3.add(fakeCon3_1);
-        List<Condition> fakeCondition4 = new ArrayList<>();
-        fakeCondition4.add(fakeCon4_1);
-        fakeCondition4.add(fakeCon4_2);
-        Rule fakeRule3 = new Rule(300L, 11, FORWARD, null, fakeCondition3);
-        Rule fakeRule4 = new Rule(400L, 2, FORWARD, null, fakeCondition4);
-        List<Rule> fakeRules2 = new ArrayList<>();
-        fakeRules2.add(fakeRule3);
-        fakeRules2.add(fakeRule4);
-        Ruleset ruleset2 =
-                Ruleset.builder()
-                        .name("Test2")
-                        .rules(fakeRules2)
-                        .id(101L)
-                        .creation_date(Timestamp.valueOf("2020-01-01 01:15:30.500"))
-                        .build();
-
         // Mock ALL repository methods that get called in the service
         when(rulesetRepository.save(Mockito.any(Ruleset.class))).thenReturn(ruleset);
-        when(rulesetRepository.getReferenceById(Mockito.any(Long.class))).thenReturn(ruleset);
-        when(ruleRepository.save(Mockito.eq(fakeRule3))).thenReturn(fakeRule3);
-        when(conditionRepository.save(Mockito.eq(fakeCon3_1))).thenReturn(fakeCon3_1);
-        when(ruleRepository.findAll()).thenReturn(fakeRules);
 
         // Given the ruleset, when post request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
-                .body(ruleset2)
-                .when()
+                .body(ruleset)
+        .when()
                 .post("/ruleset")
-                .then()
+        .then()
                 .assertThat()
                 .statusCode(409)
-                .body(containsString("Rule priority already exists in database."))
-                .body(containsString("Rule in question: Rule(id=300, priority=11.0, event_type=FORWARD, conditions=[Condition(id=300, fact_type=FRONT, value_type=END)])"));
+                .body(containsString("Rule priority already exists in ruleset."))
+                .body(containsString("Rule in question: Rule(id=200, priority=1.0, event_type=FORWARD, conditions=[Condition(id=200, fact_type=FRONT, value_type=EMPTY), Condition(id=201, fact_type=LEFT, value_type=EMPTY)])"));
     }
 
     @Test
