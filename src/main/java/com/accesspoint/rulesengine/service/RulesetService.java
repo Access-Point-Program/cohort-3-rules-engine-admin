@@ -94,11 +94,6 @@ public class RulesetService {
                     }
                     if (ruleset.getRules() != newRuleset.getRules()) {
                         System.out.println("Different Rules");
-                        List<Long> rulesetRuleIds = ruleset.getRules().stream().map(rule -> rule.getId()).toList();
-                        System.out.println(rulesetRuleIds);
-                        List<Long> newRulesetRuleIds = newRuleset.getRules().stream().map(rule -> rule.getId()).toList();
-                        System.out.println(newRulesetRuleIds);
-
                         for(Rule rule : newRuleset.getRules()){
                             System.out.println(rule);
                             if (rule.getId() == null){
@@ -119,6 +114,7 @@ public class RulesetService {
                                                 oldRule.setEvent_type(rule.getEvent_type());
                                             }
                                             if (oldRule.getConditions() != rule.getConditions()){
+                                                System.out.println("Different Conditions");
                                                 for(Condition condition : rule.getConditions()){
                                                     if (condition.getId() == null){
                                                         // ruleset rules DOES NOT contain current newRuleset rules rule
