@@ -13,12 +13,31 @@ import { ConditionsComponent } from '../conditions/conditions.component';
 export class SaveButtonComponent {
 
   public _parentRuleset: CreateRulesetComponent;
+  responseData: {} = {};
+  
 
   constructor(private _injector: Injector, private http: HttpClient) { 
     const _parent_parent: CreateRulesetComponent = this._injector.get<CreateRulesetComponent>(CreateRulesetComponent);
     this._parentRuleset = _parent_parent;
   }
 
+  callPost(data: string){
+  
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    this.http.post(`http://localhost:8080/ruleset`, data, { headers: headers }).subscribe({
+      next: res => {
+        console.log('Success:' , res);
+        this.responseData = res;
+        console.log(this.responseData);
+      },
+      error: error => {
+        console.error('There was an error!', error);
+      }
+    })
+  }
 
   saveData(){
     
@@ -43,14 +62,7 @@ export class SaveButtonComponent {
     // console.log("HERE!!!!!")
     // console.log(data);
     
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-    
-    this.http.post(`http://localhost:8080/ruleset`, data, { headers: headers })
-    .subscribe((res) => {
-      console.log('Success:' , res);
-    })
+    this.callPost(data);
   }
 }
 
