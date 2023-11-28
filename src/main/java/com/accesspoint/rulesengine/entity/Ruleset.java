@@ -35,7 +35,7 @@ public class Ruleset implements Serializable {
     }
     public void removeRuleFromList(Rule rule){
         rules.remove(rule);
-//        rule.setRuleset(this);
+        rule.setRuleset(this);
     }
 
     @PrePersist

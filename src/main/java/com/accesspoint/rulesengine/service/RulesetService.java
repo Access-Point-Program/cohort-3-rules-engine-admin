@@ -88,7 +88,8 @@ public class RulesetService {
 
         Ruleset updatedRuleset2 = rulesetRepository.findById(id) //
                 .map(ruleset -> {
-                    if (ruleset.getName() != newRuleset.getName()) {
+                    //TODO: optimize Hibernate select calls
+                    if (ruleset.getName().equals(newRuleset.getName())) {
                         System.out.println("Different Names");
                         ruleset.setName(newRuleset.getName());
                     }
@@ -121,7 +122,7 @@ public class RulesetService {
                                                         System.out.println("CONDITION RECOGNIZED AS NEW CONDITION");
                                                         condition.setRule(rule);
                                                         this.conditionRepository.save(condition);
-                                                        rule.addConditionToList(condition);
+                                                        oldRule.addConditionToList(condition);
                                                     } else {
                                                         Optional<Condition> updatedCondition = conditionRepository.findById(condition.getId())
                                                                 .map(oldCondition -> {
@@ -142,9 +143,32 @@ public class RulesetService {
                                             return oldRule;
                                         });
                             }
+//                            for
+//                            List<Long> ruleConditionIds = rule.getConditions().stream().map(condition -> condition.getId()).toList();
+//                            System.out.println(ruleConditionIds);
+//                            List<Long> ruleConditionRuleIds = newRuleset.getRules().stream().map(rule -> rule.getId()).toList();
+//                            System.out.println(ruleConditionRuleIds);
                         }
 
                         // TODO: Somehow need to remove the rules that are not included inside the newRuleset (by id?)
+                        List<Long> rulesetRuleIds = ruleset.getRules().stream().map(rule -> rule.getId()).toList();
+                        System.out.println(rulesetRuleIds);
+                        List<Long> newRulesetRuleIds = newRuleset.getRules().stream().map(rule -> rule.getId()).toList();
+                        System.out.println(newRulesetRuleIds);
+
+                        if(rulesetRuleIds.size() > newRulesetRuleIds.size()) {
+                            for(Long ruleID: rulesetRuleIds) {
+                                System.out.println(ruleID);
+                                System.out.println(rulesetRuleIds);
+
+                                if (!newRulesetRuleIds.contains(ruleID)) {
+                                    ruleset.removeRuleFromList(ruleRepository.getReferenceById(ruleID));
+                                }
+                            }
+                        }
+
+
+
                     }
                     System.out.println(ruleset);
                     return rulesetRepository.save(ruleset);

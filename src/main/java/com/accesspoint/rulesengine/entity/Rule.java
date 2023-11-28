@@ -54,6 +54,6 @@ public class Rule implements Serializable {
     }
     public void removeConditionFromList(Condition condition) {
         conditions.remove(condition);
-//        condition.setRule(this);
+        condition.setRule(this);
     }
 }
