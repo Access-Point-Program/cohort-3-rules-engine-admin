@@ -75,119 +75,87 @@ public class RulesetService {
         return ResponseEntity.ok().body(this.rulesetRepository.getReferenceById(rulesetData.getId()));
     }
 
-    public ResponseEntity<Ruleset> updateRuleset(Long id, Ruleset newRuleset){
+    public ResponseEntity<Ruleset> updateRuleset(Long id, Ruleset incomingRuleset){
 
-//        if (incomingRulesetData.name.isEmpty()) throw new BadRequestException("Name cannot be empty");
-//        if (incomingRulesetData.rules == null) throw new BadRequestException("Rules cannot be empty");
-//        incomingRulesetData.rules.stream().forEach(rule -> {
-//            if (rule.getPriority() == 0.0) throw new BadRequestException("Rule priority cannot be 0");
-//            if (rule.getConditions() == null) throw new BadRequestException("Conditions cannot be empty");
-//        });
+        if (incomingRuleset.getName() == null || incomingRuleset.getName().isEmpty()) throw new BadRequestException("Name cannot be empty");
+        if (incomingRuleset.getRules() == null || incomingRuleset.getRules().isEmpty()) throw new BadRequestException("Rules cannot be empty");
+        incomingRuleset.getRules().stream().forEach(rule -> {
+            if (rule.getPriority() == 0.0) throw new BadRequestException("Rule priority cannot be 0");
+            if (rule.getEvent_type() == null) throw new BadRequestException("Rule event type cannot be null");
+            if (rule.getConditions() == null || rule.getConditions().isEmpty()) throw new BadRequestException("Conditions cannot be empty");
+            rule.getConditions().stream().forEach(condition -> {
+                if (condition.getFact_type() == null) throw new BadRequestException("Condition fact type cannot be null");
+                if (condition.getValue_type() == null) throw new BadRequestException("Condition value type cannot be null");
+            });
+        });
 
 
 
         Ruleset updatedRuleset2 = rulesetRepository.findById(id) //
-                .map(ruleset -> {
+                .map(oldRuleset -> {
                     //TODO: optimize Hibernate select calls
-                    if (ruleset.getName().equals(newRuleset.getName())) {
-                        System.out.println("Different Names");
-                        ruleset.setName(newRuleset.getName());
-                    }
-                    if (ruleset.getRules() != newRuleset.getRules()) {
-                        System.out.println("Different Rules");
-                        for(Rule rule : newRuleset.getRules()){
-                            System.out.println(rule);
-                            if (rule.getId() == null){
-                                // ruleset rules DOES NOT contain current newRuleset rules rule
-                                System.out.println("RULE RECOGNIZED AS NEW RULE");
-                                rule.setRuleset(ruleset);
-                                this.ruleRepository.save(rule);
-                                ruleset.addRuleToList(rule);
+                    if (!oldRuleset.getName().equals(incomingRuleset.getName())) oldRuleset.setName(incomingRuleset.getName());
+                    if (oldRuleset.getRules() != incomingRuleset.getRules()) {
+                        for(Rule incomingRule : incomingRuleset.getRules()){
+                            if (incomingRule.getId() == null){
+                                // oldRuleset rules DOES NOT contain incomingRuleset rule
+                                incomingRule.setRuleset(oldRuleset);
+                                this.ruleRepository.save(incomingRule);
+                                oldRuleset.addRuleToList(incomingRule);
                             } else {
-                                Optional<Rule> updatedRule = ruleRepository.findById(rule.getId())
+                                Optional<Rule> updatedRule = ruleRepository.findById(incomingRule.getId())
                                         .map(oldRule -> {
-                                            if (oldRule.getPriority() != rule.getPriority()){
-                                                System.out.println("Different Rule Priority");
-                                                oldRule.setPriority(rule.getPriority());
-                                            }
-                                            if (oldRule.getEvent_type() != rule.getEvent_type()){
-                                                System.out.println("Different Rule Event Type");
-                                                oldRule.setEvent_type(rule.getEvent_type());
-                                            }
-                                            if (oldRule.getConditions() != rule.getConditions()){
-                                                System.out.println("Different Conditions");
-                                                for(Condition condition : rule.getConditions()){
-                                                    if (condition.getId() == null){
-                                                        // ruleset rules DOES NOT contain current newRuleset rules rule
-                                                        System.out.println("CONDITION RECOGNIZED AS NEW CONDITION");
-                                                        condition.setRule(rule);
-                                                        this.conditionRepository.save(condition);
-                                                        oldRule.addConditionToList(condition);
+                                            if (oldRule.getPriority() != incomingRule.getPriority()) oldRule.setPriority(incomingRule.getPriority());
+                                            if (oldRule.getEvent_type() != incomingRule.getEvent_type()) oldRule.setEvent_type(incomingRule.getEvent_type());
+                                            if (oldRule.getConditions() != incomingRule.getConditions()){
+                                                for(Condition newCondition : incomingRule.getConditions()){
+                                                    if (newCondition.getId() == null){
+                                                        // oldRule conditions DOES NOT contain incomingRuleset condition
+                                                        newCondition.setRule(incomingRule);
+                                                        this.conditionRepository.save(newCondition);
+                                                        oldRule.addConditionToList(newCondition);
                                                     } else {
-                                                        Optional<Condition> updatedCondition = conditionRepository.findById(condition.getId())
+                                                        Optional<Condition> updatedCondition = conditionRepository.findById(newCondition.getId())
                                                                 .map(oldCondition -> {
-                                                                    if (oldCondition.getFact_type() != condition.getFact_type()){
-                                                                        System.out.println("Different Rule Priority");
-                                                                        oldCondition.setFact_type(condition.getFact_type());
-                                                                    }
-                                                                    if (oldCondition.getValue_type() != condition.getValue_type()){
-                                                                        System.out.println("Different Rule Event Type");
-                                                                        oldCondition.setValue_type(condition.getValue_type());
-                                                                    }
+                                                                    if (oldCondition.getFact_type() != newCondition.getFact_type()) oldCondition.setFact_type(newCondition.getFact_type());
+                                                                    if (oldCondition.getValue_type() != newCondition.getValue_type()) oldCondition.setValue_type(newCondition.getValue_type());
 
                                                                     return oldCondition;
                                                                 });
                                                     }
                                                 }
                                             }
-                                            List<Long> ruleConditionIds = oldRule.getConditions().stream().map(condition -> condition.getId()).toList();
-                                            System.out.println(ruleConditionIds);
-                                            List<Long> newRuleConditionIds = rule.getConditions().stream().map(condition -> condition.getId()).toList();
-                                            System.out.println(newRuleConditionIds);
+                                            List<Long> oldRuleConditionIds = oldRule.getConditions().stream().map(condition -> condition.getId()).toList();
+                                            List<Long> incomingRuleConditionIds = incomingRule.getConditions().stream().map(condition -> condition.getId()).toList();
 
-                                            if(ruleConditionIds.size() > newRuleConditionIds.size()) {
-                                                for(Long conditionId: ruleConditionIds) {
-                                                    if (!newRuleConditionIds.contains(conditionId)) {
-                                                        System.out.println("hi");
-                                                        oldRule.removeConditionFromList(conditionRepository.getReferenceById(conditionId));
-                                                    }
+                                            if(oldRuleConditionIds.size() > incomingRuleConditionIds.size()) {
+                                                for(Long conditionId: oldRuleConditionIds) {
+                                                    if (!incomingRuleConditionIds.contains(conditionId)) oldRule.removeConditionFromList(conditionRepository.getReferenceById(conditionId));
+
                                                 }
-                                                System.out.println(oldRule.getConditions().stream().map(condition -> condition.getId()).toList());
-                                                System.out.println(rule.getConditions().stream().map(condition -> condition.getId()).toList());
                                             }
 
                                             return oldRule;
                                         });
                             }
-//                            for
-//                            List<Long> ruleConditionIds = rule.getConditions().stream().map(condition -> condition.getId()).toList();
-//                            System.out.println(ruleConditionIds);
-//                            List<Long> ruleConditionRuleIds = newRuleset.getRules().stream().map(rule -> rule.getId()).toList();
-//                            System.out.println(ruleConditionRuleIds);
                         }
 
-                        // TODO: Somehow need to remove the rules that are not included inside the newRuleset (by id?)
-                        List<Long> rulesetRuleIds = ruleset.getRules().stream().map(rule -> rule.getId()).toList();
-                        System.out.println(rulesetRuleIds);
-                        List<Long> newRulesetRuleIds = newRuleset.getRules().stream().map(rule -> rule.getId()).toList();
-                        System.out.println(newRulesetRuleIds);
+                        List<Long> oldRulesetRuleIds = oldRuleset.getRules().stream().map(rule -> rule.getId()).toList();
+                        List<Long> incomingRulesetRuleIds = incomingRuleset.getRules().stream().map(rule -> rule.getId()).toList();
 
-                        if(rulesetRuleIds.size() > newRulesetRuleIds.size()) {
-                            for(Long ruleID: rulesetRuleIds) {
-                                if (!newRulesetRuleIds.contains(ruleID)) {
-                                    ruleset.removeRuleFromList(ruleRepository.getReferenceById(ruleID));
-                                }
+                        if(oldRulesetRuleIds.size() > incomingRulesetRuleIds.size()) {
+                            for(Long ruleID: oldRulesetRuleIds) {
+                                if (!incomingRulesetRuleIds.contains(ruleID)) oldRuleset.removeRuleFromList(ruleRepository.getReferenceById(ruleID));
+
                             }
                         }
 
 
 
                     }
-                    System.out.println(ruleset);
-                    return rulesetRepository.save(ruleset);
+                    return rulesetRepository.save(oldRuleset);
                 })
                 .orElseThrow(() -> new BadRequestException("id not found"));
-        System.out.println(updatedRuleset2);
 
         return new ResponseEntity<>(updatedRuleset2, HttpStatus.OK);
     }
