@@ -140,6 +140,22 @@ public class RulesetService {
                                                     }
                                                 }
                                             }
+                                            List<Long> ruleConditionIds = oldRule.getConditions().stream().map(condition -> condition.getId()).toList();
+                                            System.out.println(ruleConditionIds);
+                                            List<Long> newRuleConditionIds = rule.getConditions().stream().map(condition -> condition.getId()).toList();
+                                            System.out.println(newRuleConditionIds);
+
+                                            if(ruleConditionIds.size() > newRuleConditionIds.size()) {
+                                                for(Long conditionId: ruleConditionIds) {
+                                                    if (!newRuleConditionIds.contains(conditionId)) {
+                                                        System.out.println("hi");
+                                                        oldRule.removeConditionFromList(conditionRepository.getReferenceById(conditionId));
+                                                    }
+                                                }
+                                                System.out.println(oldRule.getConditions().stream().map(condition -> condition.getId()).toList());
+                                                System.out.println(rule.getConditions().stream().map(condition -> condition.getId()).toList());
+                                            }
+
                                             return oldRule;
                                         });
                             }
@@ -158,9 +174,6 @@ public class RulesetService {
 
                         if(rulesetRuleIds.size() > newRulesetRuleIds.size()) {
                             for(Long ruleID: rulesetRuleIds) {
-                                System.out.println(ruleID);
-                                System.out.println(rulesetRuleIds);
-
                                 if (!newRulesetRuleIds.contains(ruleID)) {
                                     ruleset.removeRuleFromList(ruleRepository.getReferenceById(ruleID));
                                 }
