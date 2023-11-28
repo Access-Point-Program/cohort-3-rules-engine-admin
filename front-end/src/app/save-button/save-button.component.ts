@@ -1,6 +1,6 @@
 import { Component, Injector } from '@angular/core';
 import { CreateRulesetComponent } from '../create-ruleset/create-ruleset.component';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ConditionsComponent } from '../conditions/conditions.component';
 
 @Component({
@@ -8,10 +8,10 @@ import { ConditionsComponent } from '../conditions/conditions.component';
   templateUrl: './save-button.component.html',
   styleUrls: ['./save-button.component.css']
 })
+
+
 export class SaveButtonComponent {
 
-
-  
   public _parentRuleset: CreateRulesetComponent;
 
   constructor(private _injector: Injector, private http: HttpClient) { 
@@ -24,7 +24,6 @@ export class SaveButtonComponent {
     
     const mapToConditions = (condition: ConditionsComponent): ruleCondition => {
       const {conditionIsValue: value_type, conditionWhenValue: fact_type} = condition;
-
       return { fact_type, value_type};
     }
 
@@ -39,32 +38,32 @@ export class SaveButtonComponent {
       }, { name: this._parentRuleset.getName() , rules:[] });
 
     const data = JSON.stringify(jsonDataToUse, null, 2);
-    console.log("HERE!!!!!")
-    console.log(data);
 
-
-    return this.http.post(`http://localhost:8080/ruleset`, data);
+    // Use fro Data Debug
+    // console.log("HERE!!!!!")
+    // console.log(data);
+    
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    
+    this.http.post(`http://localhost:8080/ruleset`, data, { headers: headers })
+    .subscribe((res) => {
+      console.log('Success:' , res);
+    })
   }
-
-
 }
-type ruleCondition={
-      fact_type: String
-      value_type: String
-    }
+
+type ruleCondition = {
+  fact_type: String
+  value_type: String
+}
 type rulesetRule = {
-    priority: Number
-    event_type: String
-    conditions: ruleCondition[]
-  }
+  priority: Number
+  event_type: String
+  conditions: ruleCondition[]
+}
 type ruleset = {
   name: String
   rules: rulesetRule[]
 }
-
-// {"name":"Test 2","rules": [
-//   {"priority": 7, "event_type": "FORWARD", "conditions": [
-//       {
-//           "fact_type":"RIGHT","value_type":"EMPTY"
-//       }
-//   ]},

@@ -45,4 +45,7 @@ This application will be responsible for creating a User Interface that will all
 2. Run sql code to create the required tables
 3. Open the project and __navigate into the `front-end` directory__, then run `npm install`
 4. After it has finished installing, __navigate back to the root directory__, and run `mvn clean install`
-5. Once the project has finished building, then you can run the executable jar file like so `java -jar .\target\rules-engine-0.0.1-SNAPSHOT.jar`
+5. Once the project has finished building, then you can run the executable jar file. (Below)
+(Depending on terminal '\' might need to be changed to '/') 
+`java -jar .\target\rules-engine-0.0.1-SNAPSHOT.jar`  or `java -jar ./target/rules-engine-0.0.1-SNAPSHOT.jar`
+6. Go to the following URl 'http://localhost:8080/create-ruleset'

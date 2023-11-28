@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import {CreateRulesetComponent} from './create-ruleset/create-ruleset.component'
 
 const routes: Routes = [
-  { path: 'ruleset', component: CreateRulesetComponent},
-  { path: '', redirectTo: '/ruleset', pathMatch: 'full' }
+  { path: 'create-ruleset', component: CreateRulesetComponent},
+  { path: '**', redirectTo: '/create-ruleset', pathMatch: 'full' }
 ];
 
 @NgModule({
