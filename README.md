@@ -48,4 +48,4 @@ This application will be responsible for creating a User Interface that will all
 5. Once the project has finished building, then you can run the executable jar file. (Below)
 (Depending on terminal '\' might need to be changed to '/') 
 `java -jar .\target\rules-engine-0.0.1-SNAPSHOT.jar`  or `java -jar ./target/rules-engine-0.0.1-SNAPSHOT.jar`
-6. Go to the following URl 'http://localhost:8080/create-ruleset'
+6. Go to the following URl 'http://localhost:8080/#/create-ruleset'
