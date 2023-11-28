@@ -97,12 +97,17 @@ public class RulesetService {
                     if (!oldRuleset.getName().equals(incomingRuleset.getName())) oldRuleset.setName(incomingRuleset.getName());
                     if (oldRuleset.getRules() != incomingRuleset.getRules()) {
                         for(Rule incomingRule : incomingRuleset.getRules()){
+                            System.out.println(incomingRule);
                             if (incomingRule.getId() == null){
                                 // oldRuleset rules DOES NOT contain incomingRuleset rule
+                                System.out.println("here");
                                 incomingRule.setRuleset(oldRuleset);
-                                this.ruleRepository.save(incomingRule);
-                                oldRuleset.addRuleToList(incomingRule);
+                                System.out.println("BEFORE" + incomingRule);
+                                Rule savedRule = this.ruleRepository.save(incomingRule);
+                                System.out.println("AFTER" + incomingRule);
+                                oldRuleset.addRuleToList(savedRule);
                             } else {
+                                System.out.println("here2");
                                 Optional<Rule> updatedRule = ruleRepository.findById(incomingRule.getId())
                                         .map(oldRule -> {
                                             if (oldRule.getPriority() != incomingRule.getPriority()) oldRule.setPriority(incomingRule.getPriority());
@@ -149,9 +154,6 @@ public class RulesetService {
 
                             }
                         }
-
-
-
                     }
                     return rulesetRepository.save(oldRuleset);
                 })

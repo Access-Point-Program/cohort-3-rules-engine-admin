@@ -1,6 +1,7 @@
 package com.accesspoint.rulesengine.apitests.ruleset;
 
 import com.accesspoint.rulesengine.entity.Condition;
+import com.accesspoint.rulesengine.entity.EventType;
 import com.accesspoint.rulesengine.entity.Rule;
 import com.accesspoint.rulesengine.entity.Ruleset;
 import com.accesspoint.rulesengine.repository.ConditionRepository;
@@ -17,6 +18,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.sql.Array;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -561,4 +564,811 @@ public class RulesetTest {
                 .body(equalTo("Id not found"));
     }
 
+    // TODO: put endpoint nothing changes
+    @Test
+    public void givenIncomingRuleset_whenPutEndpointIsCalledWithNoChanges_thenNothingChanges() {
+        Condition condition =
+                Condition.builder()
+                        .id(10000L)
+                        .fact_type(RIGHT)
+                        .value_type(END)
+                        .build();
+
+        Rule rule =
+                Rule.builder()
+                        .id(1000L)
+                        .priority(5)
+                        .event_type(EventType.RIGHT)
+                        .conditions(List.of(condition))
+                        .build();
+
+        Ruleset ruleset =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .rules(List.of(rule))
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset));
+        when(rulesetRepository.save(Mockito.eq(ruleset))).thenReturn(ruleset);
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset)
+                .when()
+                .put("/ruleset/100")
+                .then().log().all()
+                .assertThat()
+                .statusCode(200)
+                .body("id", equalTo(100))
+                .body("name", equalTo("Test"))
+                .body("creation_date", equalTo("2000-01-01T01:15:30.500+00:00"))
+                .body("rules[0].id", equalTo((1000)))
+                .body("rules[0].priority", equalTo((5F)))
+                .body("rules[0].conditions[0].id", equalTo((10000)))
+                .body("rules[0].conditions[0].fact_type", equalTo(("RIGHT")))
+                .body("rules[0].conditions[0].value_type", equalTo(("END")));
+    }
+    // TODO: put endpoint changing name
+    @Test
+    public void givenIncomingRuleset_whenPutEndpointIsCalledWithNameChange_thenOnlyNameIsChanged() {
+        Condition condition =
+                Condition.builder()
+                        .id(10000L)
+                        .fact_type(RIGHT)
+                        .value_type(END)
+                        .build();
+
+        Rule rule =
+                Rule.builder()
+                        .id(1000L)
+                        .priority(5)
+                        .event_type(EventType.RIGHT)
+                        .conditions(List.of(condition))
+                        .build();
+
+        Ruleset ruleset1 =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .rules(List.of(rule))
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+
+        Ruleset ruleset2 =
+                Ruleset.builder()
+                        .name("Test Changed")
+                        .id(100L)
+                        .rules(List.of(rule))
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset1));
+        when(rulesetRepository.save(Mockito.eq(ruleset1))).thenReturn(ruleset1);
+
+
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset2)
+                .when()
+                .put("/ruleset/100")
+                .then().log().all()
+                .assertThat()
+                .statusCode(200)
+                .body("id", equalTo(100))
+                .body("name", equalTo("Test Changed"))
+                .body("creation_date", equalTo("2000-01-01T01:15:30.500+00:00"))
+                .body("rules[0].id", equalTo((1000)))
+                .body("rules[0].priority", equalTo((5F)))
+                .body("rules[0].event_type", equalTo("RIGHT"))
+                .body("rules[0].conditions[0].id", equalTo((10000)))
+                .body("rules[0].conditions[0].fact_type", equalTo(("RIGHT")))
+                .body("rules[0].conditions[0].value_type", equalTo(("END")));
+    }
+    // TODO: put endpoint changing rule priority
+    @Test
+    public void givenIncomingRuleset_whenPutEndpointIsCalledWithRulePriorityChanged_thenOnlyPriorityIsChanged() {
+        Condition condition =
+                Condition.builder()
+                        .id(10000L)
+                        .fact_type(RIGHT)
+                        .value_type(END)
+                        .build();
+
+        Rule rule =
+                Rule.builder()
+                        .id(1000L)
+                        .priority(5)
+                        .event_type(EventType.RIGHT)
+                        .conditions(List.of(condition))
+                        .build();
+
+        Ruleset ruleset1 =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .rules(List.of(rule))
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        Rule rule2 =
+                Rule.builder()
+                        .id(1000L)
+                        .priority(6)
+                        .event_type(EventType.RIGHT)
+                        .conditions(List.of(condition))
+                        .build();
+
+        Ruleset ruleset2 =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .rules(List.of(rule2))
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset1));
+        when(ruleRepository.findById(Mockito.eq(1000L))).thenReturn(Optional.of(rule));
+        when(rulesetRepository.save(Mockito.eq(ruleset1))).thenReturn(ruleset1);
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset2)
+                .when()
+                .put("/ruleset/100")
+                .then().log().all()
+                .assertThat()
+                .statusCode(200)
+                .body("id", equalTo(100))
+                .body("name", equalTo("Test"))
+                .body("creation_date", equalTo("2000-01-01T01:15:30.500+00:00"))
+                .body("rules[0].id", equalTo((1000)))
+                .body("rules[0].priority", equalTo((6F)))
+                .body("rules[0].event_type", equalTo("RIGHT"))
+                .body("rules[0].conditions[0].id", equalTo((10000)))
+                .body("rules[0].conditions[0].fact_type", equalTo(("RIGHT")))
+                .body("rules[0].conditions[0].value_type", equalTo(("END")));
+    }
+    // TODO: put endpoint changing rule event_type
+    @Test
+    public void givenIncomingRuleset_whenPutEndpointIsCalledWithRuleEventTypeChanged_thenOnlyEventTypeIsChanged() {
+        Condition condition =
+                Condition.builder()
+                        .id(10000L)
+                        .fact_type(RIGHT)
+                        .value_type(END)
+                        .build();
+
+        Rule rule =
+                Rule.builder()
+                        .id(1000L)
+                        .priority(5)
+                        .event_type(EventType.RIGHT)
+                        .conditions(List.of(condition))
+                        .build();
+
+        Ruleset ruleset1 =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .rules(List.of(rule))
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        Rule rule2 =
+                Rule.builder()
+                        .id(1000L)
+                        .priority(5)
+                        .event_type(EventType.LEFT)
+                        .conditions(List.of(condition))
+                        .build();
+
+        Ruleset ruleset2 =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .rules(List.of(rule2))
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset1));
+        when(ruleRepository.findById(Mockito.eq(1000L))).thenReturn(Optional.of(rule));
+        when(rulesetRepository.save(Mockito.eq(ruleset1))).thenReturn(ruleset1);
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset2)
+                .when()
+                .put("/ruleset/100")
+                .then().log().all()
+                .assertThat()
+                .statusCode(200)
+                .body("id", equalTo(100))
+                .body("name", equalTo("Test"))
+                .body("creation_date", equalTo("2000-01-01T01:15:30.500+00:00"))
+                .body("rules[0].id", equalTo((1000)))
+                .body("rules[0].priority", equalTo((5F)))
+                .body("rules[0].event_type", equalTo("LEFT"))
+                .body("rules[0].conditions[0].id", equalTo((10000)))
+                .body("rules[0].conditions[0].fact_type", equalTo(("RIGHT")))
+                .body("rules[0].conditions[0].value_type", equalTo(("END")));
+    }
+    // TODO: put endpoint changing condition fact_type
+    @Test
+    public void givenIncomingRuleset_whenPutEndpointIsCalledWithConditionFactTypeChanged_thenOnlyFactTypeIsChanged() {
+        Condition condition =
+                Condition.builder()
+                        .id(10000L)
+                        .fact_type(RIGHT)
+                        .value_type(END)
+                        .build();
+
+        Rule rule =
+                Rule.builder()
+                        .id(1000L)
+                        .priority(5)
+                        .event_type(EventType.RIGHT)
+                        .conditions(List.of(condition))
+                        .build();
+
+        Ruleset ruleset1 =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .rules(List.of(rule))
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        Condition condition2 =
+                Condition.builder()
+                        .id(10000L)
+                        .fact_type(LEFT)
+                        .value_type(END)
+                        .build();
+        Rule rule2 =
+                Rule.builder()
+                        .id(1000L)
+                        .priority(5)
+                        .event_type(EventType.RIGHT)
+                        .conditions(List.of(condition2))
+                        .build();
+
+        Ruleset ruleset2 =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .rules(List.of(rule2))
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset1));
+        when(ruleRepository.findById(Mockito.eq(1000L))).thenReturn(Optional.of(rule));
+        when(conditionRepository.findById(Mockito.eq(10000L))).thenReturn(Optional.of(condition));
+        when(rulesetRepository.save(Mockito.eq(ruleset1))).thenReturn(ruleset1);
+
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset2)
+                .when()
+                .put("/ruleset/100")
+                .then().log().all()
+                .assertThat()
+                .statusCode(200)
+                .body("id", equalTo(100))
+                .body("name", equalTo("Test"))
+                .body("creation_date", equalTo("2000-01-01T01:15:30.500+00:00"))
+                .body("rules[0].id", equalTo((1000)))
+                .body("rules[0].priority", equalTo((5F)))
+                .body("rules[0].event_type", equalTo("RIGHT"))
+                .body("rules[0].conditions[0].id", equalTo((10000)))
+                .body("rules[0].conditions[0].fact_type", equalTo(("LEFT")))
+                .body("rules[0].conditions[0].value_type", equalTo(("END")));
+    }
+    // TODO: put endpoint changing condition value_type
+    @Test
+    public void givenIncomingRuleset_whenPutEndpointIsCalledWithConditionValueTypeChanged_thenOnlyValueTypeIsChanged() {
+        Condition condition =
+                Condition.builder()
+                        .id(10000L)
+                        .fact_type(RIGHT)
+                        .value_type(END)
+                        .build();
+
+        Rule rule =
+                Rule.builder()
+                        .id(1000L)
+                        .priority(5)
+                        .event_type(EventType.RIGHT)
+                        .conditions(List.of(condition))
+                        .build();
+
+        Ruleset ruleset1 =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .rules(List.of(rule))
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        Condition condition2 =
+                Condition.builder()
+                        .id(10000L)
+                        .fact_type(RIGHT)
+                        .value_type(EMPTY)
+                        .build();
+        Rule rule2 =
+                Rule.builder()
+                        .id(1000L)
+                        .priority(5)
+                        .event_type(EventType.RIGHT)
+                        .conditions(List.of(condition2))
+                        .build();
+
+        Ruleset ruleset2 =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .rules(List.of(rule2))
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset1));
+        when(ruleRepository.findById(Mockito.eq(1000L))).thenReturn(Optional.of(rule));
+        when(conditionRepository.findById(Mockito.eq(10000L))).thenReturn(Optional.of(condition));
+        when(rulesetRepository.save(Mockito.eq(ruleset1))).thenReturn(ruleset1);
+
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset2)
+                .when()
+                .put("/ruleset/100")
+                .then().log().all()
+                .assertThat()
+                .statusCode(200)
+                .body("id", equalTo(100))
+                .body("name", equalTo("Test"))
+                .body("creation_date", equalTo("2000-01-01T01:15:30.500+00:00"))
+                .body("rules[0].id", equalTo((1000)))
+                .body("rules[0].priority", equalTo((5F)))
+                .body("rules[0].event_type", equalTo("RIGHT"))
+                .body("rules[0].conditions[0].id", equalTo((10000)))
+                .body("rules[0].conditions[0].fact_type", equalTo(("RIGHT")))
+                .body("rules[0].conditions[0].value_type", equalTo(("EMPTY")));
+    }
+    // TODO: put endpoint adding rule
+//    private Rule mockSettingId(Rule rule2) {
+//        rule2.setId(1001L);
+//        return rule2;
+//    }
+    @Test
+    public void givenIncomingRuleset_whenPutEndpointIsCalledWithRuleAdded_thenRuleAdded() {
+        Condition condition =
+                Condition.builder()
+                        .id(10000L)
+                        .fact_type(RIGHT)
+                        .value_type(END)
+                        .build();
+
+        Rule rule =
+                Rule.builder()
+                        .id(1000L)
+                        .priority(5)
+                        .event_type(EventType.RIGHT)
+                        .conditions(List.of(condition))
+                        .build();
+
+        Ruleset ruleset1 =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .rules(List.of(rule))
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        Condition condition2 =
+                Condition.builder()
+                        .fact_type(RIGHT)
+                        .value_type(EMPTY)
+                        .build();
+
+
+        Rule rule2 =
+                Rule.builder()
+                        .priority(6)
+                        .event_type(EventType.LEFT)
+                        .conditions(List.of(condition2))
+                        .build();
+
+        Ruleset ruleset2 =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .rules(List.of(rule, rule2))
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        Condition condition3 =
+                Condition.builder()
+                        .id(10001L)
+                        .fact_type(RIGHT)
+                        .value_type(EMPTY)
+                        .build();
+
+        Rule rule3 =
+                Rule.builder()
+                        .id(1001L)
+                        .priority(6)
+                        .event_type(EventType.LEFT)
+                        .conditions(List.of(condition3))
+                        .build();
+
+        when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset1));
+        when(ruleRepository.findById(Mockito.eq(1000L))).thenReturn(Optional.of(rule));
+        when(ruleRepository.save(Mockito.any(Rule.class))).thenReturn(rule3);
+        when(rulesetRepository.save(Mockito.eq(ruleset1))).thenReturn(ruleset1);
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset2)
+                .when()
+                .put("/ruleset/100")
+                .then().log().all()
+                .assertThat()
+                .statusCode(200)
+                .body("id", equalTo(100))
+                .body("name", equalTo("Test"))
+                .body("creation_date", equalTo("2000-01-01T01:15:30.500+00:00"))
+                .body("rules[0].id", equalTo((1000)))
+                .body("rules[0].priority", equalTo((5F)))
+                .body("rules[0].event_type", equalTo("RIGHT"))
+                .body("rules[0].conditions[0].id", equalTo((10000)))
+                .body("rules[0].conditions[0].fact_type", equalTo(("RIGHT")))
+                .body("rules[0].conditions[0].value_type", equalTo(("END")))
+                .body("rules[1].id", equalTo((1001)))
+                .body("rules[1].priority", equalTo((6F)))
+                .body("rules[1].event_type", equalTo("LEFT"))
+                .body("rules[1].conditions[0].id", equalTo((10001)))
+                .body("rules[1].conditions[0].fact_type", equalTo(("RIGHT")))
+                .body("rules[1].conditions[0].value_type", equalTo(("EMPTY")));
+    }
+    // TODO: put endpoint deleting rule
+
+    // TODO: put endpoint adding condition
+    // TODO: put endpoint deleting condition
+
+    // error handling
+    // TODO: put endpoint leaving name blank
+    @Test
+    public void givenRuleset_whenPutEndpointNameIsBlank_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
+        Ruleset ruleset =
+                Ruleset.builder()
+                        .name("")
+                        .id(100L)
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        // Given the ruleset, when post request, then response body is as expected
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset)
+                .when()
+                .put("/ruleset/100")
+                .then()
+                .assertThat()
+                .statusCode(400)
+                .body(equalTo("Name cannot be empty"));
+    }
+    // TODO: put endpoint having no name
+    @Test
+    public void givenRuleset_whenPutEndpointNameDNE_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
+        Ruleset ruleset =
+                Ruleset.builder()
+                        .id(100L)
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        // Given the ruleset, when post request, then response body is as expected
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset)
+                .when()
+                .put("/ruleset/100")
+                .then()
+                .log().all()
+                .assertThat()
+                .statusCode(400)
+                .body(equalTo("Name cannot be empty"));
+    }
+    // TODO: put endpoint leaving rule array blank
+    @Test
+    public void givenRuleset_whenPutEndpointRulesIsBlank_thenCustomErrorIsCalled() {
+// Building out the mock ruleset
+        List<Rule> blankRules = Collections.emptyList();
+
+        Ruleset ruleset =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .rules(blankRules)
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        // Given the ruleset, when post request, then response body is as expected
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset)
+                .when()
+                .put("/ruleset/100")
+                .then()
+                .log().all()
+                .assertThat()
+                .statusCode(400)
+                .body(equalTo("Rules cannot be empty"));
+    }
+    // TODO: put endpoint no rule array
+    @Test
+    public void givenRuleset_whenPutEndpointRulesDNE_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
+
+        Ruleset ruleset =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        // Given the ruleset, when post request, then response body is as expected
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset)
+                .when()
+                .put("/ruleset/100")
+                .then()
+                .log().all()
+                .assertThat()
+                .statusCode(400)
+                .body(equalTo("Rules cannot be empty"));
+    }
+    // TODO: put endpoint priority is 0
+    @Test
+    public void givenRuleset_whenPutEndpointPriorityIs0_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
+        //Condition fakeCon3_1 = new Condition(1000L, FRONT, END, null);
+        //Condition fakeCon4_1 = new Condition(2000L, FRONT, EMPTY, null);
+        //Condition fakeCon4_2 = new Condition(2010L, LEFT, EMPTY, null);
+        //List<Condition> fakeCondition3 = new ArrayList<>();
+        //fakeCondition3.add(fakeCon3_1);
+        //List<Condition> fakeCondition4 = new ArrayList<>();
+        //fakeCondition4.add(fakeCon4_1);
+        //fakeCondition4.add(fakeCon4_2);
+        Rule fakeRule = new Rule(1000L, 0.0, FORWARD, null, null);
+        //Rule fakeRule4 = new Rule(2000L, 210, FORWARD, null, fakeCondition4);
+        List<Rule> fakeRules = new ArrayList<>();
+        fakeRules.add(fakeRule);
+        //fakeRules2.add(fakeRule4);
+
+        Ruleset ruleset =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .rules(fakeRules)
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        // Given the ruleset, when post request, then response body is as expected
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset)
+                .when()
+                .put("/ruleset/100")
+                .then()
+                .log().all()
+                .assertThat()
+                .statusCode(400)
+                .body(equalTo("Rule priority cannot be 0"));
+    }
+    // TODO: put endpoint no priority
+    @Test
+    public void givenRuleset_whenPutEndpointPriorityDNE_thenCustomErrorIsCalled() {
+        Rule rule =
+                Rule.builder()
+                        .id(1000L)
+                        .event_type((FORWARD))
+                        .build();
+
+        Ruleset ruleset =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .rules(List.of(rule))
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        // Given the ruleset, when post request, then response body is as expected
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset)
+                .when()
+                .put("/ruleset/100")
+                .then()
+                .log().all()
+                .assertThat()
+                .statusCode(400)
+                .body(equalTo("Rule priority cannot be 0"));
+    }
+    // TODO: put endpoint no eventType
+    @Test
+    public void givenRuleset_whenPutEndpointEventTypeDNE_thenCustomErrorIsCalled() {
+        Rule rule =
+                Rule.builder()
+                        .id(1000L)
+                        .priority(5)
+                        .build();
+
+        Ruleset ruleset =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .rules(List.of(rule))
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        // Given the ruleset, when post request, then response body is as expected
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset)
+                .when()
+                .put("/ruleset/100")
+                .then()
+                .log().all()
+                .assertThat()
+                .statusCode(400)
+                .body(equalTo("Rule event type cannot be null"));
+    }
+    // TODO: put endpoint leaving conditions blank
+    @Test
+    public void givenRuleset_whenPutEndpointConditionsIsBlank_thenCustomErrorIsCalled() {
+        List<Condition> emptyConditions = Collections.emptyList();
+
+        Rule rule =
+                Rule.builder()
+                        .id(1000L)
+                        .priority(5)
+                        .event_type(EventType.RIGHT)
+                        .conditions(emptyConditions)
+                        .build();
+
+        Ruleset ruleset =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .rules(List.of(rule))
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        // Given the ruleset, when post request, then response body is as expected
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset)
+                .when()
+                .put("/ruleset/100")
+                .then()
+                .log().all()
+                .assertThat()
+                .statusCode(400)
+                .body(equalTo("Conditions cannot be empty"));
+    }
+
+    // TODO: put endpoint no conditions
+    @Test
+    public void givenRuleset_whenPutEndpointConditionsDNE_thenCustomErrorIsCalled() {
+        Rule rule =
+                Rule.builder()
+                        .id(1000L)
+                        .priority(5)
+                        .event_type(EventType.RIGHT)
+                        .build();
+
+        Ruleset ruleset =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .rules(List.of(rule))
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        // Given the ruleset, when post request, then response body is as expected
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset)
+                .when()
+                .put("/ruleset/100")
+                .then()
+                .log().all()
+                .assertThat()
+                .statusCode(400)
+                .body(equalTo("Conditions cannot be empty"));
+    }
+    // TODO: put endpoint no factType
+    @Test
+    public void givenRuleset_whenPutEndpointFactTypeDNE_thenCustomErrorIsCalled() {
+        Condition condition =
+                Condition.builder()
+                        .build();
+
+
+
+        Rule rule =
+                Rule.builder()
+                        .id(1000L)
+                        .priority(5)
+                        .event_type(EventType.RIGHT)
+                        .conditions(List.of(condition))
+                        .build();
+
+        Ruleset ruleset =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .rules(List.of(rule))
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        // Given the ruleset, when post request, then response body is as expected
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset)
+                .when()
+                .put("/ruleset/100")
+                .then()
+                .log().all()
+                .assertThat()
+                .statusCode(400)
+                .body(equalTo("Condition fact type cannot be null"));
+    }
+    // TODO: put endpoint no valueType
+    @Test
+    public void givenRuleset_whenPutEndpointValueTypeDNE_thenCustomErrorIsCalled() {
+        Condition condition =
+                Condition.builder()
+                        .fact_type(RIGHT)
+                        .build();
+
+
+
+        Rule rule =
+                Rule.builder()
+                        .id(1000L)
+                        .priority(5)
+                        .event_type(EventType.RIGHT)
+                        .conditions(List.of(condition))
+                        .build();
+
+        Ruleset ruleset =
+                Ruleset.builder()
+                        .name("Test")
+                        .id(100L)
+                        .rules(List.of(rule))
+                        .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
+                        .build();
+
+        // Given the ruleset, when post request, then response body is as expected
+        given()
+                .contentType(ContentType.JSON)
+                .body(ruleset)
+                .when()
+                .put("/ruleset/100")
+                .then()
+                .log().all()
+                .assertThat()
+                .statusCode(400)
+                .body(equalTo("Condition value type cannot be null"));
+    }
 }
