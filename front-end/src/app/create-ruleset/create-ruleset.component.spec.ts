@@ -15,6 +15,7 @@ import { DashboardPathComponent } from '../dashboard-path/dashboard-path.compone
 import { RulesetNameComponent } from '../ruleset-name/ruleset-name.component';
 import { SaveButtonComponent } from '../save-button/save-button.component';
 import { CancelButtonComponent } from '../cancel-button/cancel-button.component';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 
 describe('CreateRulesetComponent', () => {
@@ -37,7 +38,9 @@ describe('CreateRulesetComponent', () => {
         DashboardPathComponent,
         RulesetNameComponent,
         SaveButtonComponent,
-        CancelButtonComponent]
+        CancelButtonComponent
+      ],
+        providers: [HttpClient, HttpHandler]
     });
 
     fixture = TestBed.createComponent(CreateRulesetComponent);

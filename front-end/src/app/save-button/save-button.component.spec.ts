@@ -42,7 +42,7 @@ describe('SaveButtonComponent', () => {
     expect(saveButton).toBeTruthy();
   });
 
-  fit('When save button is clicked mocked saveData() function is called', () => {
+  it('When save button is clicked mocked saveData() function is called', () => {
     fixture.detectChanges();
     spyOn(component, 'saveData');
     fixture.debugElement.nativeElement.querySelector('#saveButton').click();
