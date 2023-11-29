@@ -12,9 +12,9 @@ export class RulesComponentComponent implements OnInit, AfterViewInit {
   @Input() public childrenConditions: ConditionsComponent[] = [new ConditionsComponent()];
   @Input() ruleset!: RulesComponentComponent[];
   @Input() givenRule!: RulesComponentComponent;
+  @Input() ruleIndex!: number;
   public thenValue: string = "";
   neverThenEntry: boolean = true;
-  public ruleIndex = this.ruleset.indexOf(this.givenRule);
   ngOnInit() {
     if (this.givenRule != undefined){
       this.thenValue = this.givenRule.thenValue;
