@@ -6,7 +6,8 @@
     <div class="container" style="margin-top: 10px; display: grid; grid-template-columns: repeat(4, 4fr); gap: 10px;">
         <app-create-new-condition id="conditionButton"></app-create-new-condition>
         <app-delete-rule-button id="deleteButton" [ruleIndex]="ruleIndex"></app-delete-rule-button>
-        <app-move-up-button id="moveUpButton" [rulePriority]="priority" (rulePriorityChange)="setPriority($event)"></app-move-up-button>
+        <app-move-up-button id="moveUpButton" [rulesetLength]="ruleset ? ruleset.length : 0" [rulePriority]="priority" (rulePriorityChange)="setPriority($event)"></app-move-up-button>
         <app-move-down-button id="moveDownButton" [rulesetLength]="ruleset ? ruleset.length : 0" [rulePriority]="priority" (rulePriorityChange)="setPriority($event)"></app-move-down-button>
+        {{priority}}
     </div>
 </div>

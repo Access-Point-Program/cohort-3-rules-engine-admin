@@ -17,6 +17,7 @@ export class DeleteRuleButtonComponent {
   }
 
   public deleteRule() {
-      this._parentRuleset.ruleset.splice(this.ruleIndex, 1);
+    this._parentRuleset.ruleset.map(rule => rule.setPriority(-1));
+    this._parentRuleset.ruleset.splice(this.ruleIndex, 1);
   }
 }

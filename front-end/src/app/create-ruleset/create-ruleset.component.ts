@@ -21,7 +21,7 @@ export class CreateRulesetComponent implements AfterViewInit, AfterViewChecked {
 
   ngAfterViewChecked() {
     for(let i = 0; i < this.ruleset.length; i++){
-      if(this.ruleset[i].priority == undefined){
+      if(this.ruleset[i].priority == undefined || this.ruleset[i].priority == -1 ){
         this.ruleset[i].priority = this.viewChildren.toArray()[i].priority;
       }
     }
