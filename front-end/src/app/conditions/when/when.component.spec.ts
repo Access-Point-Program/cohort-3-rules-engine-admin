@@ -20,24 +20,24 @@ describe('WhenComponent', () => {
   });
 
   describe('dropdown should contain the correct enums', () => {
-    it('First dropdown item should be \"Front\"', () => {
+    it('First dropdown item should be \"FRONT\"', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.querySelectorAll('.whenDropdownOptions').item(0).textContent).toContain("Front");
+      expect(compiled.querySelectorAll('.whenDropdownOptions').item(0).textContent).toContain("FRONT");
     });
 
-    it('Second dropdown item should be \"Right\"', () => {
+    it('Second dropdown item should be \"RIGHT\"', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.querySelectorAll('.whenDropdownOptions').item(1).textContent).toContain("Right");
+      expect(compiled.querySelectorAll('.whenDropdownOptions').item(1).textContent).toContain("RIGHT");
     });
 
-    it('Third dropdown item should be \"Left\"', () => {
+    it('Third dropdown item should be \"LEFT\"', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.querySelectorAll('.whenDropdownOptions').item(2).textContent).toContain("Left");
+      expect(compiled.querySelectorAll('.whenDropdownOptions').item(2).textContent).toContain("LEFT");
     });
 
-    it('Fourth dropdown item should be \"Behind\"', () => {
+    it('Fourth dropdown item should be \"BEHIND\"', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.querySelectorAll('.whenDropdownOptions').item(3).textContent).toContain("Behind");
+      expect(compiled.querySelectorAll('.whenDropdownOptions').item(3).textContent).toContain("BEHIND");
     });
 
     it('Dropdown only contains 4 options', () => {
@@ -47,41 +47,41 @@ describe('WhenComponent', () => {
   });
 
   describe('when dropdown option is selected, it should pass the correct fact', () => {
-    it('\"Front\" is clicked, returnedValue is \"Front\"', () => {
+    it('\"FRONT\" is clicked, returnedValue is \"FRONT\"', () => {
       let selectBox = fixture.debugElement.query(By.css('#whenSelectBox')).nativeElement;
       fixture.detectChanges();
 
       selectBox.value = selectBox.options[1].value;
       selectBox.dispatchEvent(new Event('change'))
  
-      expect(component.whenValue).toBe('Front');
+      expect(component.whenValue).toBe('FRONT');
     });
-    it('\"Right\" is clicked, returnedValue is \"Right\"', () => {
+    it('\"RIGHT\" is clicked, returnedValue is \"RIGHT\"', () => {
       let selectBox = fixture.debugElement.query(By.css('#whenSelectBox')).nativeElement;
       fixture.detectChanges();
 
       selectBox.value = selectBox.options[2].value;
       selectBox.dispatchEvent(new Event('change'))
  
-      expect(component.whenValue).toBe('Right');
+      expect(component.whenValue).toBe('RIGHT');
     });
-    it('\"Left\" is clicked, returnedValue is \"Left\"', () => {
+    it('\"LEFT\" is clicked, returnedValue is \"LEFT\"', () => {
       let selectBox = fixture.debugElement.query(By.css('#whenSelectBox')).nativeElement;
       fixture.detectChanges();
 
       selectBox.value = selectBox.options[3].value;
       selectBox.dispatchEvent(new Event('change'))
  
-      expect(component.whenValue).toBe('Left');
+      expect(component.whenValue).toBe('LEFT');
     });
-    it('\"Behind\" is clicked, returnedValue is \"Behind\"', () => {
+    it('\"BEHIND\" is clicked, returnedValue is \"BEHIND\"', () => {
       let selectBox = fixture.debugElement.query(By.css('#whenSelectBox')).nativeElement;
       fixture.detectChanges();
 
       selectBox.value = selectBox.options[4].value;
       selectBox.dispatchEvent(new Event('change'))
  
-      expect(component.whenValue).toBe('Behind');
+      expect(component.whenValue).toBe('BEHIND');
     });
   });
   
