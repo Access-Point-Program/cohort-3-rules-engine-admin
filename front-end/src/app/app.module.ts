@@ -16,6 +16,12 @@ import { RulesetNameComponent } from './ruleset-name/ruleset-name.component';
 import { SaveButtonComponent } from './save-button/save-button.component';
 import { DashboardPathComponent } from './dashboard-path/dashboard-path.component';
 import { CreateRulesetComponent } from './create-ruleset/create-ruleset.component';
+import { CancelButtonComponent } from './cancel-button/cancel-button.component';
+import { AppRoutingModule } from './app-routing.module';
+import { RouterModule } from "@angular/router";
+import { HttpClientModule } from '@angular/common/http';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
 
 @NgModule({
   declarations: [
@@ -34,12 +40,16 @@ import { CreateRulesetComponent } from './create-ruleset/create-ruleset.componen
     RulesetNameComponent,
     SaveButtonComponent,
     DashboardPathComponent,
-    CreateRulesetComponent
+    CreateRulesetComponent,
+    CancelButtonComponent
   ],
   imports: [
-    BrowserModule    
+    BrowserModule,
+    AppRoutingModule,
+    RouterModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

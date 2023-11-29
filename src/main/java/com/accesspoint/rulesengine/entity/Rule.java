@@ -1,7 +1,6 @@
 package com.accesspoint.rulesengine.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;

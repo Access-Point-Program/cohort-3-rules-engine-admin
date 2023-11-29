@@ -2,7 +2,6 @@ package com.accesspoint.rulesengine.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import jakarta.persistence.*;
@@ -33,6 +32,7 @@ public class Ruleset implements Serializable {
         rules.add(rule);
         rule.setRuleset(this);
     }
+
     public void removeRuleFromList(Rule rule){
         rules.remove(rule);
         rule.setRuleset(this);
