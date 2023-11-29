@@ -15,6 +15,8 @@ import { DashboardPathComponent } from '../dashboard-path/dashboard-path.compone
 import { RulesetNameComponent } from '../ruleset-name/ruleset-name.component';
 import { SaveButtonComponent } from '../save-button/save-button.component';
 import { CancelButtonComponent } from '../cancel-button/cancel-button.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 
 describe('CreateRulesetComponent', () => {
@@ -37,7 +39,8 @@ describe('CreateRulesetComponent', () => {
         DashboardPathComponent,
         RulesetNameComponent,
         SaveButtonComponent,
-        CancelButtonComponent]
+        CancelButtonComponent],
+        providers: [HttpClient, HttpHandler]
     });
 
     fixture = TestBed.createComponent(CreateRulesetComponent);
@@ -160,7 +163,6 @@ describe('CreateRulesetComponent', () => {
 
   it('"move-down" button on 2nd rule when 2 rules is disabled', fakeAsync(() => {
     const fixture = TestBed.createComponent(CreateRulesetComponent);
-    const createRulesetComponentInstance = fixture.componentInstance;
     fixture.detectChanges();
     fixture.debugElement.query(By.css('#ruleButton')).nativeElement.click();
     fixture.detectChanges();
@@ -178,4 +180,42 @@ describe('CreateRulesetComponent', () => {
     fixture.detectChanges();
     expect(fixture.debugElement.nativeElement.querySelectorAll('#moveUpButtonInside')[0].disabled).toBeTruthy();
   }))
+
+  it('clicking a rules "Delete" button deletes the rule from the ruleset array', () => {
+    // create CreateRulesetComponent
+    const fixture = TestBed.createComponent(CreateRulesetComponent);
+    fixture.detectChanges();
+    const createRulesetComponentInstance = fixture.componentInstance;
+    // ensure there is only 1 rule currently
+    expect(fixture.debugElement.nativeElement.querySelectorAll('#rulesComponent').length).toBe(1);
+
+    // click to add 2 new rules
+    fixture.debugElement.query(By.css('#ruleButton')).nativeElement.click();
+    fixture.detectChanges();
+    fixture.debugElement.query(By.css('#ruleButton')).nativeElement.click();
+    fixture.detectChanges();
+    // ensure that there is 3 rules now
+    expect(fixture.debugElement.nativeElement.querySelectorAll('#rulesComponent').length).toBe(3);
+    // ensure that the priorities are correct, meaning the intended rule was the one deleted
+    expect(createRulesetComponentInstance.ruleset[0].getPriority()).toBe(1);
+    expect(createRulesetComponentInstance.ruleset[1].getPriority()).toBe(2);
+    expect(createRulesetComponentInstance.ruleset[2].getPriority()).toBe(3);
+
+    // click 2nd rule delete button
+    fixture.debugElement.nativeElement.querySelectorAll('#deleteButtonInside')[1].click();
+    fixture.detectChanges();
+    // ensure that after clicking the delete rule button, there is 1 less rule in the ruleset
+    expect(fixture.debugElement.nativeElement.querySelectorAll('#rulesComponent').length).toBe(2);
+    // ensure that the remaining priorities are correct, meaning the intended rule was the one deleted
+    expect(createRulesetComponentInstance.ruleset[0].getPriority()).toBe(1);
+    expect(createRulesetComponentInstance.ruleset[1].getPriority()).toBe(3);
+
+    // click new 2nd rule delete button
+    fixture.debugElement.nativeElement.querySelectorAll('#deleteButtonInside')[1].click();
+    fixture.detectChanges();
+    // ensure that after clicking the delete rule button, there is now only 1 rule in the ruleset
+    expect(fixture.debugElement.nativeElement.querySelectorAll('#rulesComponent').length).toBe(1);
+    // ensure that the remaining priorities are correct, meaning the intended rule was the one deleted
+    expect(createRulesetComponentInstance.ruleset[0].getPriority()).toBe(1);
+  })
 });
