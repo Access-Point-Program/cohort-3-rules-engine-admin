@@ -594,9 +594,9 @@ public class RulesetTest {
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then().log().all()
+        .then().log().all()
                 .assertThat()
                 .statusCode(200)
                 .body("id", equalTo(100))
@@ -645,14 +645,12 @@ public class RulesetTest {
         when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset1));
         when(rulesetRepository.save(Mockito.eq(ruleset1))).thenReturn(ruleset1);
 
-
-
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset2)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then().log().all()
+        .then().log().all()
                 .assertThat()
                 .statusCode(200)
                 .body("id", equalTo(100))
@@ -713,9 +711,9 @@ public class RulesetTest {
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset2)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then().log().all()
+        .then().log().all()
                 .assertThat()
                 .statusCode(200)
                 .body("id", equalTo(100))
@@ -776,9 +774,9 @@ public class RulesetTest {
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset2)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then().log().all()
+        .then().log().all()
                 .assertThat()
                 .statusCode(200)
                 .body("id", equalTo(100))
@@ -843,13 +841,12 @@ public class RulesetTest {
         when(conditionRepository.findById(Mockito.eq(10000L))).thenReturn(Optional.of(condition));
         when(rulesetRepository.save(Mockito.eq(ruleset1))).thenReturn(ruleset1);
 
-
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset2)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then().log().all()
+        .then().log().all()
                 .assertThat()
                 .statusCode(200)
                 .body("id", equalTo(100))
@@ -918,9 +915,9 @@ public class RulesetTest {
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset2)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then().log().all()
+        .then().log().all()
                 .assertThat()
                 .statusCode(200)
                 .body("id", equalTo(100))
@@ -1003,9 +1000,9 @@ public class RulesetTest {
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset2)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then().log().all()
+        .then().log().all()
                 .assertThat()
                 .statusCode(200)
                 .body("id", equalTo(100))
@@ -1048,7 +1045,6 @@ public class RulesetTest {
                         .value_type(EMPTY)
                         .build();
 
-
         Rule rule2 =
                 Rule.builder()
                         .id(1001L)
@@ -1057,7 +1053,6 @@ public class RulesetTest {
                         .conditions(List.of(condition2))
                         .build();
 
-
         Ruleset ruleset1 =
                 Ruleset.builder()
                         .name("Test")
@@ -1065,7 +1060,6 @@ public class RulesetTest {
                         .rules(new ArrayList<>(List.of(rule, rule2)))
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
-
 
         Ruleset ruleset2 =
                 Ruleset.builder()
@@ -1083,9 +1077,9 @@ public class RulesetTest {
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset2)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then().log().all()
+        .then().log().all()
                 .assertThat()
                 .statusCode(200)
                 .body("id", equalTo(100))
@@ -1162,9 +1156,9 @@ public class RulesetTest {
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset2)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then().log().all()
+        .then().log().all()
                 .assertThat()
                 .statusCode(200)
                 .body("id", equalTo(100))
@@ -1237,9 +1231,9 @@ public class RulesetTest {
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset2)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then().log().all()
+        .then().log().all()
                 .assertThat()
                 .statusCode(200)
                 .body("id", equalTo(100))
@@ -1255,7 +1249,6 @@ public class RulesetTest {
     }
     @Test
     public void givenRuleset_whenPutEndpointNameIsBlank_thenCustomErrorIsCalled() {
-        // Building out the mock ruleset
         Ruleset ruleset =
                 Ruleset.builder()
                         .name("")
@@ -1263,41 +1256,36 @@ public class RulesetTest {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
-        // Given the ruleset, when post request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then()
+        .then()
                 .assertThat()
                 .statusCode(400)
                 .body(equalTo("Name cannot be empty"));
     }
     @Test
     public void givenRuleset_whenPutEndpointNameDNE_thenCustomErrorIsCalled() {
-        // Building out the mock ruleset
         Ruleset ruleset =
                 Ruleset.builder()
                         .id(100L)
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
-        // Given the ruleset, when post request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then()
-                .log().all()
+        .then().log().all()
                 .assertThat()
                 .statusCode(400)
                 .body(equalTo("Name cannot be empty"));
     }
     @Test
     public void givenRuleset_whenPutEndpointRulesIsBlank_thenCustomErrorIsCalled() {
-// Building out the mock ruleset
         List<Rule> blankRules = Collections.emptyList();
 
         Ruleset ruleset =
@@ -1308,22 +1296,18 @@ public class RulesetTest {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
-        // Given the ruleset, when post request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then()
-                .log().all()
+        .then().log().all()
                 .assertThat()
                 .statusCode(400)
                 .body(equalTo("Rules cannot be empty"));
     }
     @Test
     public void givenRuleset_whenPutEndpointRulesDNE_thenCustomErrorIsCalled() {
-        // Building out the mock ruleset
-
         Ruleset ruleset =
                 Ruleset.builder()
                         .name("Test")
@@ -1331,14 +1315,12 @@ public class RulesetTest {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
-        // Given the ruleset, when post request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then()
-                .log().all()
+        .then().log().all()
                 .assertThat()
                 .statusCode(400)
                 .body(equalTo("Rules cannot be empty"));
@@ -1357,14 +1339,12 @@ public class RulesetTest {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
-        // Given the ruleset, when post request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then()
-                .log().all()
+        .then().log().all()
                 .assertThat()
                 .statusCode(400)
                 .body(equalTo("Rule priority cannot be 0"));
@@ -1385,14 +1365,12 @@ public class RulesetTest {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
-        // Given the ruleset, when post request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then()
-                .log().all()
+        .then().log().all()
                 .assertThat()
                 .statusCode(400)
                 .body(equalTo("Rule priority cannot be 0"));
@@ -1413,14 +1391,12 @@ public class RulesetTest {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
-        // Given the ruleset, when post request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then()
-                .log().all()
+        .then().log().all()
                 .assertThat()
                 .statusCode(400)
                 .body(equalTo("Rule event type cannot be null"));
@@ -1445,14 +1421,12 @@ public class RulesetTest {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
-        // Given the ruleset, when post request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then()
-                .log().all()
+        .then().log().all()
                 .assertThat()
                 .statusCode(400)
                 .body(equalTo("Conditions cannot be empty"));
@@ -1474,14 +1448,12 @@ public class RulesetTest {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
-        // Given the ruleset, when post request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then()
-                .log().all()
+        .then().log().all()
                 .assertThat()
                 .statusCode(400)
                 .body(equalTo("Conditions cannot be empty"));
@@ -1491,8 +1463,6 @@ public class RulesetTest {
         Condition condition =
                 Condition.builder()
                         .build();
-
-
 
         Rule rule =
                 Rule.builder()
@@ -1510,14 +1480,12 @@ public class RulesetTest {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
-        // Given the ruleset, when post request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then()
-                .log().all()
+        .then().log().all()
                 .assertThat()
                 .statusCode(400)
                 .body(equalTo("Condition fact type cannot be null"));
@@ -1529,8 +1497,6 @@ public class RulesetTest {
                         .fact_type(RIGHT)
                         .build();
 
-
-
         Rule rule =
                 Rule.builder()
                         .id(1000L)
@@ -1547,14 +1513,12 @@ public class RulesetTest {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
-        // Given the ruleset, when post request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
-                .when()
+        .when()
                 .put("/ruleset/100")
-                .then()
-                .log().all()
+        .then().log().all()
                 .assertThat()
                 .statusCode(400)
                 .body(equalTo("Condition value type cannot be null"));
