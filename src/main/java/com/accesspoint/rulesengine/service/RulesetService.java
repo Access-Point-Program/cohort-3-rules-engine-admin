@@ -97,17 +97,13 @@ public class RulesetService {
                     if (!oldRuleset.getName().equals(incomingRuleset.getName())) oldRuleset.setName(incomingRuleset.getName());
                     if (oldRuleset.getRules() != incomingRuleset.getRules()) {
                         for(Rule incomingRule : incomingRuleset.getRules()){
-                            System.out.println(incomingRule);
+
                             if (incomingRule.getId() == null){
                                 // oldRuleset rules DOES NOT contain incomingRuleset rule
-                                System.out.println("here");
                                 incomingRule.setRuleset(oldRuleset);
-                                System.out.println("BEFORE" + incomingRule);
                                 Rule savedRule = this.ruleRepository.save(incomingRule);
-                                System.out.println("AFTER" + incomingRule);
                                 oldRuleset.addRuleToList(savedRule);
                             } else {
-                                System.out.println("here2");
                                 Optional<Rule> updatedRule = ruleRepository.findById(incomingRule.getId())
                                         .map(oldRule -> {
                                             if (oldRule.getPriority() != incomingRule.getPriority()) oldRule.setPriority(incomingRule.getPriority());
@@ -117,8 +113,8 @@ public class RulesetService {
                                                     if (newCondition.getId() == null){
                                                         // oldRule conditions DOES NOT contain incomingRuleset condition
                                                         newCondition.setRule(incomingRule);
-                                                        this.conditionRepository.save(newCondition);
-                                                        oldRule.addConditionToList(newCondition);
+                                                        Condition savedCondition = this.conditionRepository.save(newCondition);
+                                                        oldRule.addConditionToList(savedCondition);
                                                     } else {
                                                         Optional<Condition> updatedCondition = conditionRepository.findById(newCondition.getId())
                                                                 .map(oldCondition -> {
