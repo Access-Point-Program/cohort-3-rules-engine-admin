@@ -13,12 +13,13 @@ import { ConditionsComponent } from '../conditions/conditions.component';
 export class SaveButtonComponent {
 
   public _parentRuleset: CreateRulesetComponent;
+  public responseData: {} = {};
   
+
   constructor(private _injector: Injector, private http: HttpClient) { 
     const _parent_parent: CreateRulesetComponent = this._injector.get<CreateRulesetComponent>(CreateRulesetComponent);
     this._parentRuleset = _parent_parent;
   }
-
 
   callPost(data: string){
   
@@ -28,14 +29,12 @@ export class SaveButtonComponent {
 
     this.http.post(`http://localhost:8080/ruleset`, data, { headers: headers }).subscribe({
       next: res => {
-        window.alert("Rule Set saved!");
+        console.log('Success:' , res);
+        this.responseData = res;
+        console.log(this.responseData);
       },
-      error: err => {
-        if (err.error == "Name cannot be empty") {
-          window.alert("Rule Set could not be saved!\nError: " + err.error);
-        }else{
-          window.alert("Rule Set could not be saved!\nPlease ensure all fields are filled out.");
-        }
+      error: error => {
+        console.error('There was an error!', error);
       }
     })
   }
@@ -43,7 +42,7 @@ export class SaveButtonComponent {
   saveData(){
     
     const mapToConditions = (condition: ConditionsComponent): ruleCondition => {
-      const { conditionIsValue: value_type, conditionWhenValue: fact_type } = condition;
+      const {conditionIsValue: value_type, conditionWhenValue: fact_type} = condition;
       return { fact_type, value_type};
     }
 
@@ -58,6 +57,10 @@ export class SaveButtonComponent {
       }, { name: this._parentRuleset.getName() , rules:[] });
 
     const data = JSON.stringify(jsonDataToUse, null, 2);
+
+    // Use fro Data Debug
+    // console.log("HERE!!!!!")
+    // console.log(data);
     
     this.callPost(data);
   }
