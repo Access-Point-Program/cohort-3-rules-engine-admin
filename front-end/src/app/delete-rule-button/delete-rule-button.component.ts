@@ -1,5 +1,4 @@
 import { Component, Injector, Input } from '@angular/core';
-import { RulesComponentComponent } from '../rules-component/rules-component.component';
 import { CreateRulesetComponent } from '../create-ruleset/create-ruleset.component';
 
 @Component({
@@ -18,9 +17,6 @@ export class DeleteRuleButtonComponent {
   }
 
   public deleteRule() {
-    console.log(this.ruleIndex)
-    // const rulesetArray = this._parentRuleset.ruleset; 
-    // const currentRule = this.ruleIndex;
-    // rulesetArray.splice(currentRule, 1);
+      this._parentRuleset.ruleset.splice(this.ruleIndex, 1);
   }
 }
