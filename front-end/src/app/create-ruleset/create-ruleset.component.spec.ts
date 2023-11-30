@@ -15,6 +15,7 @@ import { DashboardPathComponent } from '../dashboard-path/dashboard-path.compone
 import { RulesetNameComponent } from '../ruleset-name/ruleset-name.component';
 import { SaveButtonComponent } from '../save-button/save-button.component';
 import { CancelButtonComponent } from '../cancel-button/cancel-button.component';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 
 describe('CreateRulesetComponent', () => {
@@ -37,7 +38,9 @@ describe('CreateRulesetComponent', () => {
         DashboardPathComponent,
         RulesetNameComponent,
         SaveButtonComponent,
-        CancelButtonComponent]
+        CancelButtonComponent
+      ],
+        providers: [HttpClient, HttpHandler]
     });
 
     fixture = TestBed.createComponent(CreateRulesetComponent);
@@ -45,7 +48,7 @@ describe('CreateRulesetComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create "create-ruleset" component', () => {
     expect(component).toBeTruthy();
   });
 
@@ -151,7 +154,6 @@ describe('CreateRulesetComponent', () => {
     fixture.detectChanges();
     // Check that it is 3 rules in the ruleset
     expect(fixture.debugElement.nativeElement.querySelectorAll('#rulesComponent').length).toBe(3);
-
     fixture.debugElement.queryAll(By.css('#moveUpButtonInside'))[1].nativeElement.click();
     fixture.detectChanges();
     // Check the priorities of the ruleset

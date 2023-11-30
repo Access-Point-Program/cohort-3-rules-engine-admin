@@ -15,7 +15,7 @@ describe('AddNewRuleButtonComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create "add-new-rule-button" component', () => {
     expect(component).toBeTruthy();
   });
 });
