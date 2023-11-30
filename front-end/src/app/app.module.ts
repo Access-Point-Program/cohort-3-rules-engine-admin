@@ -20,6 +20,7 @@ import { CancelButtonComponent } from './cancel-button/cancel-button.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from "@angular/router";
 import { HttpClientModule } from '@angular/common/http';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { HttpClientModule } from '@angular/common/http';
     SaveButtonComponent,
     DashboardPathComponent,
     CreateRulesetComponent,
+    CancelButtonComponent
   ],
   imports: [
     BrowserModule,
