@@ -13,7 +13,7 @@ export class RulesComponentComponent implements OnInit, AfterViewInit {
   @Input() ruleset!: RulesComponentComponent[];
   @Input() givenRule!: RulesComponentComponent;
   @Input() thenValue: string = "";
-  public ruleDatabaseId?: number;
+  @Input() ruleDatabaseId?: number;
   neverThenEntry: boolean = true;
 
   ngOnInit() {

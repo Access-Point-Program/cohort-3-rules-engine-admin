@@ -37,13 +37,11 @@ export class UpdateSaveButtonComponent {
   updateData(){
     const mapToConditions = (condition: ConditionsComponent): ruleCondition => {
       const {conditionIsValue: value_type, conditionWhenValue: fact_type, conditionDatabaseId: id} = condition;
-      console.log(condition);
       return { fact_type, value_type, id};
     }
     const jsonDataToUse = this._parentRuleset.updateSaveButtonClick()
       .reduce<ruleset>((acc, rule) => {
-        const { thenValue: event_type, priority } = rule;
-        const id = rule.ruleDatabaseId;
+        const { thenValue: event_type, priority, ruleDatabaseId: id} = rule;
         const conditions = rule.childrenConditions.map<ruleCondition>(mapToConditions);
         acc.rules.push({ priority, event_type, id, conditions });
         return acc;
@@ -54,6 +52,7 @@ export class UpdateSaveButtonComponent {
         id: this._parentRuleset.rulesetDatabaseId
       });
     const data = JSON.stringify(jsonDataToUse, null, 2);
+    console.log(data);
     this.callPut(data);
   }
 }

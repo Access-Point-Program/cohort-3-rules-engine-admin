@@ -6,7 +6,7 @@
                 <p style="color: #6C757D">Rules</p>
                 <hr>
                 <div class="p-2" style="height:fit-content;">
-                    <app-rules-component id="rulesComponent" *ngFor="let rule of ruleset" [ruleset]="ruleset" [givenRule]="rule" [childrenConditions]="rule.childrenConditions" [priority]="rule.getPriority() ? rule.getPriority() : ruleset.indexOf(rule) + 1"></app-rules-component>
+                    <app-rules-component id="rulesComponent" *ngFor="let rule of ruleset" [ruleDatabaseId]="rule.ruleDatabaseId" [ruleset]="ruleset" [givenRule]="rule" [childrenConditions]="rule.childrenConditions" [priority]="rule.getPriority() ? rule.getPriority() : ruleset.indexOf(rule) + 1"></app-rules-component>
                 </div>
                 <app-add-new-rule-button id="ruleButton" (click)="onAddRuleClick()"></app-add-new-rule-button>
             </div>
