@@ -40,10 +40,15 @@ public class RulesetService {
 
     public ResponseEntity<Ruleset> createRuleset(Ruleset incomingRulesetData) {
         if (incomingRulesetData.getName().isEmpty()) throw new BadRequestException("Name cannot be empty");
-        if (incomingRulesetData.getRules() == null) throw new BadRequestException("Rules cannot be empty");
+        if (incomingRulesetData.getRules() == null || incomingRulesetData.getRules().isEmpty()) throw new BadRequestException("Rules cannot be empty");
         incomingRulesetData.getRules().stream().forEach(rule -> {
             if (rule.getPriority() == 0.0) throw new BadRequestException("Rule priority cannot be 0");
-            if (rule.getConditions() == null) throw new BadRequestException("Conditions cannot be empty");
+            if (rule.getConditions() == null || rule.getConditions().isEmpty()) throw new BadRequestException("Conditions cannot be empty");
+            if (rule.getEvent_type() == null) throw new BadRequestException("Rule event type cannot be null");
+            rule.getConditions().stream().forEach(condition -> {
+                if (condition.getFact_type() == null) throw new BadRequestException("Condition fact type cannot be null");
+                if (condition.getValue_type() == null) throw new BadRequestException("Condition value type cannot be null");
+            });
         });
 
         List<Double> existingPriorities = new ArrayList<>();
