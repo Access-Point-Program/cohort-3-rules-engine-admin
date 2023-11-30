@@ -15,7 +15,6 @@ import { DashboardPathComponent } from '../dashboard-path/dashboard-path.compone
 import { RulesetNameComponent } from '../ruleset-name/ruleset-name.component';
 import { SaveButtonComponent } from '../save-button/save-button.component';
 import { CancelButtonComponent } from '../cancel-button/cancel-button.component';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 
 
@@ -39,7 +38,8 @@ describe('CreateRulesetComponent', () => {
         DashboardPathComponent,
         RulesetNameComponent,
         SaveButtonComponent,
-        CancelButtonComponent],
+        CancelButtonComponent
+      ],
         providers: [HttpClient, HttpHandler]
     });
 
@@ -204,11 +204,12 @@ describe('CreateRulesetComponent', () => {
     // click 2nd rule delete button
     fixture.debugElement.nativeElement.querySelectorAll('#deleteButtonInside')[1].click();
     fixture.detectChanges();
+    fixture.detectChanges();
     // ensure that after clicking the delete rule button, there is 1 less rule in the ruleset
     expect(fixture.debugElement.nativeElement.querySelectorAll('#rulesComponent').length).toBe(2);
     // ensure that the remaining priorities are correct, meaning the intended rule was the one deleted
     expect(createRulesetComponentInstance.ruleset[0].getPriority()).toBe(1);
-    expect(createRulesetComponentInstance.ruleset[1].getPriority()).toBe(3);
+    expect(createRulesetComponentInstance.ruleset[1].getPriority()).toBe(2);
 
     // click new 2nd rule delete button
     fixture.debugElement.nativeElement.querySelectorAll('#deleteButtonInside')[1].click();

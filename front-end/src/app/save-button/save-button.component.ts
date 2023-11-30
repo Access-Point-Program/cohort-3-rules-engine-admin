@@ -14,11 +14,11 @@ export class SaveButtonComponent {
 
   public _parentRuleset: CreateRulesetComponent;
   
+
   constructor(private _injector: Injector, private http: HttpClient) { 
     const _parent_parent: CreateRulesetComponent = this._injector.get<CreateRulesetComponent>(CreateRulesetComponent);
     this._parentRuleset = _parent_parent;
   }
-
 
   callPost(data: string){
   
