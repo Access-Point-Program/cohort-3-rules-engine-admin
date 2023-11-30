@@ -181,7 +181,7 @@ describe('CreateRulesetComponent', () => {
     expect(fixture.debugElement.nativeElement.querySelectorAll('#moveUpButtonInside')[0].disabled).toBeTruthy();
   }))
 
-  it('clicking a rules "Delete" button deletes the rule from the ruleset array', () => {
+  it('clicking a rules "Delete" button deletes the rule from the ruleset array, by side effect also ensuring the priorities are reset', () => {
     // create CreateRulesetComponent
     const fixture = TestBed.createComponent(CreateRulesetComponent);
     fixture.detectChanges();
