@@ -15,7 +15,7 @@ describe('RulesetNameComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create "ruleset-name" component', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -48,7 +48,7 @@ describe('CreateRulesetComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create "create-ruleset" component', () => {
     expect(component).toBeTruthy();
   });
 
@@ -154,7 +154,6 @@ describe('CreateRulesetComponent', () => {
     fixture.detectChanges();
     // Check that it is 3 rules in the ruleset
     expect(fixture.debugElement.nativeElement.querySelectorAll('#rulesComponent').length).toBe(3);
-
     fixture.debugElement.queryAll(By.css('#moveUpButtonInside'))[1].nativeElement.click();
     fixture.detectChanges();
     // Check the priorities of the ruleset

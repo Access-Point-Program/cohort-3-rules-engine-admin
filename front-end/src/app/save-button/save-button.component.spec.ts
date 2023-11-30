@@ -23,7 +23,7 @@ describe('SaveButtonComponent', () => {
   });
 
 
-  it('should create', () => {
+  it('should create "save-button" component', () => {
     expect(component).toBeTruthy();
   });
 

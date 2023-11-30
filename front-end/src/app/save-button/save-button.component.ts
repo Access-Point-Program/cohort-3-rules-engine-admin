@@ -13,7 +13,6 @@ import { ConditionsComponent } from '../conditions/conditions.component';
 export class SaveButtonComponent {
 
   public _parentRuleset: CreateRulesetComponent;
-  
 
   constructor(private _injector: Injector, private http: HttpClient) { 
     const _parent_parent: CreateRulesetComponent = this._injector.get<CreateRulesetComponent>(CreateRulesetComponent);
@@ -29,6 +28,7 @@ export class SaveButtonComponent {
     this.http.post(`http://localhost:8080/ruleset`, data, { headers: headers }).subscribe({
       next: res => {
         window.alert("Rule Set saved!");
+        window.location.href = "https://google.com/about";  
       },
       error: err => {
         if (err.error == "Name cannot be empty") {

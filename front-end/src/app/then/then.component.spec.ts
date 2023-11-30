@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, fakeAsync, } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
 import { ThenComponent } from './then.component';
 import { RulesComponentComponent } from '../rules-component/rules-component.component';
 import { By } from '@angular/platform-browser';
