@@ -18,7 +18,7 @@ export class UpdateSaveButtonComponent {
   }
 
   async callPut(data: string){
-    const response = await fetch(`http://localhost:8080/ruleset` + this._parentRuleset.id, {
+    const response = await fetch(`http://localhost:8080/ruleset/` + this._parentRuleset.id, {
       method: 'PUT',
       body: data,
       headers: {'Content-Type': 'application/json'} 
