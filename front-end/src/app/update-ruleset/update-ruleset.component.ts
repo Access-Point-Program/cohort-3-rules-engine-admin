@@ -96,8 +96,13 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
     this.forceUpdateRuleset();
   }
 
-  saveButtonClick():RulesComponentComponent[]{
-    this.forceUpdateRuleset();
+  updateSaveButtonClick():RulesComponentComponent[]{
+    console.log("SAVE BUTTON CLICK");
+    console.log(this.ruleset);
+    console.log(this.viewChildren);
+    console.log(this.viewChildren.toArray());
+    console.log(this.viewChildren.toArray()[0].ruleset);
+    // this.forceUpdateRuleset();
     return this.ruleset;
   }
 
