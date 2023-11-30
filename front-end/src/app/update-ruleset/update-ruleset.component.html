@@ -6,7 +6,9 @@
                 <p style="color: #6C757D">Rules</p>
                 <hr>
                 <div class="p-2" style="height:fit-content;">
+                    <app-rules-component id="rulesComponent" *ngFor="let rule of ruleset" [ruleset]="ruleset" [givenRule]="rule" [childrenConditions]="rule.childrenConditions" [priority]="rule.getPriority() ? rule.getPriority() : ruleset.indexOf(rule) + 1"[thenValue]="rule.event_type"></app-rules-component>
                 </div>
+                <app-add-new-rule-button id="ruleButton" (click)="onAddRuleClick()"></app-add-new-rule-button>
             </div>
         </div>
     </ng-container>
@@ -19,7 +21,7 @@
                 <div style="margin-top: 20px;">
                     <span style="display: flex; justify-content: end;" class="col-12">
                         <app-cancel-button></app-cancel-button>
-                        <app-save-button></app-save-button>
+                        <app-update-save-button></app-update-save-button>
                     </span>
                 </div>
             </div>

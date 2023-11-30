@@ -12,7 +12,8 @@ export class RulesComponentComponent implements OnInit, AfterViewInit {
   @Input() public childrenConditions: ConditionsComponent[] = [new ConditionsComponent()];
   @Input() ruleset!: RulesComponentComponent[];
   @Input() givenRule!: RulesComponentComponent;
-  public thenValue: string = "";
+  @Input() thenValue: string = "";
+  //public thenValue: string = "";
   neverThenEntry: boolean = true;
 
   ngOnInit() {

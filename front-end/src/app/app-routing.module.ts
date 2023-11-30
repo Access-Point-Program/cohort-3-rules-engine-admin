@@ -5,9 +5,8 @@ import { UpdateRulesetComponent } from './update-ruleset/update-ruleset.componen
 
 const routes: Routes = [
   { path: 'create-ruleset', component: CreateRulesetComponent},
-  { path: '', redirectTo: '/create-ruleset', pathMatch: 'full' },
-  { path: 'update-ruleset', component: UpdateRulesetComponent},
-  { path: '', redirectTo: '/update-ruleset', pathMatch: 'full' },
+  { path: 'update-ruleset/:id', component: UpdateRulesetComponent},
+  { path: '', redirectTo: '/create-ruleset', pathMatch: 'full' }
 ];
 
 @NgModule({

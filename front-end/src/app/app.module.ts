@@ -22,6 +22,7 @@ import { RouterModule } from "@angular/router";
 import { HttpClientModule } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { UpdateRulesetComponent } from './update-ruleset/update-ruleset.component';
+import { UpdateSaveButtonComponent } from './update-save-button/update-save-button.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { UpdateRulesetComponent } from './update-ruleset/update-ruleset.componen
     DashboardPathComponent,
     CreateRulesetComponent,
     CancelButtonComponent,
-    UpdateRulesetComponent
+    UpdateRulesetComponent,
+    UpdateSaveButtonComponent
   ],
   imports: [
     BrowserModule,
