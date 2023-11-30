@@ -30,18 +30,29 @@ public class Rule implements Serializable {
     private EventType event_type;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ruleset_id", nullable=false, updatable=false)
     @ColumnTransformer(write = "?::bigint")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Ruleset ruleset;
 
-    @OneToMany(mappedBy = "rule", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "rule", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH}, orphanRemoval = true )
     private List<Condition> conditions;
 
     @PrePersist
     private void prePersist() {
-        conditions.forEach( c -> c.setRule(this));
+        conditions.forEach( c -> {
+            c.setRule(this);
+        });
+    }
+
+    public void addConditionToList(Condition condition) {
+        conditions.add(condition);
+        condition.setRule(this);
+    }
+    public void removeConditionFromList(Condition condition) {
+        conditions.remove(condition);
+        condition.setRule(this);
     }
 }

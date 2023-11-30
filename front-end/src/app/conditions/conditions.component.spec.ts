@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { WhenComponent } from './when/when.component';
 import { IsComponent } from './is/is.component';
-
 import { ConditionsComponent } from './conditions.component';
 
 describe('ConditionsComponent', () => {

@@ -16,8 +16,8 @@ import org.hibernate.annotations.ColumnTransformer;
 @Entity
 @Table(name = "condition")
 public class Condition implements Serializable {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)
@@ -31,8 +31,8 @@ public class Condition implements Serializable {
     private ValueType value_type;
 
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "rule_id", nullable=false, updatable=false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rule_id", nullable = false, updatable = false)
     @ColumnTransformer(write = "?::bigint")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

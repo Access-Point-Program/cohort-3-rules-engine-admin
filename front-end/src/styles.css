@@ -11,4 +11,8 @@ app-root {
 }
 .btn-primary {
     --bs-btn-bg: #7749F8;
+    --bs-btn-border-color: #7749F8;
+    --bs-btn-hover-bg: #653bd7;
+    --bs-btn-hover-border-color: #7749F8;
+    --bs-btn-active-bg: #7247e8;
 }

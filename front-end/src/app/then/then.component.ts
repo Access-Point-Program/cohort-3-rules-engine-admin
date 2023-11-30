@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EventType } from '../types/eventType';
 
 @Component({
@@ -8,13 +8,20 @@ import { EventType } from '../types/eventType';
 })
 export class ThenComponent {
 
+  @Input() thenValue!: string;
+  @Output() thenValueChange = new EventEmitter<string>();
+  @Input() neverThenEntry!: boolean;
+  @Output() neverThenEntryChange = new EventEmitter<boolean>();
   public eventType = Object.values(EventType);
-  private returnedValue: string = 'asfds';
 
-  public setReturnedValue(returnedValue: string): void {
-    this.returnedValue = returnedValue;
-  };
-  public getReturnedValue(): string {
-    return this.returnedValue;
+  selectedOption(option: string): boolean {
+    return this.thenValue === option;
+  }
+
+  public setThenValue(returnedValue: string): void {
+    this.neverThenEntry = false;
+    this.neverThenEntryChange.emit(this.neverThenEntry);
+    this.thenValue = returnedValue;
+    this.thenValueChange.emit(this.thenValue);
   };
 }

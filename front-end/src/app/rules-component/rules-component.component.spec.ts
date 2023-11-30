@@ -8,9 +8,8 @@ import { DeleteRuleButtonComponent } from '../delete-rule-button/delete-rule-but
 import { MoveDownButtonComponent } from '../move-down-button/move-down-button.component';
 import { MoveUpButtonComponent } from '../move-up-button/move-up-button.component';
 import { By } from '@angular/platform-browser';
-
 import { RulesComponentComponent } from './rules-component.component';
-import { AppComponent } from '../app.component';
+import { CreateRulesetComponent } from '../create-ruleset/create-ruleset.component';
 
 describe('RulesComponentComponent', () => {
   let component: RulesComponentComponent;
@@ -18,14 +17,25 @@ describe('RulesComponentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [RulesComponentComponent, ThenComponent, ConditionsComponent, WhenComponent, IsComponent, CreateNewConditionComponent, DeleteRuleButtonComponent, MoveDownButtonComponent, MoveUpButtonComponent],
+      declarations: [
+        RulesComponentComponent, 
+        ThenComponent, 
+        ConditionsComponent, 
+        WhenComponent, 
+        IsComponent, 
+        CreateNewConditionComponent, 
+        DeleteRuleButtonComponent, 
+        MoveDownButtonComponent, 
+        MoveUpButtonComponent
+      ],
+      providers: [CreateRulesetComponent]
     });
     fixture = TestBed.createComponent(RulesComponentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create "rules-component" component', () => {
     expect(component).toBeTruthy();
   });
 

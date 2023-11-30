@@ -1,5 +1,5 @@
 export enum ValueType{
-    WALL = "Wall",
-    EMPTY = "Empty",
-    END = "End"
+    WALL = "WALL",
+    EMPTY = "EMPTY",
+    END = "END"
 }

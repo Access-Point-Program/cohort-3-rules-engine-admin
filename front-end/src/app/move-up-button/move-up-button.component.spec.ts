@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MoveUpButtonComponent } from './move-up-button.component';
-
-import { RulesComponentComponent } from '../rules-component/rules-component.component';
+import { CreateRulesetComponent } from '../create-ruleset/create-ruleset.component';
 
 describe('MoveUpButtonComponent', () => {
   let component: MoveUpButtonComponent;
@@ -10,15 +8,17 @@ describe('MoveUpButtonComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MoveUpButtonComponent], 
-      providers: [RulesComponentComponent]
+      declarations: [
+        MoveUpButtonComponent
+      ], 
+      providers: [CreateRulesetComponent]
     });
     fixture = TestBed.createComponent(MoveUpButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create "move-up" component', () => {
     expect(component).toBeTruthy();
   });
 });

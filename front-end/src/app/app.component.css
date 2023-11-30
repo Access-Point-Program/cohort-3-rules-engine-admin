@@ -2,7 +2,9 @@ main {
     height:100vh;
 }
 
-app-sidebar {
+.sidebar {
+    position: relative;
     position: -webkit-sticky;
     position: sticky;
+    top: 0;
 }

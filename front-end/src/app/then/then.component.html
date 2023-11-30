@@ -5,9 +5,9 @@
         <label class="then" for="thenSelectBox">Then</label>
       </div>
       <div class="col-10">
-        <select class="form-select" id="thenSelectBox" #selectedValue (change)="setReturnedValue(selectedValue.value)">
-          <option value="" disabled selected hidden>Action</option>
-          <option class="thenDropdownOptions" *ngFor="let event of eventType" id="thenEvent{{event}}">
+        <select class="form-select" id="thenSelectBox" #selectedValue (change)="setThenValue(selectedValue.value)">
+          <option value="" disabled [selected]='neverThenEntry' hidden>Action</option>
+          <option class="thenDropdownOptions" *ngFor="let event of eventType" id="thenEvent{{event}}" [selected]="selectedOption(event)">
               {{ event }}
           </option>
         </select>

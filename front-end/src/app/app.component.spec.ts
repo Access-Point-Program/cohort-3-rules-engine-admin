@@ -11,7 +11,13 @@ import { AddNewRuleButtonComponent } from './add-new-rule-button/add-new-rule-bu
 import { DeleteRuleButtonComponent } from './delete-rule-button/delete-rule-button.component';
 import { MoveDownButtonComponent } from './move-down-button/move-down-button.component';
 import { MoveUpButtonComponent } from './move-up-button/move-up-button.component';
-import { By } from '@angular/platform-browser';
+import { CreateRulesetComponent } from './create-ruleset/create-ruleset.component';
+import { DashboardPathComponent } from './dashboard-path/dashboard-path.component';
+import { RulesetNameComponent } from './ruleset-name/ruleset-name.component';
+import { SaveButtonComponent } from './save-button/save-button.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
+
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -26,7 +32,16 @@ describe('AppComponent', () => {
       AddNewRuleButtonComponent,
       DeleteRuleButtonComponent,
       MoveDownButtonComponent,
-      MoveUpButtonComponent
+      MoveUpButtonComponent,
+      CreateRulesetComponent,
+      DashboardPathComponent,
+      RulesetNameComponent,
+      SaveButtonComponent,
+      
+    ],
+    imports:[
+      RouterTestingModule,
+      HttpClientModule
     ]
   }));
 
@@ -40,35 +55,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('front-end');
-  });
-  it(`clicking "Add New Rule" should increase the amount of rules`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    fixture.debugElement.query(By.css('#ruleButton')).nativeElement.click();
-
-    expect(app.ruleset.length).toBe(2);
-  });
-  it('button should be rendered', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    const button = fixture.debugElement.query(By.css('#ruleButton'));
-
-    expect(button).toBeTruthy();
-  });
-  it('clicking "Add New Rule" should display all of the conditions and buttons for them', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    expect(fixture.debugElement.nativeElement.querySelectorAll('#rulesComponent').length).toBe(1);
-    fixture.debugElement.query(By.css('#ruleButton')).nativeElement.click();
-    fixture.detectChanges();
-    expect(fixture.debugElement.nativeElement.querySelectorAll('#rulesComponent').length).toBe(2);
-  });
-  it('all buttons should be displayed on screen', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    expect(fixture.debugElement.nativeElement.querySelector('#conditionButton')).toBeTruthy();
-    expect(fixture.debugElement.nativeElement.querySelector('#deleteButton')).toBeTruthy();
-    expect(fixture.debugElement.nativeElement.querySelector('#moveUpButton')).toBeTruthy();
-    expect(fixture.debugElement.nativeElement.querySelector('#moveDownButton')).toBeTruthy();
   });
 });

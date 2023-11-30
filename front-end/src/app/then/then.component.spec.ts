@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
-
+import { ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
 import { ThenComponent } from './then.component';
+import { RulesComponentComponent } from '../rules-component/rules-component.component';
 import { By } from '@angular/platform-browser';
 
 describe('ThenComponent', () => {
@@ -9,7 +9,8 @@ describe('ThenComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ThenComponent]
+      declarations: [ThenComponent],
+      providers: [RulesComponentComponent]
     });
     fixture = TestBed.createComponent(ThenComponent);
     component = fixture.componentInstance;
@@ -21,19 +22,19 @@ describe('ThenComponent', () => {
   });
 
   describe('dropdown should contain the correct enums', () => {
-    it('First dropdown item should be \"Forward\"', () => {
+    it('First dropdown item should be \"FORWARD\"', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.querySelectorAll('.thenDropdownOptions').item(0).textContent).toContain("Forward");
+      expect(compiled.querySelectorAll('.thenDropdownOptions').item(0).textContent).toContain("FORWARD");
     });
 
-    it('Second dropdown item should be \"Right\"', () => {
+    it('Second dropdown item should be \"RIGHT\"', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.querySelectorAll('.thenDropdownOptions').item(1).textContent).toContain("Right");
+      expect(compiled.querySelectorAll('.thenDropdownOptions').item(1).textContent).toContain("RIGHT");
     });
 
-    it('Third dropdown item should be \"Left\"', () => {
+    it('Third dropdown item should be \"LEFT\"', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.querySelectorAll('.thenDropdownOptions').item(2).textContent).toContain("Left");
+      expect(compiled.querySelectorAll('.thenDropdownOptions').item(2).textContent).toContain("LEFT");
     });
 
     it('Dropdown only contains 3 options', () => {
@@ -43,32 +44,32 @@ describe('ThenComponent', () => {
   });
 
   describe('when dropdown option is selected, it should pass the correct fact', () => {
-    it('\"Forward\" is clicked, returnedValue is \"Forward\"', () => {
+    it('\"FORWARD\" is clicked, returnedValue is \"FORWARD\"', () => {
       let selectBox = fixture.debugElement.query(By.css('#thenSelectBox')).nativeElement;
       fixture.detectChanges();
 
       selectBox.value = selectBox.options[1].value;
       selectBox.dispatchEvent(new Event('change'))
  
-      expect(component.getReturnedValue()).toBe('Forward');
+      expect(component.thenValue).toBe('FORWARD');
     });
-    it('\"Right\" is clicked, returnedValue is \"Right\"', () => {
+    it('\"RIGHT\" is clicked, returnedValue is \"RIGHT\"', () => {
       let selectBox = fixture.debugElement.query(By.css('#thenSelectBox')).nativeElement;
       fixture.detectChanges();
 
       selectBox.value = selectBox.options[2].value;
       selectBox.dispatchEvent(new Event('change'))
  
-      expect(component.getReturnedValue()).toBe('Right');
+      expect(component.thenValue).toBe('RIGHT');
     });
-    it('\"Left\" is clicked, returnedValue is \"Left\"', fakeAsync( () => {
+    it('\"LEFT\" is clicked, returnedValue is \"LEFT\"', fakeAsync( () => {
       let selectBox = fixture.debugElement.query(By.css('#thenSelectBox')).nativeElement;
       fixture.detectChanges();
 
       selectBox.value = selectBox.options[3].value;
       selectBox.dispatchEvent(new Event('change'))
  
-      expect(component.getReturnedValue()).toBe('Left');
+      expect(component.thenValue).toBe('LEFT');
     }));
   });
   

@@ -15,7 +15,7 @@ describe('DeleteRuleButtonComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create "delete-rule" component', () => {
     expect(component).toBeTruthy();
   });
 });

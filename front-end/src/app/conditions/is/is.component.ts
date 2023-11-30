@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ValueType } from '../../types/valueType';
 
 @Component({
@@ -8,13 +8,20 @@ import { ValueType } from '../../types/valueType';
 })
 export class IsComponent {
 
+  @Input() isValue!: string;
+  @Output() isValueChange = new EventEmitter<string>();
+  @Input() neverIsEntry!: boolean;
+  @Output() neverIsEntryChange = new EventEmitter<boolean>();
   public valueType = Object.values(ValueType);
-  public returnedValue: string = '';
 
-  public setReturnedValue(returnedValue: string): void {
-    this.returnedValue = returnedValue;
-  };
-  public getReturnedValue(): string {
-    return this.returnedValue;
+  selectedOption(option: string): boolean {
+    return this.isValue === option;
+  }
+
+  public setIsValue(returnedValue: string): void {
+    this.neverIsEntry = false;
+    this.neverIsEntryChange.emit(this.neverIsEntry);
+    this.isValue = returnedValue;
+    this.isValueChange.emit(this.isValue);
   };
 }
