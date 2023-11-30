@@ -9,7 +9,6 @@ export class RulesetNameComponent {
   @Input() name !: string;
   @Output() nameChange = new EventEmitter<string>();
 
-
   public setName(returnedValue: any): void {
     this.name = returnedValue.target.value;
     this.nameChange.emit(this.name);

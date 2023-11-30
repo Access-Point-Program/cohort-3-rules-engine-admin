@@ -25,10 +25,6 @@ export class CreateRulesetComponent implements AfterViewInit, AfterViewChecked {
         this.ruleset[i].priority = this.viewChildren.toArray()[i].priority;
       }
     }
-    // Console logs to be used for save button logic
-    // console.log("After View checked Ruleset");
-    // console.log(this.ruleset);
-    // console.log(this.viewChildren.toArray());
   }
 
   forceUpdateRuleset() {

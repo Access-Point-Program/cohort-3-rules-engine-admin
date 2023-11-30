@@ -15,7 +15,7 @@ describe('DashboardPathComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create "dashboard-path" component', () => {
     expect(component).toBeTruthy();
   });
 });

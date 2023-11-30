@@ -26,8 +26,8 @@ public class RulesetController {
     }
 
     @PostMapping("/ruleset")
-    ResponseEntity<Ruleset> newRuleset(@RequestBody Ruleset request) {
-        return this.rulesetService.createRuleset(request);
+    ResponseEntity<Ruleset> newRuleset(@RequestBody Ruleset ruleset) {
+        return this.rulesetService.createRuleset(ruleset);
     }
 
     @PutMapping("/ruleset/{id}")
