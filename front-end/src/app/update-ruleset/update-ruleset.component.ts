@@ -53,16 +53,12 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
           this.ruleset = recievedRuleset;
           this.name = response.name;
           this.rulesetDatabaseId = response.id;
-          console.log("AFTER RULESET IS SET");
-          console.log(this.ruleset);
         }).catch((e) => {
           window.alert("There was an issue populating the webpage.\n\nError: " + e);
           window.location.href = "https://google.com/about";  
         }) 
       }
     );
-    console.log("AFTER INIT");
-    console.log(this.ruleset);
   }
 
   ngOnDestroy() {
@@ -101,12 +97,7 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
   }
 
   updateSaveButtonClick():RulesComponentComponent[]{
-    console.log("SAVE BUTTON CLICK");
-    console.log(this.ruleset);
-    console.log(this.viewChildren.toArray());
     this.forceUpdateRuleset();
-    console.log(this.ruleset);
-    console.log(this.viewChildren.toArray());
     return this.ruleset;
   }
 

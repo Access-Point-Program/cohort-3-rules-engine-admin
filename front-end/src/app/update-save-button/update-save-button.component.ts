@@ -22,16 +22,15 @@ export class UpdateSaveButtonComponent {
       method: 'PUT',
       body: data,
       headers: {'Content-Type': 'application/json'} 
-    });
-    console.log("CALL PUT");
-    console.log(response);
-    if (!response.ok) { 
-      console.log('Success: ' + response);
-      this.responseData = this.responseData;
-      console.log(this.responseData);
-    } else {
-      console.log('Error: ' + response)
-    }
+    }).then((response) => {
+      if(!response.ok) throw new Error();
+      return response.json();
+    }).then((response) => {
+      window.alert("The ruleset changes have been saved.");
+    }).catch((e) => {
+      console.log(e);
+      window.alert("Rule Set could not be saved!\nPlease ensure all fields are filled out.");
+    })
   }
 
   updateData(){
@@ -52,7 +51,6 @@ export class UpdateSaveButtonComponent {
         id: this._parentRuleset.rulesetDatabaseId
       });
     const data = JSON.stringify(jsonDataToUse, null, 2);
-    console.log(data);
     this.callPut(data);
   }
 }
