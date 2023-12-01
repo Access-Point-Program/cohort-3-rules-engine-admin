@@ -6,7 +6,6 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./conditions.component.css']
 })
 export class ConditionsComponent implements OnInit {
-  
   //givenCondition is a passed conditionComponent of the previous/current instance of this component
   @Input() givenCondition!: ConditionsComponent;
   public conditionDatabaseId?: number;

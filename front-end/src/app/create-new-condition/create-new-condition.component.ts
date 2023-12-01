@@ -9,7 +9,6 @@ import { ConditionsComponent } from '../conditions/conditions.component';
   styleUrls: ['./create-new-condition.component.css']
 })
 export class CreateNewConditionComponent {
-
   public _parent: RulesComponentComponent;
 
   constructor(private _injector: Injector) { 

@@ -48,5 +48,4 @@ describe('RulesComponentComponent', () => {
     conditionComponentsArray = fixture.debugElement.nativeElement.querySelectorAll('.conditionsComponent');
     expect(conditionComponentsArray.length).toBe(2);
   });
-
 });

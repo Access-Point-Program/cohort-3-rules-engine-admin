@@ -19,7 +19,6 @@ import { UpdateRulesetComponent } from './update-ruleset/update-ruleset.componen
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 
-
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
     declarations: [AppComponent,
@@ -39,7 +38,6 @@ describe('AppComponent', () => {
       RulesetNameComponent,
       SaveButtonComponent,
       UpdateRulesetComponent
-      
     ],
     imports:[
       RouterTestingModule,

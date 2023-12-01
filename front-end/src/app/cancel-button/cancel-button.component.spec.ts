@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser'
 import { CancelButtonComponent } from './cancel-button.component';
 
-
 describe('CancelButtonComponent', () => {
   let component: CancelButtonComponent;
   let fixture: ComponentFixture<CancelButtonComponent>;

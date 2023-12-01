@@ -25,6 +25,7 @@ describe('SidebarComponent', () => {
     const rendered = fixture.debugElement.nativeElement.querySelector('#sidebar-title');
     expect(rendered.innerHTML).toBe('Super Cool Name');
   });
+
   describe('Should render all sidebar text', () => {
     it('should render "Dashboard"', () => {
       const dashboard = fixture.debugElement.query(By.css('#dashboard')).nativeElement;
@@ -45,5 +46,4 @@ describe('SidebarComponent', () => {
       expect(signOut.innerHTML).toBe('Sign Out');
     });
   });
-  
 });

@@ -1,5 +1,6 @@
 import { Component, Input, ViewChildren, OnInit, QueryList, AfterViewInit } from '@angular/core';
 import { ConditionsComponent } from '../conditions/conditions.component';
+
 @Component({
   selector: 'app-rules-component',
   templateUrl: './rules-component.component.html',

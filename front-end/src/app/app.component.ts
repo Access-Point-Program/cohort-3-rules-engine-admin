@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { RulesComponentComponent } from './rules-component/rules-component.component';
 
 @Component({
   selector: 'app-root',

@@ -4,7 +4,6 @@ import { By } from '@angular/platform-browser';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CreateRulesetComponent } from '../create-ruleset/create-ruleset.component';
 
-
 describe('SaveButtonComponent', () => {
   let component: SaveButtonComponent;
   let fixture: ComponentFixture<SaveButtonComponent>;
@@ -15,14 +14,11 @@ describe('SaveButtonComponent', () => {
       imports: [ HttpClientTestingModule ],
       providers: [ CreateRulesetComponent ]
     });
-
     fixture = TestBed.createComponent(SaveButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    
   });
-
-
+  
   it('should create "save-button" component', () => {
     expect(component).toBeTruthy();
   });
@@ -39,5 +35,4 @@ describe('SaveButtonComponent', () => {
     fixture.detectChanges();
     expect(component.saveData).toHaveBeenCalled();  
   });
-
  });

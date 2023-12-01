@@ -24,7 +24,6 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { UpdateRulesetComponent } from './update-ruleset/update-ruleset.component';
 import { UpdateSaveButtonComponent } from './update-save-button/update-save-button.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
