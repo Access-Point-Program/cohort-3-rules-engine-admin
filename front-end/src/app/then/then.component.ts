@@ -7,7 +7,6 @@ import { EventType } from '../types/eventType';
   styleUrls: ['./then.component.css']
 })
 export class ThenComponent {
-
   @Input() thenValue!: string;
   @Output() thenValueChange = new EventEmitter<string>();
   @Input() neverThenEntry!: boolean;

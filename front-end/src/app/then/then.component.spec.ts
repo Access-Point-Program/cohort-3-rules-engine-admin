@@ -47,28 +47,24 @@ describe('ThenComponent', () => {
     it('\"FORWARD\" is clicked, returnedValue is \"FORWARD\"', () => {
       let selectBox = fixture.debugElement.query(By.css('#thenSelectBox')).nativeElement;
       fixture.detectChanges();
-
       selectBox.value = selectBox.options[1].value;
       selectBox.dispatchEvent(new Event('change'))
- 
       expect(component.thenValue).toBe('FORWARD');
     });
+
     it('\"RIGHT\" is clicked, returnedValue is \"RIGHT\"', () => {
       let selectBox = fixture.debugElement.query(By.css('#thenSelectBox')).nativeElement;
       fixture.detectChanges();
-
       selectBox.value = selectBox.options[2].value;
       selectBox.dispatchEvent(new Event('change'))
- 
       expect(component.thenValue).toBe('RIGHT');
     });
+    
     it('\"LEFT\" is clicked, returnedValue is \"LEFT\"', fakeAsync( () => {
       let selectBox = fixture.debugElement.query(By.css('#thenSelectBox')).nativeElement;
       fixture.detectChanges();
-
       selectBox.value = selectBox.options[3].value;
       selectBox.dispatchEvent(new Event('change'))
- 
       expect(component.thenValue).toBe('LEFT');
     }));
   });

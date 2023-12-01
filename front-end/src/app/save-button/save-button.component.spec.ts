@@ -14,14 +14,11 @@ describe('SaveButtonComponent', () => {
       imports: [ HttpClientTestingModule ],
       providers: [ CreateRulesetComponent ]
     });
-
     fixture = TestBed.createComponent(SaveButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    
   });
-
-
+  
   it('should create "save-button" component', () => {
     expect(component).toBeTruthy();
   });

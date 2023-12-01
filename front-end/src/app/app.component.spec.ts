@@ -35,8 +35,7 @@ describe('AppComponent', () => {
       CreateRulesetComponent,
       DashboardPathComponent,
       RulesetNameComponent,
-      SaveButtonComponent,
-      
+      SaveButtonComponent
     ],
     imports:[
       RouterTestingModule,
