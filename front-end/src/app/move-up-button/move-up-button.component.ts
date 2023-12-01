@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import { RulesComponentComponent } from '../rules-component/rules-component.component';
 import { Injector } from '@angular/core';
 import { CreateRulesetComponent } from '../create-ruleset/create-ruleset.component';
 
@@ -11,6 +10,7 @@ import { CreateRulesetComponent } from '../create-ruleset/create-ruleset.compone
 export class MoveUpButtonComponent implements OnChanges {
 
   @Input() rulePriority!: number;
+  @Input() rulesetLength!: number;
   @Output() rulePriorityChange = new EventEmitter<number>();
 
   public _parentRuleset: CreateRulesetComponent;
