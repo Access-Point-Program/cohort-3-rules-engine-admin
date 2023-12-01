@@ -13,5 +13,4 @@ export class RulesetNameComponent {
     this.name = returnedValue.target.value;
     this.nameChange.emit(this.name);
   };
-  
 }

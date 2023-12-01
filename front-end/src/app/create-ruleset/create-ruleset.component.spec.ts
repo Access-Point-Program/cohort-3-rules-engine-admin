@@ -17,7 +17,6 @@ import { SaveButtonComponent } from '../save-button/save-button.component';
 import { CancelButtonComponent } from '../cancel-button/cancel-button.component';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 
-
 describe('CreateRulesetComponent', () => {
   let component: CreateRulesetComponent;
   let fixture: ComponentFixture<CreateRulesetComponent>;
@@ -59,7 +58,7 @@ describe('CreateRulesetComponent', () => {
 
     expect(app.ruleset.length).toBe(2);
   });
-  it('button should be rendered', () => {
+  it('"Add New Rule" button should be rendered', () => {
     const fixture = TestBed.createComponent(CreateRulesetComponent);
     const app = fixture.componentInstance;
     const button = fixture.debugElement.query(By.css('#ruleButton'));

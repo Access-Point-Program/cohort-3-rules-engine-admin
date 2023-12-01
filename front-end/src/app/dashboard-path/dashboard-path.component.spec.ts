@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { DashboardPathComponent } from './dashboard-path.component';
 
 describe('DashboardPathComponent', () => {

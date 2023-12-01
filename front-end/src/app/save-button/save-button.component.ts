@@ -9,9 +9,7 @@ import { ConditionsComponent } from '../conditions/conditions.component';
   styleUrls: ['./save-button.component.css']
 })
 
-
 export class SaveButtonComponent {
-
   public _parentRuleset: CreateRulesetComponent;
 
   constructor(private _injector: Injector, private http: HttpClient) { 

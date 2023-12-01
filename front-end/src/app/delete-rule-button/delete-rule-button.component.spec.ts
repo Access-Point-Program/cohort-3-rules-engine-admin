@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { DeleteRuleButtonComponent } from './delete-rule-button.component';
 import { CreateRulesetComponent } from '../create-ruleset/create-ruleset.component';
 import { By } from '@angular/platform-browser';

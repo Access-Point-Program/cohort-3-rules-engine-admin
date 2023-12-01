@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
 import { CreateNewConditionComponent } from './create-new-condition.component';
 import { RulesComponentComponent } from '../rules-component/rules-component.component';
 
@@ -32,5 +31,4 @@ describe('CreateNewConditionComponent', () => {
     addConditionButton.click();
     expect(component._parent.childrenConditions.length).toBe(2);
   });
-
 });

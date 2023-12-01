@@ -4,7 +4,6 @@ import { By } from '@angular/platform-browser';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CreateRulesetComponent } from '../create-ruleset/create-ruleset.component';
 
-
 describe('SaveButtonComponent', () => {
   let component: SaveButtonComponent;
   let fixture: ComponentFixture<SaveButtonComponent>;
@@ -39,5 +38,4 @@ describe('SaveButtonComponent', () => {
     fixture.detectChanges();
     expect(component.saveData).toHaveBeenCalled();  
   });
-
  });

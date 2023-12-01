@@ -7,7 +7,6 @@ import { CreateRulesetComponent } from '../create-ruleset/create-ruleset.compone
   styleUrls: ['./move-down-button.component.css']
 })
 export class MoveDownButtonComponent {
-
   @Input() rulePriority!: number;
   @Input() rulesetLength!: number;
   @Output() rulePriorityChange = new EventEmitter<number>();
