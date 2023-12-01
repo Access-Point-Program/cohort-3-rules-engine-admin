@@ -1,13 +1,13 @@
 package com.accesspoint.rulesengine.controller;
 
+import com.accesspoint.rulesengine.entity.Ruleset;
 import com.accesspoint.rulesengine.model.RulesetModel;
 import com.accesspoint.rulesengine.service.RulesetService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
-
 
 @RestController
 public class RulesetController {
@@ -20,5 +20,23 @@ public class RulesetController {
         return rulesetService.getAll();
     }
 
+    @GetMapping("/ruleset/{id}")
+    public ResponseEntity<Ruleset> one(@PathVariable Long id) {
+        return rulesetService.getById(id);
+    }
 
+    @PostMapping("/ruleset")
+    ResponseEntity<Ruleset> newRuleset(@RequestBody Ruleset ruleset) {
+        return this.rulesetService.createRuleset(ruleset);
+    }
+
+    @PutMapping("/ruleset/{id}")
+    ResponseEntity<Ruleset> updateRuleset(@PathVariable Long id, @RequestBody Ruleset ruleset) {
+        return rulesetService.updateRuleset(id, ruleset);
+    }
+
+    @DeleteMapping("/ruleset/{id}")
+    ResponseEntity<HttpStatus> deleteRuleset(@PathVariable Long id) {
+        return rulesetService.deleteRulesetById(id);
+    }
 }

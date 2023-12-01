@@ -1,0 +1,13 @@
+<div class="isComponent row">
+  <div class="col-1">
+    <label class="is col-form-label" for="isSelectBox">is</label>
+  </div>
+  <div class="col-11">
+    <select class="form-select" id="isSelectBox" #selectedValue (change)="setIsValue(selectedValue.value)">
+      <option value="" disabled [selected]='neverIsEntry' hidden>State</option>
+      <option class="isDropdownOptions"*ngFor="let val of valueType" id="isValue{{val}}" [selected]="selectedOption(val)">
+          {{ val }}
+      </option>
+    </select>
+  </div>
+</div>

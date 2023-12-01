@@ -1,58 +1,58 @@
 package com.accesspoint.rulesengine.entity;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-
+import java.io.Serializable;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.ColumnTransformer;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
+@Builder
 @Entity
 @Table(name = "rule")
-public class Rule {
+public class Rule implements Serializable {
 
-    @Getter @Setter private @Id Long id;
-    @OneToMany(mappedBy = "rule")
-    private Set<Condition> Conditions = new HashSet<>();
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "ruleset_id")
-    @Getter @Setter private Ruleset ruleset;
+    @NotNull
+    private double priority;
 
-    @Getter @Setter private double priority;
+    @Enumerated(EnumType.STRING)
+    @ColumnTransformer(write = "?::EventType")
+    @NotNull
+    private EventType event_type;
 
-    @Getter @Setter private EventType event_type;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ruleset_id", nullable=false, updatable=false)
+    @ColumnTransformer(write = "?::bigint")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Ruleset ruleset;
 
-    Rule() {}
+    @OneToMany(mappedBy = "rule", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH}, orphanRemoval = true )
+    private List<Condition> conditions;
 
-    Rule(double priority, EventType event_type) {
-        this.priority = priority;
-        this.event_type = event_type;
-        // if stuff breaks, add secondary key here
+    @PrePersist
+    private void prePersist() {
+        conditions.forEach( c -> {
+            c.setRule(this);
+        });
     }
 
-    @Override
-    public boolean equals(Object r) {
-
-        if (this == r)
-            return true;
-        if (!(r instanceof Rule))
-            return false;
-        Rule rule = (Rule) r;
-        return Objects.equals(this.id, rule.id)
-                && Objects.equals(this.ruleset, rule.ruleset)
-                && Objects.equals(this.priority, rule.priority)
-                && Objects.equals(this.event_type, rule.event_type);
+    public void addConditionToList(Condition condition) {
+        conditions.add(condition);
+        condition.setRule(this);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.id, this.ruleset, this.priority, this.event_type);
-    }
-
-    @Override
-    public String toString() {
-        return "Rule{" + "id=" + this.id + ", ruleset_id=" + this.ruleset + ", priority=" + this.priority + ", event_type=" + this.event_type;
+    public void removeConditionFromList(Condition condition) {
+        conditions.remove(condition);
+        condition.setRule(this);
     }
 }
