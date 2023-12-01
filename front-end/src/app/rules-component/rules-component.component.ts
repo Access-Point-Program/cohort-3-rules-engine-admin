@@ -12,6 +12,7 @@ export class RulesComponentComponent implements OnInit, AfterViewInit {
   @Input() public childrenConditions: ConditionsComponent[] = [new ConditionsComponent()];
   @Input() ruleset!: RulesComponentComponent[];
   @Input() givenRule!: RulesComponentComponent;
+  @Input() ruleIndex!: number;
   @Input() thenValue: string = "";
   @Input() ruleDatabaseId?: number;
   neverThenEntry: boolean = true;

@@ -18,15 +18,10 @@ export class MoveDownButtonComponent {
 
   constructor(private _injector: Injector) {
     try {
-      // console.log(this._injector.get<CreateRulesetComponent>(CreateRulesetComponent));
       const _parent_parent: CreateRulesetComponent = this._injector.get<CreateRulesetComponent>(CreateRulesetComponent);
-      // console.log(typeof(_parent_parent));
       this._parentRuleset = _parent_parent;
   
     } catch (e) {
-      // console.log("CAUGHT " + e);
-      // console.log(typeof(this._injector));
-      // console.log(this._injector.get<UpdateRulesetComponent>(UpdateRulesetComponent));
       const _parent_parent: UpdateRulesetComponent = this._injector.get<UpdateRulesetComponent>(UpdateRulesetComponent);
       this._parentRuleset = _parent_parent;
     }

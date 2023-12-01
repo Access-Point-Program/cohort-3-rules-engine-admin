@@ -51,6 +51,7 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
             recievedRuleset.push(newRule);
           }
           this.ruleset = recievedRuleset;
+          this.ruleset.map(rule => rule.setPriority(-1));
           this.name = response.name;
           this.rulesetDatabaseId = response.id;
         }).catch((e) => {
@@ -72,7 +73,7 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
 
   ngAfterViewChecked() {
     for(let i = 0; i < this.ruleset.length; i++){
-      if(this.ruleset[i].priority == undefined){
+      if(this.ruleset[i].priority == undefined || this.ruleset[i].priority == -1 ){
         this.ruleset[i].priority = this.viewChildren.toArray()[i].priority;
       }
     }
