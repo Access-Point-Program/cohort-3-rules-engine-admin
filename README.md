@@ -4,7 +4,7 @@ This application will be responsible for creating a User Interface that will all
 
 ### Technologies:
 - Java / SpringBoot / Rest Assured
-- Angular v15 / Typescript / Jasmine / Karma
+- Angular v16.2.8 / Typescript / Jasmine / Karma
 - Docker / Jenkins
 - Postgres / SQL
 - Postman
