@@ -14,7 +14,7 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
   public ruleset: RulesComponentComponent[] = [new RulesComponentComponent()]
   public rulesetDatabaseId?: number;
   public name:string = '';
-  private url: string = 'http://localhost:8080/ruleset/';
+  private url: string = 'http://localhost:9004/ruleset/';
   public paramsSubscription$!: Subscription;
   public id!: string | null;
 

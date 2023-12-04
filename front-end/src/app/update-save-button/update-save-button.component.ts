@@ -11,16 +11,16 @@ export class UpdateSaveButtonComponent {
   public _parentRuleset: UpdateRulesetComponent;
   public responseData: {} = {};
 
-  constructor(private _injector: Injector) { 
+  constructor(private _injector: Injector) {
     const _parent_parent: UpdateRulesetComponent = this._injector.get<UpdateRulesetComponent>(UpdateRulesetComponent);
     this._parentRuleset = _parent_parent;
   }
 
   async callPut(data: string){
-    const response = await fetch(`http://localhost:8080/ruleset/` + this._parentRuleset.id, {
+    const response = await fetch(`http://localhost:9004/ruleset/` + this._parentRuleset.id, {
       method: 'PUT',
       body: data,
-      headers: {'Content-Type': 'application/json'} 
+      headers: {'Content-Type': 'application/json'}
     }).then((response) => {
       if(!response.ok) throw new Error();
       return response.json();
@@ -43,9 +43,9 @@ export class UpdateSaveButtonComponent {
         const conditions = rule.childrenConditions.map<ruleCondition>(mapToConditions);
         acc.rules.push({ priority, event_type, id, conditions });
         return acc;
-      }, 
-      { 
-        name: this._parentRuleset.getName(), 
+      },
+      {
+        name: this._parentRuleset.getName(),
         rules: [],
         id: this._parentRuleset.rulesetDatabaseId
       });
