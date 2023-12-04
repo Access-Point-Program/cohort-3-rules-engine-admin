@@ -26,7 +26,7 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
         this.id = params.get("id");
         fetch(this.url + this.id)
         .then((response) => {
-          if(!response.ok) throw new Error("There was an issue retrieving the ruleset. Fetch response status code was not successful.");
+          if(!response.ok) throw new Error("There was an issue retrieving the ruleset.\nFetch response status code was not successful.");
           return response.json();
         })
         .then((response) => {
@@ -54,7 +54,7 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
           this.name = response.name;
           this.rulesetDatabaseId = response.id;
         }).catch((e) => {
-          window.alert("There was an issue populating the webpage.\n\nError: " + e);
+          window.alert("There was an issue populating the webpage.\n\n" + e);
           window.location.href = "https://google.com/about";  
         }) 
       }
