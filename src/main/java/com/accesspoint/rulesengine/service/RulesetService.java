@@ -88,11 +88,10 @@ public class RulesetService {
 
         Ruleset updatedRuleset2 = rulesetRepository.findById(id) //
                 .map(oldRuleset -> {
-                    //TODO: optimize Hibernate select calls
                     if (!oldRuleset.getName().equals(incomingRuleset.getName())) oldRuleset.setName(incomingRuleset.getName());
                     if (oldRuleset.getRules() != incomingRuleset.getRules()) {
                         for (Rule incomingRule : incomingRuleset.getRules()) {
-
+                            if (oldRuleset.getRules().contains(incomingRule)) continue;
                             if (incomingRule.getId() == null) {
                                 // oldRuleset rules DOES NOT contain incomingRuleset rule
                                 incomingRule.setRuleset(oldRuleset);
@@ -105,6 +104,7 @@ public class RulesetService {
                                             if (oldRule.getEvent_type() != incomingRule.getEvent_type()) oldRule.setEvent_type(incomingRule.getEvent_type());
                                             if (oldRule.getConditions() != incomingRule.getConditions()) {
                                                 for (Condition newCondition : incomingRule.getConditions()) {
+                                                    if (oldRule.getConditions().contains(newCondition)) continue;
                                                     if (newCondition.getId() == null) {
                                                         // oldRule conditions DOES NOT contain incomingRuleset condition
                                                         newCondition.setRule(incomingRule);
