@@ -54,8 +54,8 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
           this.name = response.name;
           this.rulesetDatabaseId = response.id;
         }).catch((e) => {
-          window.alert("There was an issue populating the webpage.\n\n" + e);
-          window.location.href = "https://google.com/about";  
+          window.alert("There was an issue populating the webpage.\n\nError: " + e);
+          window.location.href = "http://localhost:9030/rulesets";  
         }) 
       }
     );
