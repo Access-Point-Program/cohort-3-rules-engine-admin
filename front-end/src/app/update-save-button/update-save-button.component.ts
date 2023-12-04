@@ -50,7 +50,16 @@ export class UpdateSaveButtonComponent {
         id: this._parentRuleset.rulesetDatabaseId
       });
     const data = JSON.stringify(jsonDataToUse, null, 2);
+
+    // confirmation popup
+
+    //yes 
     this.callPut(data);
+
+    //no
+    //return void or do nothing?
+
+
   }
 }
 
