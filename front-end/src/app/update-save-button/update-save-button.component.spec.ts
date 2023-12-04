@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { UpdateSaveButtonComponent } from './update-save-button.component';
 import { By } from '@angular/platform-browser';
 import { UpdateRulesetComponent } from '../update-ruleset/update-ruleset.component';
@@ -21,7 +20,7 @@ describe('UpdateSaveButtonComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create update save button', () => {
+  it('should create "update-save-button" component', () => {
     expect(component).toBeTruthy();
   });
 

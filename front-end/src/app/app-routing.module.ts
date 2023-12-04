@@ -8,7 +8,6 @@ const routes: Routes = [
   { path: 'update-ruleset/:id', component: UpdateRulesetComponent},
   { path: '', redirectTo: '/create-ruleset', pathMatch: 'full' }
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

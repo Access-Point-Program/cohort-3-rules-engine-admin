@@ -10,7 +10,6 @@ import { ConditionsComponent } from '../conditions/conditions.component';
   styleUrls: ['./update-ruleset.component.css']
 })
 export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewChecked {
-  
   @ViewChildren(RulesComponentComponent) viewChildren!: QueryList<RulesComponentComponent>;
   public ruleset: RulesComponentComponent[] = [new RulesComponentComponent()]
   public rulesetDatabaseId?: number;
@@ -93,6 +92,7 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
   priorityMoveUp() {
     this.forceUpdateRuleset();
   }
+
   priorityMoveDown() {
     this.forceUpdateRuleset();
   }

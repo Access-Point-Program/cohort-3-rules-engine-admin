@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { UpdateRulesetComponent } from './update-ruleset.component';
 import { UpdateSaveButtonComponent } from '../update-save-button/update-save-button.component';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -48,7 +47,7 @@ describe('UpdateRulesetComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create UpdateRulesetComponent', () => {
+  it('should create "Update-ruleset" component', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -7,7 +7,6 @@ import { ConditionsComponent } from '../conditions/conditions.component';
   styleUrls: ['./rules-component.component.css']
 })
 export class RulesComponentComponent implements OnInit, AfterViewInit {
-
   @ViewChildren(ConditionsComponent) viewChildren!: QueryList<ConditionsComponent>;
   @Input() priority!: number;
   @Input() public childrenConditions: ConditionsComponent[] = [new ConditionsComponent()];

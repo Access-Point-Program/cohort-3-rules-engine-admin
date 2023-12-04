@@ -10,7 +10,6 @@ import { ConditionsComponent } from '../conditions/conditions.component';
 export class UpdateSaveButtonComponent {
   public _parentRuleset: UpdateRulesetComponent;
   public responseData: {} = {};
-  
 
   constructor(private _injector: Injector) { 
     const _parent_parent: UpdateRulesetComponent = this._injector.get<UpdateRulesetComponent>(UpdateRulesetComponent);

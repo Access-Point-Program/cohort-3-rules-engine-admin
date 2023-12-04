@@ -8,6 +8,5 @@
         <app-delete-rule-button id="deleteButton" [ruleIndex]="ruleIndex"></app-delete-rule-button>
         <app-move-up-button id="moveUpButton" [rulesetLength]="ruleset ? ruleset.length : 0" [rulePriority]="priority" (rulePriorityChange)="setPriority($event)"></app-move-up-button>
         <app-move-down-button id="moveDownButton" [rulesetLength]="ruleset ? ruleset.length : 0" [rulePriority]="priority" (rulePriorityChange)="setPriority($event)"></app-move-down-button>
-        {{priority}}
     </div>
 </div>

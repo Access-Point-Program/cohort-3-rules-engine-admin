@@ -9,7 +9,6 @@ import { UpdateRulesetComponent } from '../update-ruleset/update-ruleset.compone
   styleUrls: ['./move-up-button.component.css']
 })
 export class MoveUpButtonComponent implements OnChanges {
-
   @Input() rulePriority!: number;
   @Input() rulesetLength!: number;
   @Output() rulePriorityChange = new EventEmitter<number>();
