@@ -21,10 +21,10 @@ This application will be responsible for creating a User Interface that will all
 
 - 1 React / JavaScript / Redux application.
   - 1 Page for creating a new Ruleset.
-  - 1 Page for viewing the edited version of a Ruleset.
+  - 1 Page for editing Rulesets that have been created.
 
 - 1 Java / SpringBoot API
-  - 1 GET endpoint to retrieve all Rulesets.
+  - 1 GET endpoint to retrieve all Rulesets (id, name, date created).
   - 1 GET endpoint to retrieve a Ruleset with its Rules and Conditions.
   - 1 POST endpoint for creating a new Ruleset and its Rules and Conditions.
   - 1 PUT endpoint for updating a Ruleset and its Rules and Conditions.
@@ -49,5 +49,5 @@ This application will be responsible for creating a User Interface that will all
 (Depending on terminal '\' might need to be changed to '/') 
 `java -jar .\target\rules-engine-0.0.1-SNAPSHOT.jar`  or `java -jar ./target/rules-engine-0.0.1-SNAPSHOT.jar`
 6.
-   - Go to the following URl 'http://localhost:8080/#/create-ruleset' to create a rule
-   - Go to the following URl 'http://localhost:8080/#/update-ruleset/{insert id of ruleset here}' to edit a rule
+   - Go to the following URl 'http://localhost:8080/#/create-ruleset' to create a rule.
+   - Go to the following URl 'http://localhost:8080/#/update-ruleset/{id}' to edit a rule ("{id}" should be replaced with the id of the rule you want to edit).
