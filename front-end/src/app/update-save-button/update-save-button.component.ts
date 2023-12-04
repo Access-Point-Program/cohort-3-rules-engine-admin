@@ -52,13 +52,9 @@ export class UpdateSaveButtonComponent {
     const data = JSON.stringify(jsonDataToUse, null, 2);
 
     // confirmation popup
-
-    //yes 
-    this.callPut(data);
-
-    //no
-    //return void or do nothing?
-
+    if (window.confirm("Are you sure you want to save changes?")) {
+      this.callPut(data);
+    }
 
   }
 }
