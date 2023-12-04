@@ -8,6 +8,6 @@ import { Component } from '@angular/core';
 export class CancelButtonComponent {
 
   redirectToDashboard(){
-    window.location.href = "https://google.com/about";  
+    window.location.href = "http://localhost:9030/rulesets";  
   }
 }

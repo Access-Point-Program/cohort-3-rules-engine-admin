@@ -24,7 +24,7 @@ export class SaveButtonComponent {
     this.http.post(`http://localhost:8080/ruleset`, data, { headers: headers }).subscribe({
       next: res => {
         window.alert("Rule Set saved!");
-        window.location.href = "https://google.com/about";  
+        window.location.href = "http://localhost:9030/rulesets";  
       },
       error: err => {
         if (err.error == "Name cannot be empty") {
