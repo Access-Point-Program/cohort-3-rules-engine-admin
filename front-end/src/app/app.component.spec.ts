@@ -15,6 +15,7 @@ import { CreateRulesetComponent } from './create-ruleset/create-ruleset.componen
 import { DashboardPathComponent } from './dashboard-path/dashboard-path.component';
 import { RulesetNameComponent } from './ruleset-name/ruleset-name.component';
 import { SaveButtonComponent } from './save-button/save-button.component';
+import { UpdateRulesetComponent } from './update-ruleset/update-ruleset.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -35,7 +36,8 @@ describe('AppComponent', () => {
       CreateRulesetComponent,
       DashboardPathComponent,
       RulesetNameComponent,
-      SaveButtonComponent
+      SaveButtonComponent,
+      UpdateRulesetComponent
     ],
     imports:[
       RouterTestingModule,

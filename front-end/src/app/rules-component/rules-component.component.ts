@@ -7,14 +7,14 @@ import { ConditionsComponent } from '../conditions/conditions.component';
   styleUrls: ['./rules-component.component.css']
 })
 export class RulesComponentComponent implements OnInit, AfterViewInit {
-
   @ViewChildren(ConditionsComponent) viewChildren!: QueryList<ConditionsComponent>;
   @Input() priority!: number;
   @Input() public childrenConditions: ConditionsComponent[] = [new ConditionsComponent()];
   @Input() ruleset!: RulesComponentComponent[];
   @Input() givenRule!: RulesComponentComponent;
   @Input() ruleIndex!: number;
-  public thenValue: string = "";
+  @Input() thenValue: string = "";
+  @Input() ruleDatabaseId?: number;
   neverThenEntry: boolean = true;
   ngOnInit() {
     if (this.givenRule != undefined){

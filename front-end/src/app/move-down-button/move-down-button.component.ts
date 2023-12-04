@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Injector, Input, Output } from '@angular/core';
 import { CreateRulesetComponent } from '../create-ruleset/create-ruleset.component';
+import { UpdateRulesetComponent } from '../update-ruleset/update-ruleset.component';
 
 @Component({
   selector: 'app-move-down-button',
@@ -11,12 +12,19 @@ export class MoveDownButtonComponent {
   @Input() rulesetLength!: number;
   @Output() rulePriorityChange = new EventEmitter<number>();
 
-  public _parentRuleset: CreateRulesetComponent;
+  public _parentRuleset: CreateRulesetComponent | UpdateRulesetComponent;
   public buttonDisabled: boolean = false;
 
-  constructor(private _injector: Injector) { 
-    const _parent_parent: CreateRulesetComponent = this._injector.get<CreateRulesetComponent>(CreateRulesetComponent);
-    this._parentRuleset = _parent_parent;
+  constructor(private _injector: Injector) {
+    try {
+      const _parent_parent: CreateRulesetComponent = this._injector.get<CreateRulesetComponent>(CreateRulesetComponent);
+      this._parentRuleset = _parent_parent;
+  
+    } catch (e) {
+      const _parent_parent: UpdateRulesetComponent = this._injector.get<UpdateRulesetComponent>(UpdateRulesetComponent);
+      this._parentRuleset = _parent_parent;
+    }
+
   }
 
   ngOnChanges(){

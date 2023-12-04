@@ -8,10 +8,11 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ConditionsComponent implements OnInit {
   //givenCondition is a passed conditionComponent of the previous/current instance of this component
   @Input() givenCondition!: ConditionsComponent;
+  public conditionDatabaseId?: number;
   public conditionWhenValue: string = "";
-  conditionNeverEntry: boolean = true;
+  public conditionNeverEntry: boolean = true;
   public conditionIsValue: string = "";
-  conditionNeverIsEntry: boolean = true;
+  public conditionNeverIsEntry: boolean = true;
 
   // When conditions component is initialized, it will update the whenValue and NeverEntry based on the previous instance
   ngOnInit() {
@@ -20,6 +21,9 @@ export class ConditionsComponent implements OnInit {
       this.conditionNeverEntry = this.givenCondition.conditionNeverEntry;
       this.conditionIsValue = this.givenCondition.conditionIsValue;
       this.conditionNeverIsEntry = this.givenCondition.conditionNeverIsEntry;
+      if (this.givenCondition.conditionDatabaseId != undefined) { 
+        this.conditionDatabaseId = this.givenCondition.conditionDatabaseId;
+      }
     }
   }
 }

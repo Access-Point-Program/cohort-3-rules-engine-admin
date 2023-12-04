@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import { Injector } from '@angular/core';
+import { Injector } from '@angular/core'; 
 import { CreateRulesetComponent } from '../create-ruleset/create-ruleset.component';
+import { UpdateRulesetComponent } from '../update-ruleset/update-ruleset.component';
 
 @Component({
   selector: 'app-move-up-button',
@@ -8,17 +9,22 @@ import { CreateRulesetComponent } from '../create-ruleset/create-ruleset.compone
   styleUrls: ['./move-up-button.component.css']
 })
 export class MoveUpButtonComponent implements OnChanges {
-
   @Input() rulePriority!: number;
   @Input() rulesetLength!: number;
   @Output() rulePriorityChange = new EventEmitter<number>();
 
-  public _parentRuleset: CreateRulesetComponent;
+  public _parentRuleset!: CreateRulesetComponent | UpdateRulesetComponent;
   public buttonDisabled: boolean = false;
 
   constructor(private _injector: Injector) { 
-    const _parent_parent: CreateRulesetComponent = this._injector.get<CreateRulesetComponent>(CreateRulesetComponent);
-    this._parentRuleset = _parent_parent;
+    try {
+      const _parent_parent: CreateRulesetComponent = this._injector.get<CreateRulesetComponent>(CreateRulesetComponent);
+      this._parentRuleset = _parent_parent;
+  
+    } catch (e) {
+      const _parent_parent: UpdateRulesetComponent = this._injector.get<UpdateRulesetComponent>(UpdateRulesetComponent);
+      this._parentRuleset = _parent_parent;
+    }
   }
 
   ngOnChanges(){

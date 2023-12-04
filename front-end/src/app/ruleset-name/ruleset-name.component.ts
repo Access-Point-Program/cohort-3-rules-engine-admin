@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./ruleset-name.component.css']
 })
 export class RulesetNameComponent {
-  @Input() name !: string;
+  @Input() name!: string;
   @Output() nameChange = new EventEmitter<string>();
 
   public setName(returnedValue: any): void {
