@@ -12,7 +12,7 @@ import { ConditionsComponent } from '../conditions/conditions.component';
 export class SaveButtonComponent {
   public _parentRuleset: CreateRulesetComponent;
 
-  constructor(private _injector: Injector, private http: HttpClient) { 
+  constructor(private _injector: Injector, private http: HttpClient) {
     const _parent_parent: CreateRulesetComponent = this._injector.get<CreateRulesetComponent>(CreateRulesetComponent);
     this._parentRuleset = _parent_parent;
   }
@@ -21,7 +21,7 @@ export class SaveButtonComponent {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    this.http.post(`http://localhost:8080/ruleset`, data, { headers: headers }).subscribe({
+    this.http.post(`http://localhost:9004/ruleset`, data, { headers: headers }).subscribe({
       next: res => {
         window.alert("Rule Set saved!");
         window.location.href = "http://localhost:9030/rulesets";  
