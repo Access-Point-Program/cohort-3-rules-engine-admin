@@ -29,6 +29,7 @@ public class Rule implements Serializable {
     @NotNull
     private EventType event_type;
 
+    // Joins rule table to ruleset table through the ruleset_id
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ruleset_id", nullable=false, updatable=false)
@@ -37,6 +38,7 @@ public class Rule implements Serializable {
     @ToString.Exclude
     private Ruleset ruleset;
 
+    // Joins rule table to condition table
     @OneToMany(mappedBy = "rule", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH}, orphanRemoval = true )
     private List<Condition> conditions;
 

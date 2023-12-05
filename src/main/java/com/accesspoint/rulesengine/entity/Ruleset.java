@@ -25,6 +25,7 @@ public class Ruleset implements Serializable {
     @CreationTimestamp @NotNull
     private Timestamp creation_date;
 
+    // Joins ruleset table to rule table
     @OneToMany(mappedBy = "ruleset", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH}, orphanRemoval = true)
     private List<Rule> rules;
 

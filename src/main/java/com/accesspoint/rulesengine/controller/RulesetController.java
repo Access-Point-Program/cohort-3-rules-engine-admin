@@ -15,27 +15,27 @@ public class RulesetController {
     @Autowired
     private RulesetService rulesetService;
 
-    @GetMapping("/ruleset")
+    @GetMapping("/ruleset") // Calls service to get all ruleset names, ids, and creation dates
     public List<RulesetModel> all() {
         return rulesetService.getAll();
     }
 
-    @GetMapping("/ruleset/{id}")
+    @GetMapping("/ruleset/{id}") // Calls service to get a ruleset by its id to return the ruleset's name, id, creation date, and it's rules and conditions information
     public ResponseEntity<Ruleset> one(@PathVariable Long id) {
         return rulesetService.getById(id);
     }
 
-    @PostMapping("/ruleset")
+    @PostMapping("/ruleset") // Calls service to create a ruleset and it's rules and conditions
     ResponseEntity<Ruleset> newRuleset(@RequestBody Ruleset ruleset) {
         return this.rulesetService.createRuleset(ruleset);
     }
 
-    @PutMapping("/ruleset/{id}")
+    @PutMapping("/ruleset/{id}") // Calls service to update an existing ruleset and it's rules and conditions
     ResponseEntity<Ruleset> updateRuleset(@PathVariable Long id, @RequestBody Ruleset ruleset) {
         return rulesetService.updateRuleset(id, ruleset);
     }
 
-    @DeleteMapping("/ruleset/{id}")
+    @DeleteMapping("/ruleset/{id}") // Calls service to delete an existing ruleset and it's rules and conditions
     ResponseEntity<HttpStatus> deleteRuleset(@PathVariable Long id) {
         return rulesetService.deleteRulesetById(id);
     }
