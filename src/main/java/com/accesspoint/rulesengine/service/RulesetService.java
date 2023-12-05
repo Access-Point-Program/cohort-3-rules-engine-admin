@@ -39,7 +39,7 @@ public class RulesetService {
     }
 
     public ResponseEntity<Ruleset> createRuleset(Ruleset incomingRulesetData) {
-        if (incomingRulesetData.getName().isEmpty()) throw new BadRequestException("Name cannot be empty");
+        if (incomingRulesetData.getName() == null || incomingRulesetData.getName().isEmpty()) throw new BadRequestException("Name cannot be empty");
         if (incomingRulesetData.getRules() == null || incomingRulesetData.getRules().isEmpty()) throw new BadRequestException("Rules cannot be empty");
         incomingRulesetData.getRules().stream().forEach(rule -> {
             if (rule.getPriority() == 0.0) throw new BadRequestException("Rule priority cannot be 0");
