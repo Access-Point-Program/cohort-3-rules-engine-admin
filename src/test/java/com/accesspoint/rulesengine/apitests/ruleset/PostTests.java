@@ -532,8 +532,6 @@ public class PostTests {
         when(rulesetRepository.save(Mockito.any(Ruleset.class))).thenReturn(ruleset);
         when(rulesetRepository.getReferenceById(Mockito.any(Long.class))).thenReturn(ruleset);
         when(ruleRepository.save(Mockito.eq(rule))).thenReturn(rule);
-        //when(conditionRepository.save(Mockito.eq(null))).thenReturn(null);
-
 
         given()
                 .contentType(ContentType.JSON)
@@ -584,6 +582,7 @@ public class PostTests {
                 .statusCode(400)
                 .body(equalTo("Condition value type cannot be null"));
     }
+
     @Test
     public void givenRuleset_whenPostEndpointFactTypeDNE_thenCustomErrorIsCalled() {
         Condition condition =
