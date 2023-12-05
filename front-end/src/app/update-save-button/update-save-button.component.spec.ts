@@ -40,10 +40,8 @@ describe('UpdateSaveButtonComponent', () => {
   it('When clicking the save button, confirmation pops up', () => {
     fixture.detectChanges();
     spyOn(window, 'confirm');
-
     fixture.debugElement.nativeElement.querySelector('#updateSaveButton').click();
     fixture.detectChanges();
-
     expect(window.confirm).toBeTruthy();
   });
 
@@ -55,16 +53,6 @@ describe('UpdateSaveButtonComponent', () => {
     expect(component.updateData).toHaveBeenCalled();
   });
 
-        // COME BACK TO THIS TEST
-
-  // it("data is converted correctly", () => {
-  //   fixture.detectChanges();
-  //   spyOn(component, 'updateSaveButtonClick');
-  //   fixture.debugElement.nativeElement.querySelector('#updateSaveButton').click();
-  //   fixture.detectChanges();
-  //   expect(component.updateSaveButtonClick).
-  // });
-
   fit("When clicking the save button, callPut is called", () => {
     fixture.detectChanges();
     spyOn(component, 'callPut');
@@ -72,4 +60,12 @@ describe('UpdateSaveButtonComponent', () => {
     fixture.detectChanges();
     expect(component.callPut).toHaveBeenCalled();
   });
+
+        // COME BACK TO THIS TEST
+
+  // it("data is converted correctly", () => {
+  //   fixture.detectChanges();
+  //   spyOn(component, 'updateSaveButtonClick');
+  // });
+
 });
