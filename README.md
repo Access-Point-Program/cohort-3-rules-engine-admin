@@ -49,5 +49,5 @@ This application will be responsible for creating a User Interface that will all
 (Depending on terminal '\' might need to be changed to '/') 
 `java -jar .\target\rules-engine-0.0.1-SNAPSHOT.jar`  or `java -jar ./target/rules-engine-0.0.1-SNAPSHOT.jar`
 6.
-   - Go to the following URl 'http://localhost:9004/#/create-ruleset' to create a rule.
-   - Go to the following URl 'http://localhost:9004/#/update-ruleset/{id}' to edit a rule ("{id}" should be replaced with the id of the rule you want to edit).
+   - Go to the following URl 'http://localhost:9004/create-ruleset' to create a rule.
+   - Go to the following URl 'http://localhost:9004/update-ruleset/{id}' to edit a rule ("{id}" should be replaced with the id of the rule you want to edit).

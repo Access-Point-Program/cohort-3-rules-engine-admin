@@ -32,6 +32,11 @@ public class RulesetService {
         return rulesetList;
     }
 
+    public List<Ruleset> getAllExtended() {
+        List<Ruleset> rulesetList = rulesetRepository.findAll();
+        return rulesetList;
+    }
+
     public ResponseEntity<Ruleset> getById(Long id){
         Ruleset ruleset = rulesetRepository.findById(id)
         .orElseThrow(() -> new BadRequestException("Id not found"));
@@ -39,7 +44,7 @@ public class RulesetService {
     }
 
     public ResponseEntity<Ruleset> createRuleset(Ruleset incomingRulesetData) {
-        if (incomingRulesetData.getName().isEmpty()) throw new BadRequestException("Name cannot be empty");
+        if (incomingRulesetData.getName() == null || incomingRulesetData.getName().isEmpty()) throw new BadRequestException("Name cannot be empty");
         if (incomingRulesetData.getRules() == null || incomingRulesetData.getRules().isEmpty()) throw new BadRequestException("Rules cannot be empty");
         incomingRulesetData.getRules().stream().forEach(rule -> {
             if (rule.getPriority() == 0.0) throw new BadRequestException("Rule priority cannot be 0");
