@@ -50,7 +50,11 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
             recievedRuleset.push(newRule);
           }
           this.ruleset = recievedRuleset;
-          this.ruleset.map(rule => rule.setPriority(-1));
+
+          // TODO: REMOVE THIS
+          // this.ruleset.map(rule => rule.setPriority(-1));
+
+
           this.name = response.name;
           this.rulesetDatabaseId = response.id;
         }).catch((e) => {
@@ -112,5 +116,9 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
       const priorityB = b.priority;
       return (priorityA < priorityB) ? -1 : (priorityA > priorityB) ? 1 : 0;
     });
+  }
+
+  roundToCeil(num: number): number {
+    return Math.ceil(num);
   }
 }

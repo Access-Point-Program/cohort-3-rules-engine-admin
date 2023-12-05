@@ -60,4 +60,8 @@ export class CreateRulesetComponent implements AfterViewInit, AfterViewChecked {
       return (priorityA < priorityB) ? -1 : (priorityA > priorityB) ? 1 : 0;
     });
   }
+
+  roundToCeil(num: number): number {
+    return Math.ceil(num);
+  }
 }

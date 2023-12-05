@@ -6,7 +6,16 @@
                 <p style="color: #6C757D">Rules</p>
                 <hr>
                 <div class="p-2" style="height:fit-content;">
-                    <app-rules-component id="rulesComponent" *ngFor="let rule of ruleset" [ruleset]="ruleset" [givenRule]="rule" [childrenConditions]="rule.childrenConditions" [priority]="rule.getPriority() && rule.getPriority() !==-1 ? rule.getPriority() : ruleset.indexOf(rule) + 1" [ruleIndex]="ruleset.indexOf(rule)"></app-rules-component>
+                    <app-rules-component id="rulesComponent" *ngFor="let rule of ruleset" [ruleset]="ruleset" [givenRule]="rule" [childrenConditions]="rule.childrenConditions" 
+                    [priority]="rule.getPriority() && rule.getPriority() !==-1 ? 
+                        rule.getPriority() : 
+                        !ruleset[(ruleset.indexOf(rule) - 1)] ?
+                            1 :
+                            roundToCeil(ruleset[(ruleset.indexOf(rule) - 1)].getPriority()) != ruleset[(ruleset.indexOf(rule) - 1)].getPriority() ?
+                            roundToCeil(ruleset[(ruleset.indexOf(rule) - 1)].getPriority()) :
+                            roundToCeil(ruleset[(ruleset.indexOf(rule) - 1)].getPriority()) + 1"
+
+                    [ruleIndex]="ruleset.indexOf(rule)"></app-rules-component>
                 </div>
                 <app-add-new-rule-button id="ruleButton" (click)="onAddRuleClick()"></app-add-new-rule-button>
             </div>
