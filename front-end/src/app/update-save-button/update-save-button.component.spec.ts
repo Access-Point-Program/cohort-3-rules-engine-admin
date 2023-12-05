@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { UpdateSaveButtonComponent } from './update-save-button.component';
 import { By } from '@angular/platform-browser';
 import { UpdateRulesetComponent } from '../update-ruleset/update-ruleset.component';
@@ -36,4 +36,16 @@ describe('UpdateSaveButtonComponent', () => {
     fixture.detectChanges();
     expect(component.updateData).toHaveBeenCalled();  
   });
+
+  it('When clicking the save button, confirmation pops up', fakeAsync(() => {
+    fixture.detectChanges();
+    spyOn(window, 'confirm');
+    spyOn(component, 'updateData');
+
+    fixture.debugElement.nativeElement.querySelector('#updateSaveButton').click();
+    fixture.detectChanges();
+
+    expect(window.confirm).toBeTruthy();
+    expect(component.updateData).toHaveBeenCalled();
+  }));
 });
