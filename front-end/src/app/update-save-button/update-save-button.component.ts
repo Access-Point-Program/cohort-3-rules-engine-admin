@@ -37,7 +37,7 @@ export class UpdateSaveButtonComponent {
       const {conditionIsValue: value_type, conditionWhenValue: fact_type, conditionDatabaseId: id} = condition;
       return { fact_type, value_type, id};
     }
-    const jsonDataToUse = this._parentRuleset.updateSaveButtonClick()
+    const jsonDataToUse = this.updateSaveButtonClick()
       .reduce<ruleset>((acc, rule) => {
         const { thenValue: event_type, priority, ruleDatabaseId: id} = rule;
         const conditions = rule.childrenConditions.map<ruleCondition>(mapToConditions);
@@ -49,7 +49,7 @@ export class UpdateSaveButtonComponent {
         rules: [],
         id: this._parentRuleset.rulesetDatabaseId
       });
-    const data = JSON.stringify(jsonDataToUse, null, 2);
+    const data = JSON.stringify(jsonDataToUse, null, 2);   
 
     // confirmation popup
     if (window.confirm("Are you sure you want to save changes?")) {
@@ -57,7 +57,12 @@ export class UpdateSaveButtonComponent {
     }
 
   }
+  updateSaveButtonClick(){
+    return this._parentRuleset.updateSaveButtonClick();
+   }
 }
+
+
 
 type ruleCondition = {
   fact_type: String

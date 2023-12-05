@@ -37,15 +37,39 @@ describe('UpdateSaveButtonComponent', () => {
     expect(component.updateData).toHaveBeenCalled();  
   });
 
-  it('When clicking the save button, confirmation pops up', fakeAsync(() => {
+  it('When clicking the save button, confirmation pops up', () => {
     fixture.detectChanges();
     spyOn(window, 'confirm');
-    spyOn(component, 'updateData');
 
     fixture.debugElement.nativeElement.querySelector('#updateSaveButton').click();
     fixture.detectChanges();
 
     expect(window.confirm).toBeTruthy();
+  });
+
+  it("When clicking the save button, update data is called", () => {
+    fixture.detectChanges();
+    spyOn(component, 'updateData');
+    fixture.debugElement.nativeElement.querySelector('#updateSaveButton').click();
+    fixture.detectChanges();
     expect(component.updateData).toHaveBeenCalled();
-  }));
+  });
+
+        // COME BACK TO THIS TEST
+
+  // it("data is converted correctly", () => {
+  //   fixture.detectChanges();
+  //   spyOn(component, 'updateSaveButtonClick');
+  //   fixture.debugElement.nativeElement.querySelector('#updateSaveButton').click();
+  //   fixture.detectChanges();
+  //   expect(component.updateSaveButtonClick).
+  // });
+
+  fit("When clicking the save button, callPut is called", () => {
+    fixture.detectChanges();
+    spyOn(component, 'callPut');
+    fixture.debugElement.nativeElement.querySelector('#updateSaveButton').click();
+    fixture.detectChanges();
+    expect(component.callPut).toHaveBeenCalled();
+  });
 });

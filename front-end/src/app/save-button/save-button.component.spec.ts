@@ -36,15 +36,13 @@ describe('SaveButtonComponent', () => {
     expect(component.saveData).toHaveBeenCalled();  
   });
 
-  fit('When clicking the save button, data saved pops up', fakeAsync(() => {
+  it('When clicking the save button, data saved pops up', () => {
     fixture.detectChanges();
     spyOn(window, 'alert');
-    spyOn(component, 'saveData');
 
     fixture.debugElement.nativeElement.querySelector('#saveButton').click();
     fixture.detectChanges();
 
     expect(window.alert).toBeTruthy();
-    expect(component.saveData).toHaveBeenCalled();
-  }));
+  });
 });
