@@ -4,6 +4,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ConditionsComponent } from '../conditions/conditions.component';
 
+
 @Component({
   selector: 'app-update-ruleset',
   templateUrl: './update-ruleset.component.html',
@@ -24,10 +25,14 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
     this.paramsSubscription$ = this.route.paramMap.subscribe(
       (params: ParamMap) => {
         this.id = params.get("id");
-        fetch(this.url + this.id)
+        this.customFetch(this.url, this.id!)
+        // SERGIO AND SCOTT
+        // send customFetch mock promise as not response.ok to test error throw
         .then((response) => {
           if(!response.ok) throw new Error("There was an issue retrieving the ruleset.\nFetch response status code was not successful.");
-          return response.json();
+          return this.convertResponseToJson(response);
+          // SERGIO AND SCOTT
+          // mock customFetch & convertResponseToJson to get to here for testing this overwrite logic
         })
         .then((response) => {
           const recievedRuleset: RulesComponentComponent[] = [];
@@ -58,6 +63,18 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
         }) 
       }
     );
+  }
+
+  // SERGIO AND SCOTT
+  // THESE 2 METHODS
+  customFetch(url: string, id: string) {
+    return fetch(url + id); // returns a promise
+  }
+  convertResponseToJson(response: Response) {
+    const jsonResponse = response.json();
+    console.log("json")
+    console.log(jsonResponse);
+    return jsonResponse; // returns a promise that is fullfilled with the value of the ruleset object
   }
 
   ngOnDestroy() {

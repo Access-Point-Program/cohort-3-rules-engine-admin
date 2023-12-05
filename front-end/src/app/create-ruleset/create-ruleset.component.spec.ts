@@ -58,6 +58,7 @@ describe('CreateRulesetComponent', () => {
 
     expect(app.ruleset.length).toBe(2);
   });
+
   it('"Add New Rule" button should be rendered', () => {
     const fixture = TestBed.createComponent(CreateRulesetComponent);
     const app = fixture.componentInstance;
@@ -65,6 +66,7 @@ describe('CreateRulesetComponent', () => {
 
     expect(button).toBeTruthy();
   });
+  
   it('clicking "Add New Rule" should display all of the conditions and buttons for them', () => {
     const fixture = TestBed.createComponent(CreateRulesetComponent);
     fixture.detectChanges();
@@ -73,6 +75,7 @@ describe('CreateRulesetComponent', () => {
     fixture.detectChanges();
     expect(fixture.debugElement.nativeElement.querySelectorAll('#rulesComponent').length).toBe(2);
   });
+  
   it('all buttons should be displayed on screen', () => {
     const fixture = TestBed.createComponent(CreateRulesetComponent);
     fixture.detectChanges();
@@ -216,5 +219,55 @@ describe('CreateRulesetComponent', () => {
     expect(fixture.debugElement.nativeElement.querySelectorAll('#rulesComponent').length).toBe(1);
     // ensure that the remaining priorities are correct, meaning the intended rule was the one deleted
     expect(createRulesetComponentInstance.ruleset[0].getPriority()).toBe(1);
+  })
+
+  it('When moving a rule up, making the priority go past 10 decimal places, then it resets all priorities', ()=> {
+    const fixture = TestBed.createComponent(CreateRulesetComponent);
+    fixture.detectChanges();
+    const createRulesetComponentInstance = fixture.componentInstance;
+    // Create 2 new rules
+    fixture.debugElement.query(By.css('#ruleButton')).nativeElement.click();
+    fixture.detectChanges();
+    fixture.debugElement.query(By.css('#ruleButton')).nativeElement.click();
+    fixture.detectChanges();
+    // Move 2nd rule above 1st rule 10 times, so the decimal place length is 10
+    for (let i = 0; i < 10; i++){
+      fixture.debugElement.queryAll(By.css('#moveUpButtonInside'))[1].nativeElement.click();
+      fixture.detectChanges();
+    }
+    // Make sure decimal length of 1st rule is 10, 2nd rule is 9, and 3rd rule is 0
+    expect(createRulesetComponentInstance.ruleset.map(rule => rule.getPriority().toString().split(".")[1] ? rule.getPriority().toString().split(".")[1].length : 0)).toEqual([10, 9, 0]);
+    // Do one more move up to push over 10 decimal places
+    fixture.debugElement.queryAll(By.css('#moveUpButtonInside'))[1].nativeElement.click();
+    fixture.detectChanges();
+    // Make sure that decimal length of all rules is now 0
+    expect(createRulesetComponentInstance.ruleset.map(rule => rule.getPriority().toString().split(".")[1] ? rule.getPriority().toString().split(".")[1].length : 0)).toEqual([0, 0, 0]);
+    // Check that the priority has reset back to default whole numbers 1, 2, 3
+    expect(createRulesetComponentInstance.ruleset.map(rule => rule.getPriority())).toEqual([1, 2, 3]);
+  })
+
+  it('When moving a rule down, making the priority go past 10 decimal places, then it resets all priorities', ()=> {
+    const fixture = TestBed.createComponent(CreateRulesetComponent);
+    fixture.detectChanges();
+    const createRulesetComponentInstance = fixture.componentInstance;
+    // Create 2 new rules
+    fixture.debugElement.query(By.css('#ruleButton')).nativeElement.click();
+    fixture.detectChanges();
+    fixture.debugElement.query(By.css('#ruleButton')).nativeElement.click();
+    fixture.detectChanges();
+    // Move 2nd rule below 1st rule 10 times, so the decimal place length is 10
+    for (let i = 0; i < 10; i++){
+      fixture.debugElement.queryAll(By.css('#moveDownButtonInside'))[0].nativeElement.click();
+      fixture.detectChanges();
+    }
+    // Make sure decimal length of 1st rule is 9, 2nd rule is 10, and 3rd rule is 0
+    expect(createRulesetComponentInstance.ruleset.map(rule => rule.getPriority().toString().split(".")[1] ? rule.getPriority().toString().split(".")[1].length : 0)).toEqual([9, 10, 0]);
+    // Do one more move up to push over 10 decimal places
+    fixture.debugElement.queryAll(By.css('#moveDownButtonInside'))[0].nativeElement.click();
+    fixture.detectChanges();
+    // Make sure that decimal length of all rules is now 0
+    expect(createRulesetComponentInstance.ruleset.map(rule => rule.getPriority().toString().split(".")[1] ? rule.getPriority().toString().split(".")[1].length : 0)).toEqual([0, 0, 0]);
+    // Check that the priority has reset back to default whole numbers 1, 2, 3
+    expect(createRulesetComponentInstance.ruleset.map(rule => rule.getPriority())).toEqual([1, 2, 3]);
   })
 });
