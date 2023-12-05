@@ -31,6 +31,14 @@ export class CreateRulesetComponent implements AfterViewInit, AfterViewChecked {
     this.ruleset.forEach(rule => {
       rule.childrenConditions = rule.viewChildren.toArray();
     })
+
+    for(let rule of this.ruleset){
+      const rulePriorityDecimalLength = rule.getPriority().toString().split(".")[1] ? rule.getPriority().toString().split(".")[1].length : 0;
+      if(rulePriorityDecimalLength > 10){
+        this.ruleset.map(rule => rule.setPriority(this.ruleset.indexOf(rule) + 1));
+        break;
+      }
+    }
   }
 
   onAddRuleClick() {
