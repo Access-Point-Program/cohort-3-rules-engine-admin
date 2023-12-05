@@ -25,6 +25,11 @@ public class RulesetController {
         return rulesetService.getById(id);
     }
 
+    @GetMapping("/ruleset-extended")
+    public List<Ruleset> allExtended() {
+        return rulesetService.getAllExtended();
+    }
+
     @PostMapping("/ruleset") // Calls service to create a ruleset and it's rules and conditions
     ResponseEntity<Ruleset> newRuleset(@RequestBody Ruleset ruleset) {
         return this.rulesetService.createRuleset(ruleset);
