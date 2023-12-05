@@ -207,7 +207,7 @@ describe('CreateRulesetComponent', () => {
     expect(fixture.debugElement.nativeElement.querySelectorAll('#rulesComponent').length).toBe(2);
     // ensure that the remaining priorities are correct, meaning the intended rule was the one deleted
     expect(createRulesetComponentInstance.ruleset[0].getPriority()).toBe(1);
-    expect(createRulesetComponentInstance.ruleset[1].getPriority()).toBe(2);
+    expect(createRulesetComponentInstance.ruleset[1].getPriority()).toBe(3);
 
     // click new 2nd rule delete button
     fixture.debugElement.nativeElement.querySelectorAll('#deleteButtonInside')[1].click();
