@@ -32,6 +32,11 @@ public class RulesetService {
         return rulesetList;
     }
 
+    public List<Ruleset> getAllExtended() {
+        List<Ruleset> rulesetList = rulesetRepository.findAll();
+        return rulesetList;
+    }
+
     public ResponseEntity<Ruleset> getById(Long id){
         Ruleset ruleset = rulesetRepository.findById(id)
         .orElseThrow(() -> new BadRequestException("Id not found"));
