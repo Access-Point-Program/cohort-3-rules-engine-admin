@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
   leavePage(url: string){
-    if (confirm("Are you sure you want to leave?\nAll changes will be lost :(")) {
+    if (confirm("Are you sure you want to leave?\nAll changes will be lost!")) {
       window.location.href = url;  
     }
   }
