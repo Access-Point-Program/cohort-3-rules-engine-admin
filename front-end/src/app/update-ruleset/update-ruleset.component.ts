@@ -131,12 +131,4 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
   roundToCeil(num: number): number {
     return Math.ceil(num);
   }
-
-  setRuleset(rulesArray: RulesComponentComponent[]){
-    this.ruleset = rulesArray;
-  }
-
-  getRuleset(){
-    return this.ruleset
-  }
 }

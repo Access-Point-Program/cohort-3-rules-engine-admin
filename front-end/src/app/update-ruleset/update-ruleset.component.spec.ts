@@ -147,7 +147,7 @@ describe('UpdateRulesetComponent', () => {
     spyOn(component, 'customFetch').and.returnValue(Promise.resolve(new Response(JSON.stringify(fakeFetchBody), {status: 200})));
     spyOn(component, 'convertResponseToJson').and.returnValue(Promise.resolve(fakeFetchBody));
     fixture.detectChanges();
-    component.setRuleset(fakeRulesetData);
+    component.ruleset = fakeRulesetData;
     fixture.detectChanges();
     // There should be 2 rules
     expect(fixture.debugElement.nativeElement.querySelectorAll('#rulesComponent').length).toBe(2);
@@ -330,7 +330,7 @@ describe('UpdateRulesetComponent', () => {
   }))
 
 
-  fit('clicking a rules "Delete" button deletes the rule from the ruleset array', fakeAsync(() => {
+  it('clicking a rules "Delete" button deletes the rule from the ruleset array', fakeAsync(() => {
     spyOn(component, 'customFetch').and.returnValue(Promise.resolve(new Response(JSON.stringify(fakeFetchBody), {status: 200})));
     spyOn(component, 'convertResponseToJson').and.returnValue(Promise.resolve(fakeFetchBody));
     fixture.detectChanges();
