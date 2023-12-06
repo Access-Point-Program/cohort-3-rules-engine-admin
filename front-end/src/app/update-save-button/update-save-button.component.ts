@@ -7,6 +7,7 @@ import { ConditionsComponent } from '../conditions/conditions.component';
   templateUrl: './update-save-button.component.html',
   styleUrls: ['./update-save-button.component.css']
 })
+
 export class UpdateSaveButtonComponent {
   public _parentRuleset: UpdateRulesetComponent;
   public responseData: {} = {};
@@ -16,53 +17,51 @@ export class UpdateSaveButtonComponent {
     this._parentRuleset = _parent_parent;
   }
 
-  async callPut(data: string){
-    const response = await fetch(`http://localhost:9004/ruleset/` + this._parentRuleset.id, {
-      method: 'PUT',
+  async callPut(data: string): Promise<void> { 
+   const response = await fetch(`http://localhost:9004/ruleset/` + this._parentRuleset.id, {
+   method: 'PUT',
       body: data,
-      headers: {'Content-Type': 'application/json'}
-    }).then((response) => {
-      if(!response.ok) throw new Error();
-      return response.json();
-    }).then((response) => {
-      window.alert("The ruleset changes have been saved.");
-    }).catch((e) => {
-      console.log(e);
-      window.alert("Rule Set could not be saved!\nPlease ensure all fields are filled out.");
-    })
+       headers: {'Content-Type': 'application/json'}
+     }).then((response) => {
+       if(!response.ok) throw new Error();
+       return response.json();
+     }).then((response) => {
+       window.alert("The ruleset changes have been saved.");
+     }).catch((e) => {
+       console.log(e);
+       window.alert("Rule Set could not be saved!\nPlease ensure all fields are filled out.");
+     })
   }
 
-  updateData(){
-    const mapToConditions = (condition: ConditionsComponent): ruleCondition => {
-      const {conditionIsValue: value_type, conditionWhenValue: fact_type, conditionDatabaseId: id} = condition;
-      return { fact_type, value_type, id};
-    }
-    const jsonDataToUse = this.updateSaveButtonClick()
-      .reduce<ruleset>((acc, rule) => {
-        const { thenValue: event_type, priority, ruleDatabaseId: id} = rule;
-        const conditions = rule.childrenConditions.map<ruleCondition>(mapToConditions);
-        acc.rules.push({ priority, event_type, id, conditions });
-        return acc;
-      },
-      {
-        name: this._parentRuleset.getName(),
-        rules: [],
-        id: this._parentRuleset.rulesetDatabaseId
-      });
-    const data = JSON.stringify(jsonDataToUse, null, 2);   
+   updateData(){
+     const mapToConditions = (condition: ConditionsComponent): ruleCondition => {
+       const {conditionIsValue: value_type, conditionWhenValue: fact_type, conditionDatabaseId: id} = condition;
+       return { fact_type, value_type, id};
+     }
+     const jsonDataToUse = this.updateSaveButtonClick()
+       .reduce<ruleset>((acc, rule) => {
+         const { thenValue: event_type, priority, ruleDatabaseId: id} = rule;
+         const conditions = rule.childrenConditions.map<ruleCondition>(mapToConditions);
+         acc.rules.push({ priority, event_type, id, conditions });
+         return acc;
+       },
+       {
+         name: this._parentRuleset.getName(),
+         rules: [],
+         id: this._parentRuleset.rulesetDatabaseId
+       });
+     const data = JSON.stringify(jsonDataToUse, null, 2);   
 
-    // confirmation popup
-    if (window.confirm("Are you sure you want to save changes?")) {
-      this.callPut(data);
-    }
-
-  }
-  updateSaveButtonClick(){
-    return this._parentRuleset.updateSaveButtonClick();
+     // confirmation popup
+     if (window.confirm("Are you sure you want to save changes?")) {
+       this.callPut(data);
+     }
    }
-}
 
-
+   updateSaveButtonClick(){
+     return this._parentRuleset.updateSaveButtonClick();
+    }
+ }
 
 type ruleCondition = {
   fact_type: String
