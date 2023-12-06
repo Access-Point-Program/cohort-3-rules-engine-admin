@@ -4,8 +4,8 @@
         <div class="col-8" style="height:fit-content; ">
             <div class="rounded shadow" style="border: 1px solid #DEE2E6; padding:2.5rem;">
                 <p style="color: #6C757D">Rules</p>
-                <hr>
-                <div class="" style="height:fit-content;display:inline-block;width:100%; margin-top: -1rem;">
+                <hr style="padding: 16px;">
+                <div class="" style="height:fit-content;display:inline-block;width:100%; margin-top: -3rem;">
                     <div>
                         <app-rules-component id="rulesComponent" class="m-1" *ngFor="let rule of ruleset" [ruleset]="ruleset" [givenRule]="rule" [childrenConditions]="rule.childrenConditions" [priority]="rule.getPriority() && rule.getPriority() !==-1 ? rule.getPriority() : ruleset.indexOf(rule) + 1" [ruleIndex]="ruleset.indexOf(rule)"></app-rules-component>
                     </div>
