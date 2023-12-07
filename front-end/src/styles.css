@@ -3,6 +3,9 @@ body, app-root {
     height: 100vh;
     width: 100%;
 }
+html { 
+    scrollbar-gutter:stable;
+}
 app-root {
     display: inline-block;
 }
@@ -15,4 +18,11 @@ app-root {
     --bs-btn-hover-bg: #653bd7;
     --bs-btn-hover-border-color: #7749F8;
     --bs-btn-active-bg: #7247e8;
+}
+.dashboardPath{
+    text-decoration: none;
+    color: #7749F8;
+    &:hover {
+        color:#653bd7;
+    }
 }
