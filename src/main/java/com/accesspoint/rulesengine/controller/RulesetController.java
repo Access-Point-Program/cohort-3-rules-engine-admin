@@ -20,6 +20,11 @@ public class RulesetController {
         return rulesetService.getAll();
     }
 
+    @GetMapping("/ruleset-extended")
+    public List<Ruleset> allExtended() {
+        return rulesetService.getAllExtended();
+    }
+
     @GetMapping("/ruleset/{id}")
     public ResponseEntity<Ruleset> one(@PathVariable Long id) {
         return rulesetService.getById(id);

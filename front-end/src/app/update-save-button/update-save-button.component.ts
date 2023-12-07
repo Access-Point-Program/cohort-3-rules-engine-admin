@@ -21,16 +21,15 @@ export class UpdateSaveButtonComponent {
    const response = await fetch(`http://localhost:9004/ruleset/` + this._parentRuleset.id, {
    method: 'PUT',
       body: data,
-       headers: {'Content-Type': 'application/json'}
-     }).then((response) => {
-       if(!response.ok) throw new Error();
-       return response.json();
-     }).then((response) => {
-       window.alert("The ruleset changes have been saved.");
-     }).catch((e) => {
-       console.log(e);
-       window.alert("Rule Set could not be saved!\nPlease ensure all fields are filled out.");
-     })
+      headers: {'Content-Type': 'application/json'}
+    }).then((response) => {
+      if(!response.ok) throw new Error();
+      return response.json();
+    }).then((response) => {
+      window.alert("The ruleset changes have been saved.");
+    }).catch((e) => {
+      window.alert("Rule Set could not be saved!\nPlease ensure all fields are filled out.");
+    })
   }
 
    updateData(){

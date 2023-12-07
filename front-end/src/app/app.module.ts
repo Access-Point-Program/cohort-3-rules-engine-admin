@@ -20,7 +20,6 @@ import { CancelButtonComponent } from './cancel-button/cancel-button.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from "@angular/router";
 import { HttpClientModule } from '@angular/common/http';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { UpdateRulesetComponent } from './update-ruleset/update-ruleset.component';
 import { UpdateSaveButtonComponent } from './update-save-button/update-save-button.component';
 
@@ -52,7 +51,6 @@ import { UpdateSaveButtonComponent } from './update-save-button/update-save-butt
     RouterModule,
     HttpClientModule
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
