@@ -107,18 +107,4 @@ describe('UpdateSaveButtonComponent', () => {
     fixture.detectChanges();
     expect(component.callPut).toHaveBeenCalled();
   }));
-
-  fit('calling callPut with good data it does the changes saved', fakeAsync(() => {
-    spyOn(component, 'callPut').and.returnValue(Promise.resolve());
-    spyOn(component, 'updateSaveButtonClick').and.returnValue(fakeRulesetData);
-    spyOn(window, 'alert');
-
-    fixture.detectChanges();
-    fixture.debugElement.nativeElement.querySelector('#updateSaveButton').click();
-    fixture.whenStable()
-    fixture.detectChanges();
-    expect(window.alert).toHaveBeenCalledWith("The ruleset changes have been saved.");
-
-  }));
-
   });

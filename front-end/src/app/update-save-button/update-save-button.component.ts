@@ -26,11 +26,15 @@ export class UpdateSaveButtonComponent {
       if(!response.ok) throw new Error();
       return response.json();
     }).then((response) => {
-      window.alert("The ruleset changes have been saved.");
+      this.alertPopup("The ruleset changes have been saved.");
     }).catch((e) => {
       window.alert("Rule Set could not be saved!\nPlease ensure all fields are filled out.");
     })
   }
+
+  alertPopup(messagePopup: string) {
+    window.alert(messagePopup);
+  };
 
    updateData(){
      const mapToConditions = (condition: ConditionsComponent): ruleCondition => {
