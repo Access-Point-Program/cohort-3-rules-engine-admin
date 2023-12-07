@@ -2,3 +2,6 @@
   display: inline-block;
   color: #7749F8;
 }
+.hand{
+    cursor: pointer;
+}
