@@ -30,6 +30,50 @@ This application will be responsible for creating a User Interface that will all
   - 1 PUT endpoint for updating a Ruleset and its Rules and Conditions.
   - 1 DELETE endpoint for deleting a Ruleset and its Rules and Conditions.
 
+# Setting Up Database Locally
+- Create a user
+- Create Environmental Variables
+- Create a server
+- Set Up PostgreSQL Tables in pgAdmin
+
+# Creating User
+
+- Right-click Login/Group Roles -> Create -> Login/Group role
+- General: 
+  - Name = rules-engine-admin
+- Definition:
+  - Password = put a password here you want to use
+  - Connection limit = -1
+  - Privileges = Can login, Inherit rights from the parent roles
+- Save
+
+# Setting Up Environmental Variables
+
+- In Windows search bar, type "Environmental variables"
+- Click "Edit the system environmental variables"
+- Click "Environmental Variables..." button (towards bottom right of screen)
+- Under "System variables" click "New..." button
+- For our Username
+  - Variable name = rules_engine_username
+  - Variable value = our database username (rules-engine-admin)
+- For our Password
+  - Variable name = rules_engine_password
+  - Variable value = same password as before 
+- MAKE SURE TO PUSH OK TWICE
+
+# Creating Server
+- Right-click Servers -> Register -> Server...
+- General:
+  - Name = rules-engine
+- Connection:
+  - Host name/address = localhost
+  - LEAVE PORT AS DEFAULT!!!
+  - Maintenance database = postgres
+  - Username = rules-engine-admin
+  - Password = same password as before
+  - Check "Save password?"
+- Save
+
 # Setting Up PostgreSQL Tables in pgAdmin
 
 - Right-click database -> Query Tool
@@ -51,3 +95,10 @@ This application will be responsible for creating a User Interface that will all
 6.
    - Go to the following URl 'http://localhost:9004/create-ruleset' to create a rule.
    - Go to the following URl 'http://localhost:9004/update-ruleset/{id}' to edit a rule ("{id}" should be replaced with the id of the rule you want to edit).
+
+# Accessing Postman Endpoints
+- Download file in repository named "[Ruleset Endpoints.postman_collection.json](https://github.com/Access-Point-Program/cohort-3-rules-engine-admin/blob/7ae6a172a0188bb6b8e5b7e1a70f28e58111cfb7/Ruleset%20Endpoints.postman_collection.json)" (If you have the repository cloned you should have it downloaded already)
+- In Postman, click on "Collections" on sidebar
+- Click on "Import" (top right of collections popup)
+- Select the file you just downloaded
+- Select "Open"

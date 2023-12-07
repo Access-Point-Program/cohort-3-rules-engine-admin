@@ -44,6 +44,7 @@ public class RulesetService {
     }
 
     public ResponseEntity<Ruleset> createRuleset(Ruleset incomingRulesetData) {
+        // Error handling
         if (incomingRulesetData.getName() == null || incomingRulesetData.getName().isEmpty()) throw new BadRequestException("Name cannot be empty");
         if (incomingRulesetData.getRules() == null || incomingRulesetData.getRules().isEmpty()) throw new BadRequestException("Rules cannot be empty");
         incomingRulesetData.getRules().stream().forEach(rule -> {
@@ -68,6 +69,7 @@ public class RulesetService {
             }
         });
 
+        // Building out new ruleset with incomingRulesetData
         Ruleset rulesetData = this.rulesetRepository.save(
                 Ruleset.builder()
                         .name(incomingRulesetData.getName())
@@ -78,6 +80,7 @@ public class RulesetService {
     }
 
     public ResponseEntity<Ruleset> updateRuleset(Long id, Ruleset incomingRuleset) {
+        // Error handling
         if (incomingRuleset.getName() == null || incomingRuleset.getName().isEmpty()) throw new BadRequestException("Name cannot be empty");
         if (incomingRuleset.getRules() == null || incomingRuleset.getRules().isEmpty()) throw new BadRequestException("Rules cannot be empty");
         incomingRuleset.getRules().stream().forEach(rule -> {
@@ -90,11 +93,12 @@ public class RulesetService {
             });
         });
 
-
+        // Updating data in oldRuleset to be the same as our incomingRuleset
         Ruleset updatedRuleset2 = rulesetRepository.findById(id) //
                 .map(oldRuleset -> {
                     if (!oldRuleset.getName().equals(incomingRuleset.getName())) oldRuleset.setName(incomingRuleset.getName());
                     if (oldRuleset.getRules() != incomingRuleset.getRules()) {
+                        // Rules data in incomingRuleset is different to oldRuleset
                         for (Rule incomingRule : incomingRuleset.getRules()) {
                             if (oldRuleset.getRules().contains(incomingRule)) continue;
                             if (incomingRule.getId() == null) {
@@ -103,19 +107,22 @@ public class RulesetService {
                                 Rule savedRule = this.ruleRepository.save(incomingRule);
                                 oldRuleset.addRuleToList(savedRule);
                             } else {
+                                // oldRuleset contains incomingRuleset rule but the data is different
                                 Optional<Rule> updatedRule = ruleRepository.findById(incomingRule.getId())
                                         .map(oldRule -> {
                                             if (oldRule.getPriority() != incomingRule.getPriority()) oldRule.setPriority(incomingRule.getPriority());
                                             if (oldRule.getEvent_type() != incomingRule.getEvent_type()) oldRule.setEvent_type(incomingRule.getEvent_type());
                                             if (oldRule.getConditions() != incomingRule.getConditions()) {
+                                                // Conditions data for incomingRule is different to oldRule
                                                 for (Condition newCondition : incomingRule.getConditions()) {
                                                     if (oldRule.getConditions().contains(newCondition)) continue;
                                                     if (newCondition.getId() == null) {
-                                                        // oldRule conditions DOES NOT contain incomingRuleset condition
+                                                        // oldRule conditions DOES NOT contain incomingRule condition
                                                         newCondition.setRule(incomingRule);
                                                         Condition savedCondition = this.conditionRepository.save(newCondition);
                                                         oldRule.addConditionToList(savedCondition);
                                                     } else {
+                                                        // oldRule contains incomingRule condition but the data is different
                                                         Optional<Condition> updatedCondition = conditionRepository.findById(newCondition.getId())
                                                                 .map(oldCondition -> {
                                                                     if (oldCondition.getFact_type() != newCondition.getFact_type()) oldCondition.setFact_type(newCondition.getFact_type());
@@ -125,6 +132,7 @@ public class RulesetService {
                                                     }
                                                 }
                                             }
+                                            // Deletes conditions that are in oldRule but not in the newRule
                                             List<Long> oldRuleConditionIds = oldRule.getConditions().stream().map(condition -> condition.getId()).toList();
                                             List<Long> incomingRuleConditionIds = incomingRule.getConditions().stream().map(condition -> condition.getId()).toList();
 
@@ -137,6 +145,7 @@ public class RulesetService {
                                         });
                             }
                         }
+                        // Deletes rules that are in oldRuleset but not in the newRuleset
                         List<Long> oldRulesetRuleIds = oldRuleset.getRules().stream().map(rule -> rule.getId()).toList();
                         List<Long> incomingRulesetRuleIds = incomingRuleset.getRules().stream().map(rule -> rule.getId()).toList();
 
@@ -148,14 +157,16 @@ public class RulesetService {
                     }
                     return rulesetRepository.save(oldRuleset);
                 })
-                .orElseThrow(() -> new BadRequestException("id not found"));
+                .orElseThrow(() -> new BadRequestException("id not found")); // Handles when PUT endpoint is called with an id that does not exist
         return new ResponseEntity<>(updatedRuleset2, HttpStatus.OK);
     }
 
     public ResponseEntity<HttpStatus> deleteRulesetById(Long id) {
         if (rulesetRepository.findById(id).isEmpty()) {
+            // Error Handling
             throw new BadRequestException("Id does not exist");
         } else {
+            // Deleting ruleset with incoming id
             rulesetRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

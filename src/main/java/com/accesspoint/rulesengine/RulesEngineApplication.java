@@ -16,6 +16,7 @@ public class RulesEngineApplication implements ErrorController {
 
 	private static final String PATH = "/error";
 
+	// when the PATH is not one of our predefined paths (in our front-end), it is set to /error and forwards to our index.html file in our front-end
 	@RequestMapping(value = PATH)
 	public String error() {
 		return "forward:/index.html";

@@ -3,6 +3,7 @@ package com.accesspoint.rulesengine.model;
 import java.sql.Timestamp;
 import lombok.Getter;
 
+// Model to stop our GetAll endpoint from getting data from rules and conditions
 public class RulesetModel {
 
     @Getter

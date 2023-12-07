@@ -54,6 +54,7 @@ public class PutTests {
 
     @Test
     public void givenIncomingRuleset_whenPutEndpointIsCalledWithNoChanges_thenNothingChanges() {
+        // Building out the mock ruleset
         Condition condition =
                 Condition.builder()
                         .id(10000L)
@@ -77,9 +78,11 @@ public class PutTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Mock ALL repository methods that get called in the service
         when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset));
         when(rulesetRepository.save(Mockito.eq(ruleset))).thenReturn(ruleset);
 
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
@@ -99,6 +102,7 @@ public class PutTests {
     }
     @Test
     public void givenIncomingRuleset_whenPutEndpointIsCalledWithNameChange_thenOnlyNameIsChanged() {
+        // Building out the mock ruleset
         Condition condition =
                 Condition.builder()
                         .id(10000L)
@@ -131,9 +135,11 @@ public class PutTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Mock ALL repository methods that get called in the service
         when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset1));
         when(rulesetRepository.save(Mockito.eq(ruleset1))).thenReturn(ruleset1);
 
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset2)
@@ -154,6 +160,7 @@ public class PutTests {
     }
     @Test
     public void givenIncomingRuleset_whenPutEndpointIsCalledWithRulePriorityChanged_thenOnlyPriorityIsChanged() {
+        // Building out the mock ruleset
         Condition condition =
                 Condition.builder()
                         .id(10000L)
@@ -193,10 +200,12 @@ public class PutTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Mock ALL repository methods that get called in the service
         when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset1));
         when(ruleRepository.findById(Mockito.eq(1000L))).thenReturn(Optional.of(rule));
         when(rulesetRepository.save(Mockito.eq(ruleset1))).thenReturn(ruleset1);
 
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset2)
@@ -217,6 +226,7 @@ public class PutTests {
     }
     @Test
     public void givenIncomingRuleset_whenPutEndpointIsCalledWithRuleEventTypeChanged_thenOnlyEventTypeIsChanged() {
+        // Building out the mock ruleset
         Condition condition =
                 Condition.builder()
                         .id(10000L)
@@ -256,10 +266,12 @@ public class PutTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Mock ALL repository methods that get called in the service
         when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset1));
         when(ruleRepository.findById(Mockito.eq(1000L))).thenReturn(Optional.of(rule));
         when(rulesetRepository.save(Mockito.eq(ruleset1))).thenReturn(ruleset1);
 
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset2)
@@ -280,6 +292,7 @@ public class PutTests {
     }
     @Test
     public void givenIncomingRuleset_whenPutEndpointIsCalledWithConditionFactTypeChanged_thenOnlyFactTypeIsChanged() {
+        // Building out the mock ruleset
         Condition condition =
                 Condition.builder()
                         .id(10000L)
@@ -325,11 +338,13 @@ public class PutTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Mock ALL repository methods that get called in the service
         when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset1));
         when(ruleRepository.findById(Mockito.eq(1000L))).thenReturn(Optional.of(rule));
         when(conditionRepository.findById(Mockito.eq(10000L))).thenReturn(Optional.of(condition));
         when(rulesetRepository.save(Mockito.eq(ruleset1))).thenReturn(ruleset1);
 
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset2)
@@ -350,6 +365,7 @@ public class PutTests {
     }
     @Test
     public void givenIncomingRuleset_whenPutEndpointIsCalledWithConditionValueTypeChanged_thenOnlyValueTypeIsChanged() {
+        // Building out the mock ruleset
         Condition condition =
                 Condition.builder()
                         .id(10000L)
@@ -395,12 +411,13 @@ public class PutTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Mock ALL repository methods that get called in the service
         when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset1));
         when(ruleRepository.findById(Mockito.eq(1000L))).thenReturn(Optional.of(rule));
         when(conditionRepository.findById(Mockito.eq(10000L))).thenReturn(Optional.of(condition));
         when(rulesetRepository.save(Mockito.eq(ruleset1))).thenReturn(ruleset1);
 
-
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset2)
@@ -421,6 +438,7 @@ public class PutTests {
     }
     @Test
     public void givenIncomingRuleset_whenPutEndpointIsCalledWithRuleAdded_thenRuleAdded() {
+        // Building out the mock ruleset
         Condition condition =
                 Condition.builder()
                         .id(10000L)
@@ -481,11 +499,13 @@ public class PutTests {
                         .conditions(List.of(condition3))
                         .build();
 
+        // Mock ALL repository methods that get called in the service
         when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset1));
         when(ruleRepository.findById(Mockito.eq(1000L))).thenReturn(Optional.of(rule));
         when(ruleRepository.save(Mockito.eq(rule2))).thenReturn(rule3);
         when(rulesetRepository.save(Mockito.eq(ruleset1))).thenReturn(ruleset1);
 
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset2)
@@ -512,6 +532,7 @@ public class PutTests {
     }
     @Test
     public void givenIncomingRuleset_whenPutEndpointIsCalledWithRuleRemoved_thenRuleRemoved() {
+        // Building out the mock ruleset
         Condition condition =
                 Condition.builder()
                         .id(10000L)
@@ -558,11 +579,13 @@ public class PutTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Mock ALL repository methods that get called in the service
         when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset1));
         when(ruleRepository.findById(Mockito.eq(1000L))).thenReturn(Optional.of(rule));
         when(ruleRepository.getReferenceById(Mockito.eq(1001L))).thenReturn(rule2);
         when(rulesetRepository.save(Mockito.eq(ruleset1))).thenReturn(ruleset1);
 
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset2)
@@ -584,6 +607,7 @@ public class PutTests {
     }
     @Test
     public void givenIncomingRuleset_whenPutEndpointIsCalledWithConditionAdded_thenConditionAdded() {
+        // Building out the mock ruleset
         Condition condition =
                 Condition.builder()
                         .id(10000L)
@@ -636,12 +660,14 @@ public class PutTests {
                         .value_type(EMPTY)
                         .build();
 
+        // Mock ALL repository methods that get called in the service
         when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset1));
         when(ruleRepository.findById(Mockito.eq(1000L))).thenReturn(Optional.of(rule));
         when(conditionRepository.findById(Mockito.eq(10000L))).thenReturn(Optional.of(condition));
         when(conditionRepository.save(Mockito.eq(condition2))).thenReturn(condition3);
         when(rulesetRepository.save(Mockito.eq(ruleset1))).thenReturn(ruleset1);
 
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset2)
@@ -665,6 +691,7 @@ public class PutTests {
     }
     @Test
     public void givenIncomingRuleset_whenPutEndpointIsCalledWithConditionRemoved_thenConditionRemoved() {
+        // Building out the mock ruleset
         Condition condition =
                 Condition.builder()
                         .id(10000L)
@@ -711,12 +738,14 @@ public class PutTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Mock ALL repository methods that get called in the service
         when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset1));
         when(ruleRepository.findById(Mockito.eq(1000L))).thenReturn(Optional.of(rule));
         when(conditionRepository.findById(Mockito.eq(10000L))).thenReturn(Optional.of(condition));
         when(conditionRepository.getReferenceById(Mockito.eq(10001L))).thenReturn(condition2);
         when(rulesetRepository.save(Mockito.eq(ruleset1))).thenReturn(ruleset1);
 
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset2)
@@ -738,6 +767,7 @@ public class PutTests {
     }
     @Test
     public void givenRuleset_whenPutEndpointNameIsBlank_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
         Ruleset ruleset =
                 Ruleset.builder()
                         .name("")
@@ -745,6 +775,7 @@ public class PutTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
@@ -757,12 +788,14 @@ public class PutTests {
     }
     @Test
     public void givenRuleset_whenPutEndpointNameDNE_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
         Ruleset ruleset =
                 Ruleset.builder()
                         .id(100L)
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
@@ -775,6 +808,7 @@ public class PutTests {
     }
     @Test
     public void givenRuleset_whenPutEndpointRulesIsBlank_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
         List<Rule> blankRules = Collections.emptyList();
 
         Ruleset ruleset =
@@ -785,6 +819,7 @@ public class PutTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
@@ -797,6 +832,7 @@ public class PutTests {
     }
     @Test
     public void givenRuleset_whenPutEndpointRulesDNE_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
         Ruleset ruleset =
                 Ruleset.builder()
                         .name("Test")
@@ -804,6 +840,7 @@ public class PutTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
@@ -816,6 +853,7 @@ public class PutTests {
     }
     @Test
     public void givenRuleset_whenPutEndpointPriorityIs0_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
         Rule fakeRule = new Rule(1000L, 0.0, FORWARD, null, null);
         List<Rule> fakeRules = new ArrayList<>();
         fakeRules.add(fakeRule);
@@ -828,6 +866,7 @@ public class PutTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
@@ -840,6 +879,7 @@ public class PutTests {
     }
     @Test
     public void givenRuleset_whenPutEndpointPriorityDNE_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
         Rule rule =
                 Rule.builder()
                         .id(1000L)
@@ -854,6 +894,7 @@ public class PutTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
@@ -866,6 +907,7 @@ public class PutTests {
     }
     @Test
     public void givenRuleset_whenPutEndpointEventTypeDNE_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
         Rule rule =
                 Rule.builder()
                         .id(1000L)
@@ -880,6 +922,7 @@ public class PutTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
@@ -892,6 +935,7 @@ public class PutTests {
     }
     @Test
     public void givenRuleset_whenPutEndpointConditionsIsBlank_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
         List<Condition> emptyConditions = Collections.emptyList();
 
         Rule rule =
@@ -910,6 +954,7 @@ public class PutTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
@@ -922,6 +967,7 @@ public class PutTests {
     }
     @Test
     public void givenRuleset_whenPutEndpointConditionsDNE_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
         Rule rule =
                 Rule.builder()
                         .id(1000L)
@@ -937,6 +983,7 @@ public class PutTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
@@ -949,6 +996,7 @@ public class PutTests {
     }
     @Test
     public void givenRuleset_whenPutEndpointFactTypeDNE_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
         Condition condition =
                 Condition.builder()
                         .build();
@@ -969,6 +1017,7 @@ public class PutTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
@@ -981,6 +1030,7 @@ public class PutTests {
     }
     @Test
     public void givenRuleset_whenPutEndpointValueTypeDNE_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
         Condition condition =
                 Condition.builder()
                         .fact_type(RIGHT)
@@ -1002,6 +1052,7 @@ public class PutTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Given the ruleset, when put request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)

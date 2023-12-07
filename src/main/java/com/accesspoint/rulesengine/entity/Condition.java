@@ -30,6 +30,7 @@ public class Condition implements Serializable {
     @NotNull
     private ValueType value_type;
 
+    // Joins condition table to rule table through the rule_id
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rule_id", nullable = false, updatable = false)
