@@ -27,7 +27,6 @@ export class UpdateSaveButtonComponent {
     }).then((response) => {
       window.alert("The ruleset changes have been saved.");
     }).catch((e) => {
-      console.log(e);
       window.alert("Rule Set could not be saved!\nPlease ensure all fields are filled out.");
     })
   }

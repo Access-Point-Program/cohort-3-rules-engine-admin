@@ -24,10 +24,10 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
     this.paramsSubscription$ = this.route.paramMap.subscribe(
       (params: ParamMap) => {
         this.id = params.get("id");
-        fetch(this.url + this.id)
+        this.customFetch(this.url, this.id!)
         .then((response) => {
           if(!response.ok) throw new Error("There was an issue retrieving the ruleset.\nFetch response status code was not successful.");
-          return response.json();
+          return this.convertResponseToJson(response);
         })
         .then((response) => {
           const recievedRuleset: RulesComponentComponent[] = [];
@@ -50,7 +50,6 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
             recievedRuleset.push(newRule);
           }
           this.ruleset = recievedRuleset;
-          this.ruleset.map(rule => rule.setPriority(-1));
           this.name = response.name;
           this.rulesetDatabaseId = response.id;
         }).catch((e) => {
@@ -59,6 +58,13 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
         }) 
       }
     );
+  }
+
+  customFetch(url: string, id: string) {
+    return fetch(url + id);
+  }
+  convertResponseToJson(response: Response) {
+    return response.json();
   }
 
   ngOnDestroy() {
@@ -83,6 +89,14 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
     this.ruleset.forEach(rule => {
       rule.childrenConditions = rule.viewChildren.toArray();
     })
+
+    for(let rule of this.ruleset){
+      const rulePriorityDecimalLength = rule.getPriority().toString().split(".")[1] ? rule.getPriority().toString().split(".")[1].length : 0;
+      if(rulePriorityDecimalLength > 10){
+        this.ruleset.map(rule => rule.setPriority(this.ruleset.indexOf(rule) + 1));
+        break;
+      }
+    }
   }
 
   onAddRuleClick() {
@@ -112,5 +126,9 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
       const priorityB = b.priority;
       return (priorityA < priorityB) ? -1 : (priorityA > priorityB) ? 1 : 0;
     });
+  }
+
+  roundToCeil(num: number): number {
+    return Math.ceil(num);
   }
 }
