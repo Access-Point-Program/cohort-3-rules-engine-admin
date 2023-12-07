@@ -83,7 +83,7 @@ This application will be responsible for creating a User Interface that will all
    - Go to the following URl 'http://localhost:9004/update-ruleset/{id}' to edit a rule ("{id}" should be replaced with the id of the rule you want to edit).
 
 # Accessing Postman Endpoints
-- Download file in repository named "Ruleset Endpoints.postman_collection.json" (If you have the repository cloned you should have it downloaded already)
+- Download file in repository named "[Ruleset Endpoints.postman_collection.json](https://github.com/Access-Point-Program/cohort-3-rules-engine-admin/blob/7ae6a172a0188bb6b8e5b7e1a70f28e58111cfb7/Ruleset%20Endpoints.postman_collection.json)" (If you have the repository cloned you should have it downloaded already)
 - In Postman, click on "Collections" on sidebar
 - Click on "Import" (top right of collections popup)
 - Select the file you just downloaded
