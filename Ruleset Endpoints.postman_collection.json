@@ -1,0 +1,204 @@
+{
+	"info": {
+		"_postman_id": "9996ac56-1b92-4766-819f-000bcd657617",
+		"name": "Ruleset Endpoints",
+		"description": "Get Put and Post Endpoints for Ruleset",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29812752",
+		"_collection_link": "https://www.postman.com/cohort3-cyclones/workspace/cohort3rulesengineadmin/collection/30470151-9996ac56-1b92-4766-819f-000bcd657617?action=share&source=collection_link&creator=29812752"
+	},
+	"item": [
+		{
+			"name": "GetAllRulesets",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Header should contain Json content type\", function (){\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{port}}/ruleset",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"ruleset"
+					]
+				},
+				"description": "This will get all rulesets from our ruleset table, and display the id, name, and creation date.\n\nHere are some example response bodies:\n\n###### If there is a single entry/ruleset in the ruleset table, the response body would look like this:\n\n`[{\"id\": 1, \"name\": \"Bilbo\", \"creation_date\": \"2023-10-25T18:12:50.581+00:00\"}]`\n\n###### If there is multiple entries/rulesets in the ruleset table, the response body would look like this:\n\n`[{\"id\": 1, \"name\": \"Bilbo\", \"creation_date\": \"2023-10-25T18:12:50.581+00:00\"}, {\"id\": 2, \"name\": \"Carol\", \"creation_date\": \"3023-10-25T18:14:48.838+00:00\"}]`"
+			},
+			"response": []
+		},
+		{
+			"name": "PostNewRuleset",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"Ruleset 1\",\"rules\": [\r\n    {\"priority\": 1, \"event_type\": \"FORWARD\", \"conditions\": [\r\n        {\r\n            \"fact_type\":\"FRONT\",\"value_type\":\"END\"\r\n        }\r\n    ]},\r\n    {\"priority\": 2, \"event_type\": \"LEFT\", \"conditions\": [\r\n        {\r\n            \"fact_type\":\"LEFT\",\"value_type\":\"END\"\r\n        }\r\n    ]},\r\n    {\"priority\": 3, \"event_type\": \"RIGHT\", \"conditions\": [\r\n        {\r\n            \"fact_type\":\"RIGHT\",\"value_type\":\"END\"\r\n        }\r\n    ]},\r\n    {\"priority\": 4, \"event_type\": \"RIGHT\", \"conditions\": [\r\n        {\r\n            \"fact_type\":\"BEHIND\",\"value_type\":\"END\"\r\n        }\r\n    ]},\r\n    {\"priority\": 5, \"event_type\": \"RIGHT\", \"conditions\": [\r\n        {\r\n            \"fact_type\":\"FRONT\",\"value_type\":\"WALL\"\r\n        },\r\n        {\r\n            \"fact_type\":\"LEFT\",\"value_type\":\"WALL\"\r\n        }\r\n    ]},\r\n    {\"priority\": 6, \"event_type\": \"LEFT\", \"conditions\": [\r\n        {\r\n            \"fact_type\":\"FRONT\",\"value_type\":\"WALL\"\r\n        },\r\n        {\r\n            \"fact_type\":\"RIGHT\",\"value_type\":\"WALL\"\r\n        }\r\n    ]},\r\n    {\"priority\": 7, \"event_type\": \"FORWARD\", \"conditions\": [\r\n        {\r\n            \"fact_type\":\"FRONT\",\"value_type\":\"EMPTY\"\r\n        }\r\n    ]},\r\n    {\"priority\": 8, \"event_type\": \"RIGHT\",\"conditions\": [\r\n        {\r\n            \"fact_type\":\"FRONT\",\"value_type\":\"END\"\r\n        },\r\n        {\r\n            \"fact_type\":\"LEFT\",\"value_type\":\"EMPTY\"\r\n        },\r\n        {\r\n            \"fact_type\":\"RIGHT\",\"value_type\":\"WALL\"\r\n        },\r\n        {\r\n            \"fact_type\":\"BEHIND\",\"value_type\":\"WALL\"\r\n        }\r\n    ]}\r\n]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/ruleset",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"ruleset"
+					]
+				},
+				"description": "Must provide a ruleset style json object like the example below.  \n  \nThe json must meet the following criteria:\n\n- name can not be empty or null.\n    \n- rules can not be empty or null.\n    \n- conditions can not be empty or null.\n    \n- priority can not be 0 or null.\n    \n- Valid event_type values are: \"FORWARD\", \"RIGHT\", or \"LEFT\".\n    \n- Valid fact_type values are: \"FRONT\", \"RIGHT\", \"LEFT\", or \"BEHIND\".\n    \n- Valid value_type values are: \"WALL\", \"EMPTY\", or \"END\"."
+			},
+			"response": []
+		},
+		{
+			"name": "GetById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Header should contain Json content type\", function (){\r",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{port}}/ruleset/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"ruleset",
+						"8"
+					]
+				},
+				"description": "This API endpoint retrieves a specific ruleset based on its ID. The ID of the ruleset is passed as a path parameter in the URL.\n\nTo retrieve a ruleset, make an HTTP GET request to:\n\n```\nhttp://localhost:{{port}}/ruleset/PUT ID HERE\n\n ```\n\nReplace `{{port}}` with the actual port number where the server is running, and `PUT ID HERE` with the ID of the ruleset you want to retrieve.\n\nThe response will have a status code of 200 if the request is successful. The response body will contain the details of the ruleset in JSON format. Here is an example response:\n\n``` json\n{\n    \"id\": 5,\n    \"name\": \"Test1\",\n    \"creation_date\": \"2023-11-20T17:16:53.190+00:00\",\n    \"rules\": [\n        {\n            \"id\": 4,\n            \"priority\": 1.0,\n            \"event_type\": \"FORWARD\",\n            \"conditions\": [\n            {\n                \"id\": 5,\n                \"fact_type\": \"FRONT\",\n                \"value_type\": \"END\"\n        }\n      ]\n    }\n  ]\n}\n\n ```\n\nThe response body includes the following properties:\n\n- `id`: The ID of the ruleset.\n- `name`: The name of the ruleset.\n- `creation_date`: The date when the ruleset was created.\n- `rules`: An array of rules within the ruleset. Each rule has the following properties:\n    - `id`: The ID of the rule.\n    - `priority`: The priority of the rule.\n    - `event_type`: The enum for the event that happens when the conditions are met (ie. forward left or right).\n    - `conditions`: An array of conditions within the rule. Each condition has the following properties:\n        - `id`: The ID of the condition.\n        - `fact_type`: The enum for spatial condition (ie. front left right or behind).\n        - `value_type`: The enum for what the space is (ie. wall empty or end).\n\nPlease note that the actual values of the properties may vary depending on the specific ruleset being retrieved."
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							"// pm.test(\"Header should contain Json content type\", function (){\r",
+							"//     pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+							"// });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{port}}/ruleset/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"ruleset",
+						"1"
+					]
+				},
+				"description": "This HTTP DELETE request is used to delete a specific ruleset with the given id. The id of the ruleset to be deleted is specified in the URL path as a parameter.\n\n### Request\n\n- Method: DELETE\n- URL: `http://localhost:{{port}}/ruleset/PUT ID HERE`\n    \n\n### Response\n\nThe response for this request is a status code of 204, indicating a successful delete request. Nothing will be returned if there is a status code of 204. If the id does not exist, then it will return a status code of 400 and the message \"Id does not exist\".\n\nPlease note that the `{{port}}` placeholder in the URL should be replaced with the actual port number where the API is hosted and replace `PUT ID HERE` with the ruleset id."
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateById",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 8,\r\n    \"name\": \"Ruleset 1\",\r\n    \"creation_date\": \"2023-12-04T17:30:14.568+00:00\",\r\n    \"rules\": [\r\n        {\r\n            \"id\": 22,\r\n            \"priority\": 1.0,\r\n            \"event_type\": \"RIGHT\",\r\n            \"conditions\": [\r\n                {\r\n                    \"id\": 33,\r\n                    \"fact_type\": \"RIGHT\",\r\n                    \"value_type\": \"END\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": 23,\r\n            \"priority\": 2.0,\r\n            \"event_type\": \"RIGHT\",\r\n            \"conditions\": [\r\n                {\r\n                    \"id\": 34,\r\n                    \"fact_type\": \"BEHIND\",\r\n                    \"value_type\": \"END\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": 24,\r\n            \"priority\": 3.0,\r\n            \"event_type\": \"RIGHT\",\r\n            \"conditions\": [\r\n                {\r\n                    \"id\": 35,\r\n                    \"fact_type\": \"FRONT\",\r\n                    \"value_type\": \"WALL\"\r\n                },\r\n                {\r\n                    \"id\": 36,\r\n                    \"fact_type\": \"LEFT\",\r\n                    \"value_type\": \"WALL\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": 27,\r\n            \"priority\": 4.0,\r\n            \"event_type\": \"RIGHT\",\r\n            \"conditions\": [\r\n                {\r\n                    \"id\": 40,\r\n                    \"fact_type\": \"FRONT\",\r\n                    \"value_type\": \"END\"\r\n                },\r\n                {\r\n                    \"id\": 41,\r\n                    \"fact_type\": \"LEFT\",\r\n                    \"value_type\": \"EMPTY\"\r\n                },\r\n                {\r\n                    \"id\": 42,\r\n                    \"fact_type\": \"RIGHT\",\r\n                    \"value_type\": \"WALL\"\r\n                },\r\n                {\r\n                    \"id\": 43,\r\n                    \"fact_type\": \"BEHIND\",\r\n                    \"value_type\": \"WALL\"\r\n                },\r\n                {\r\n                    \"fact_type\": \"RIGHT\",\r\n                    \"value_type\": \"EMPTY\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"priority\": 5.0,\r\n            \"event_type\": \"RIGHT\",\r\n            \"conditions\": [\r\n                {\r\n                    \"fact_type\": \"RIGHT\",\r\n                    \"value_type\": \"END\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/ruleset/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"ruleset",
+						"8"
+					]
+				},
+				"description": "This endpoint allows you to update a specific ruleset using the HTTP PUT method. The request should be sent to [http://localhost:{{port}}/ruleset/{{ruleset-id}}](http://localhost:{{port}}/ruleset/9).\n\n### Request Body\n\nThe request should include a JSON payload in the raw request body type with the following structure:\n\n``` json\n{\n    \"id\": 0,\n    \"name\": \"\",\n    \"creation_date\": \"\",\n    \"rules\": [\n        {\n            \"id\": 0,\n            \"priority\": 0,\n            \"event_type\": \"\",\n            \"conditions\": [\n                {\n                    \"id\": 0,\n                    \"fact_type\": \"\",\n                    \"value_type\": \"\"\n                }\n            ]\n        }\n    ]\n}\n\n ```\n\nAll fields must be filled appropriately, and will result in a bad status code and unsuccessful execution if you fail to satisfy them.\n\nWhen you are updating a ruleset and are adding a new rule or condition, you do not include the \"id\" field inside of the new rule or condition."
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllExtended",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{port}}/ruleset-extended",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"ruleset-extended"
+					]
+				},
+				"description": "This endpoint is an extended version of our \"GetAllRulesets\", with the difference being this will give every detail for everything in our database. ((this was created for Deep))\n\nExample response:\n\n``` json\n[\n    {\n        \"id\": 1,\n        \"name\": \"Test 1\",\n        \"creation_date\": \"2023-11-30T19:59:40.422+00:00\",\n        \"rules\": [\n            {\n                \"id\": 1,\n                \"priority\": 0.75,\n                \"event_type\": \"LEFT\",\n                \"conditions\": [\n                    {\n                        \"id\": 1,\n                        \"fact_type\": \"FRONT\",\n                        \"value_type\": \"EMPTY\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"fact_type\": \"RIGHT\",\n                        \"value_type\": \"END\"\n                    }\n                ]\n            },\n            {\n                \"id\": 2,\n                \"priority\": 1.375,\n                \"event_type\": \"LEFT\",\n                \"conditions\": [\n                    {\n                        \"id\": 3,\n                        \"fact_type\": \"RIGHT\",\n                        \"value_type\": \"WALL\"\n                    }\n                ]\n            },\n            {\n                \"id\": 3,\n                \"priority\": 1.625,\n                \"event_type\": \"LEFT\",\n                \"conditions\": [\n                    {\n                        \"id\": 4,\n                        \"fact_type\": \"LEFT\",\n                        \"value_type\": \"WALL\"\n                    }\n                ]\n            }\n        ]\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Test 2\",\n        \"creation_date\": \"2023-12-05T16:35:44.312+00:00\",\n        \"rules\": [\n            {\n                \"id\": 4,\n                \"priority\": 0.75,\n                \"event_type\": \"RIGHT\",\n                \"conditions\": [\n                    {\n                        \"id\": 5,\n                        \"fact_type\": \"RIGHT\",\n                        \"value_type\": \"WALL\"\n                    }\n                ]\n            }\n        ]\n    }\n]\n\n ```"
+			},
+			"response": []
+		}
+	]
+}
