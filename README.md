@@ -63,13 +63,14 @@ This application will be responsible for creating a User Interface that will all
 
 # Creating Server
 - Right-click Servers -> Register -> Server...
-- General: Name = rules-engine
+- General:
+  - Name = rules-engine
 - Connection:
-- Host name/address = localhost
-- LEAVE PORT AS DEFAULT!!!
-- Maintenance database = postgres
-- Username = rules-engine-admin
-- Password = same password as before
+  - Host name/address = localhost
+  - LEAVE PORT AS DEFAULT!!!
+  - Maintenance database = postgres
+  - Username = rules-engine-admin
+  - Password = same password as before
 - Check "Save password?"
 Save
 
