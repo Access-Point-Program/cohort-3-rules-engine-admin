@@ -41,7 +41,7 @@ export class SaveButtonComponent {
       const { conditionIsValue: value_type, conditionWhenValue: fact_type } = condition;
       return { fact_type, value_type};
     }
-    const jsonDataToUse = this._parentRuleset.saveButtonClick()
+    const jsonDataToUse = this.saveButtonClick()
       .reduce<ruleset>((acc, rule) => {
         const { thenValue: event_type, priority } = rule;
         const conditions = rule.childrenConditions.map<ruleCondition>(mapToConditions);
@@ -50,6 +50,10 @@ export class SaveButtonComponent {
       }, { name: this._parentRuleset.getName() , rules:[] });
     const data = JSON.stringify(jsonDataToUse, null, 2);
     this.callPost(data);
+  }
+
+  saveButtonClick(){
+    return this._parentRuleset.saveButtonClick();
   }
 }
 

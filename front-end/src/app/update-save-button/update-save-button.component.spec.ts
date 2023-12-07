@@ -1,9 +1,43 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { UpdateSaveButtonComponent } from './update-save-button.component';
 import { By } from '@angular/platform-browser';
 import { UpdateRulesetComponent } from '../update-ruleset/update-ruleset.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from "@angular/router/testing";
+import { RulesComponentComponent } from '../rules-component/rules-component.component';
+import { ConditionsComponent } from '../conditions/conditions.component';
+
+const condition1 = new ConditionsComponent();
+  condition1.conditionDatabaseId = 100;
+  condition1.conditionWhenValue = "FRONT";
+  condition1.conditionIsValue = "END";
+  condition1.conditionNeverEntry = false;
+  condition1.conditionNeverIsEntry = false;
+const rule1 = new RulesComponentComponent();
+  rule1.ruleIndex = 10;
+  rule1.priority = 1.0;
+  rule1.thenValue = "FORWARD";
+  rule1.neverThenEntry = false;
+  rule1.childrenConditions = [condition1];
+const condition2 = new ConditionsComponent();
+  condition1.conditionDatabaseId = 200;
+  condition1.conditionWhenValue = "RIGHT";
+  condition1.conditionIsValue = "EMPTY";
+  condition1.conditionNeverEntry = false;
+  condition1.conditionNeverIsEntry = false;
+const condition3 = new ConditionsComponent();
+  condition1.conditionDatabaseId = 300;
+  condition1.conditionWhenValue = "LEFT";
+  condition1.conditionIsValue = "WALL";
+  condition1.conditionNeverEntry = false;
+  condition1.conditionNeverIsEntry = false;
+const rule2 = new RulesComponentComponent();
+  rule2.ruleIndex = 20;
+  rule2.priority = 2.0;
+  rule2.thenValue = "LEFT";
+  rule2.neverThenEntry = false;
+  rule2.childrenConditions = [condition2, condition3];
+const fakeRulesetData: RulesComponentComponent[] = [rule1, rule2];
 
 describe('UpdateSaveButtonComponent', () => {
   let component: UpdateSaveButtonComponent;
@@ -36,4 +70,44 @@ describe('UpdateSaveButtonComponent', () => {
     fixture.detectChanges();
     expect(component.updateData).toHaveBeenCalled();  
   });
+
+  it('When clicking the save button, confirmation pops up is called', () => {
+    spyOn(component, 'updateSaveButtonClick').and.returnValue(fakeRulesetData);
+    spyOn(component, 'updateConfirm');
+    fixture.debugElement.nativeElement.querySelector('#updateSaveButton').click();
+    fixture.detectChanges();
+    expect(component.updateConfirm).toHaveBeenCalled();
+  });
+
+  it("When clicking the save button, update data is called", () => {
+    fixture.detectChanges();
+    spyOn(component, 'updateData');
+    fixture.debugElement.nativeElement.querySelector('#updateSaveButton').click();
+    fixture.detectChanges();
+    expect(component.updateData).toHaveBeenCalled();
+  });
+
+  it("When clicking the save button, updateSaveButtonClick is called", () => {
+    spyOn(component, 'updateData').and.stub();
+    fixture.detectChanges();
+    fixture.debugElement.nativeElement.querySelector('#updateSaveButton').click();
+    expect(component.updateData).toHaveBeenCalled();
+  });
+
+  it('When updateData gets called, updateConfirm is called', () => {
+    spyOn(component, 'updateSaveButtonClick').and.returnValue(fakeRulesetData);
+    spyOn(component, 'updateConfirm');
+    fixture.detectChanges();
+    fixture.debugElement.nativeElement.querySelector('#updateSaveButton').click();
+    expect(component.updateConfirm).toHaveBeenCalled();
+  });
+
+  it('When updateConfirm is called, and true, then callPut is called', () => {
+    spyOn(component, 'updateSaveButtonClick').and.returnValue(fakeRulesetData);
+    spyOn(component, 'updateConfirm').and.callFake(() => component.callPut(""));
+    spyOn(component, 'callPut').and.stub();
+    fixture.detectChanges();
+    fixture.debugElement.nativeElement.querySelector('#updateSaveButton').click();
+    expect(component.callPut).toHaveBeenCalled();
+  })
 });

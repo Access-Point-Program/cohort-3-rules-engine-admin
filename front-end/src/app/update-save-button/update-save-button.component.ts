@@ -7,6 +7,7 @@ import { ConditionsComponent } from '../conditions/conditions.component';
   templateUrl: './update-save-button.component.html',
   styleUrls: ['./update-save-button.component.css']
 })
+
 export class UpdateSaveButtonComponent {
   public _parentRuleset: UpdateRulesetComponent;
   public responseData: {} = {};
@@ -16,27 +17,31 @@ export class UpdateSaveButtonComponent {
     this._parentRuleset = _parent_parent;
   }
 
-  async callPut(data: string){
-    const response = await fetch(`http://localhost:9004/ruleset/` + this._parentRuleset.id, {
+  callPut(data: string) { 
+    fetch(`http://localhost:9004/ruleset/` + this._parentRuleset.id, {
       method: 'PUT',
-      body: data,
+      body: data, 
       headers: {'Content-Type': 'application/json'}
     }).then((response) => {
       if(!response.ok) throw new Error();
       return response.json();
     }).then((response) => {
-      window.alert("The ruleset changes have been saved.");
+      this.alertPopup("The ruleset changes have been saved.");
     }).catch((e) => {
-      window.alert("Rule Set could not be saved!\nPlease ensure all fields are filled out.");
+      this.alertPopup("Rule Set could not be saved!\nPlease ensure all fields are filled out.");
     })
   }
+
+  alertPopup(messagePopup: string) {
+    window.alert(messagePopup);
+  };
 
   updateData(){
     const mapToConditions = (condition: ConditionsComponent): ruleCondition => {
       const {conditionIsValue: value_type, conditionWhenValue: fact_type, conditionDatabaseId: id} = condition;
       return { fact_type, value_type, id};
     }
-    const jsonDataToUse = this._parentRuleset.updateSaveButtonClick()
+    const jsonDataToUse = this.updateSaveButtonClick()
       .reduce<ruleset>((acc, rule) => {
         const { thenValue: event_type, priority, ruleDatabaseId: id} = rule;
         const conditions = rule.childrenConditions.map<ruleCondition>(mapToConditions);
@@ -48,8 +53,18 @@ export class UpdateSaveButtonComponent {
         rules: [],
         id: this._parentRuleset.rulesetDatabaseId
       });
-    const data = JSON.stringify(jsonDataToUse, null, 2);
-    this.callPut(data);
+    const data = JSON.stringify(jsonDataToUse, null, 2);   
+    this.updateConfirm(data);
+  }
+
+  updateConfirm(data: string){
+    if (window.confirm("Are you sure you want to save changes?")) {
+      this.callPut(data);
+    }
+  }
+
+  updateSaveButtonClick(){
+    return this._parentRuleset.updateSaveButtonClick();
   }
 }
 

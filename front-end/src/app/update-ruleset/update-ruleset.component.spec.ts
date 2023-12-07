@@ -329,7 +329,6 @@ describe('UpdateRulesetComponent', () => {
     expect(fixture.debugElement.nativeElement.querySelectorAll('#moveUpButtonInside')[0].disabled).toBeTruthy();
   }))
 
-
   it('clicking a rules "Delete" button deletes the rule from the ruleset array', fakeAsync(() => {
     spyOn(component, 'customFetch').and.returnValue(Promise.resolve(new Response(JSON.stringify(fakeFetchBody), {status: 200})));
     spyOn(component, 'convertResponseToJson').and.returnValue(Promise.resolve(fakeFetchBody));
