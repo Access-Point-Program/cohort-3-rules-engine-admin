@@ -42,6 +42,8 @@ public class Rule implements Serializable {
     @OneToMany(mappedBy = "rule", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH}, orphanRemoval = true )
     private List<Condition> conditions;
 
+
+    // Right before the rule is saved to the database, the children conditions of the rule are populated
     @PrePersist
     private void prePersist() {
         conditions.forEach( c -> {

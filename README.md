@@ -30,6 +30,11 @@ This application will be responsible for creating a User Interface that will all
   - 1 PUT endpoint for updating a Ruleset and its Rules and Conditions.
   - 1 DELETE endpoint for deleting a Ruleset and its Rules and Conditions.
 
+# Setting Up Database Locally
+- Set Up PostgreSQL Tables in pgAdmin
+- Create a user
+- Create Environmental Variables
+
 # Setting Up PostgreSQL Tables in pgAdmin
 
 - Right-click database -> Query Tool
@@ -38,6 +43,31 @@ This application will be responsible for creating a User Interface that will all
 - Right-click database -> Refresh
 - Verify that ruleset, rule, and condition table are under the Tables tab.
 - Verify that eventtype, facttype and valuetype are under the Types tab. 
+
+# Creating User
+
+- Right-click Login/Group Roles -> Create -> Login/Group role
+- General: 
+  - Name = rules-engine-admin
+- Definition:
+  - Password = put a password here you want to use
+  - Connection limit = -1
+  - Privileges = Can login, Inherit rights from the parent roles
+- Save
+
+# Setting Up Environmental Variables
+
+- In Windows search bar, type "Environmental variables"
+- Click "Edit the system environmental variables"
+- Click "Environmental Variables..." button (towards bottom right of screen)
+- Under "System variables" click "New..." button
+- For our Username
+  - Variable name = rules_engine_username
+  - Variable value = our database username (rules-engine-admin)
+- For our Password
+  - Variable name = rules_engine_password
+  - Variable value = same password as before 
+- MAKE SURE TO PUSH OK TWICE
 
 # Running the entire application
 
@@ -51,3 +81,10 @@ This application will be responsible for creating a User Interface that will all
 6.
    - Go to the following URl 'http://localhost:9004/create-ruleset' to create a rule.
    - Go to the following URl 'http://localhost:9004/update-ruleset/{id}' to edit a rule ("{id}" should be replaced with the id of the rule you want to edit).
+
+# Accessing Postman Endpoints
+- Download file in repository named "Ruleset Endpoints.postman_collection.json" (If you have the repository cloned you should have it downloaded already)
+- In Postman, click on "Collections" on sidebar
+- Click on "Import" (top right of collections popup)
+- Select the file you just downloaded
+- Select "Open"

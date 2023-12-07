@@ -243,15 +243,18 @@ public class PostTests {
 
     @Test
     public void givenRuleset_whenPostNameDNE_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
         Ruleset ruleset =
                 Ruleset.builder()
                         .id(100L)
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Mock ALL repository methods that get called in the service
         when(rulesetRepository.save(Mockito.any(Ruleset.class))).thenReturn(ruleset);
         when(rulesetRepository.getReferenceById(Mockito.any(Long.class))).thenReturn(ruleset);
 
+        // Given the ruleset, when post request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
@@ -292,8 +295,7 @@ public class PostTests {
 
     @Test
     public void givenRuleset_whenPostRulesDNE_thenCustomErrorIsCalled() {
-
-
+        // Building out the mock ruleset
         Ruleset ruleset =
                 Ruleset.builder()
                         .name("Test")
@@ -301,9 +303,11 @@ public class PostTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Mock ALL repository methods that get called in the service
         when(rulesetRepository.save(Mockito.any(Ruleset.class))).thenReturn(ruleset);
         when(rulesetRepository.getReferenceById(Mockito.any(Long.class))).thenReturn(ruleset);
 
+        // Given the ruleset, when post request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
@@ -359,6 +363,7 @@ public class PostTests {
 
     @Test
     public void givenRuleset_whenPostEndpointPriorityDNE_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
         Rule rule =
                 Rule.builder()
                         .id(1000L)
@@ -373,10 +378,12 @@ public class PostTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Mock ALL repository methods that get called in the service
         when(rulesetRepository.save(Mockito.any(Ruleset.class))).thenReturn(ruleset);
         when(rulesetRepository.getReferenceById(Mockito.any(Long.class))).thenReturn(ruleset);
         when(ruleRepository.save(Mockito.eq(rule))).thenReturn(rule);
 
+        // Given the ruleset, when post request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
@@ -514,6 +521,7 @@ public class PostTests {
 
     @Test
     public void givenRuleset_whenPostEndpointConditionsDNE_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
         Rule rule =
                 Rule.builder()
                         .id(1000L)
@@ -529,10 +537,12 @@ public class PostTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Mock ALL repository methods that get called in the service
         when(rulesetRepository.save(Mockito.any(Ruleset.class))).thenReturn(ruleset);
         when(rulesetRepository.getReferenceById(Mockito.any(Long.class))).thenReturn(ruleset);
         when(ruleRepository.save(Mockito.eq(rule))).thenReturn(rule);
 
+        // Given the ruleset, when post request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
@@ -546,6 +556,7 @@ public class PostTests {
 
     @Test
     public void givenRuleset_whenPostEndpointValueTypeDNE_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
         Condition condition =
                 Condition.builder()
                         .fact_type(RIGHT)
@@ -567,11 +578,13 @@ public class PostTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Mock ALL repository methods that get called in the service
         when(rulesetRepository.save(Mockito.any(Ruleset.class))).thenReturn(ruleset);
         when(rulesetRepository.getReferenceById(Mockito.any(Long.class))).thenReturn(ruleset);
         when(ruleRepository.save(Mockito.eq(rule))).thenReturn(rule);
         when(conditionRepository.save(Mockito.eq(condition))).thenReturn(condition);
 
+        // Given the ruleset, when post request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
@@ -585,6 +598,7 @@ public class PostTests {
 
     @Test
     public void givenRuleset_whenPostEndpointFactTypeDNE_thenCustomErrorIsCalled() {
+        // Building out the mock ruleset
         Condition condition =
                 Condition.builder()
                         .build();
@@ -605,11 +619,13 @@ public class PostTests {
                         .creation_date(Timestamp.valueOf("2000-01-01 01:15:30.500"))
                         .build();
 
+        // Mock ALL repository methods that get called in the service
         when(rulesetRepository.save(Mockito.any(Ruleset.class))).thenReturn(ruleset);
         when(rulesetRepository.getReferenceById(Mockito.any(Long.class))).thenReturn(ruleset);
         when(ruleRepository.save(Mockito.eq(rule))).thenReturn(rule);
         when(conditionRepository.save(Mockito.eq(condition))).thenReturn(condition);
 
+        // Given the ruleset, when post request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)

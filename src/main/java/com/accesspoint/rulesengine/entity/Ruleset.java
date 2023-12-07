@@ -16,31 +16,34 @@ import org.hibernate.annotations.CreationTimestamp;
 @Table(name = "ruleset")
 public class Ruleset implements Serializable {
 
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
     private String name;
 
-    @CreationTimestamp @NotNull
+    @CreationTimestamp
+    @NotNull
     private Timestamp creation_date;
 
     // Joins ruleset table to rule table
     @OneToMany(mappedBy = "ruleset", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH}, orphanRemoval = true)
     private List<Rule> rules;
 
-    public void addRuleToList(Rule rule){
+    // Right before the rule is saved to the database, the children conditions of the rule are populated
+    @PrePersist
+    private void prePersist() {
+        rules.forEach( c -> c.setRuleset(this));
+    }
+
+    public void addRuleToList(Rule rule) {
         rules.add(rule);
         rule.setRuleset(this);
     }
 
-    public void removeRuleFromList(Rule rule){
+    public void removeRuleFromList(Rule rule) {
         rules.remove(rule);
         rule.setRuleset(this);
-    }
-
-    @PrePersist
-    private void prePersist() {
-        rules.forEach( c -> c.setRuleset(this));
     }
 }

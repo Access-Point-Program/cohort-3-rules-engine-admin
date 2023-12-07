@@ -74,7 +74,7 @@ public class DeleteTests {
         // Mock ALL repository methods that get called in the service
         when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset));
 
-        // Given the ruleset, when post request, then response body is as expected
+        // Given the ruleset, when get request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
@@ -112,7 +112,7 @@ public class DeleteTests {
         // Mock ALL repository methods that get called in the service
         when(rulesetRepository.findById(Mockito.eq(100L))).thenReturn(Optional.ofNullable(ruleset));
 
-        // Given the ruleset, when post request, then response body is as expected
+        // Given the ruleset, when get request, then response body is as expected
         given()
                 .contentType(ContentType.JSON)
                 .body(ruleset)
