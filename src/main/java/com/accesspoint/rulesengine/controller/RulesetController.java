@@ -15,17 +15,20 @@ public class RulesetController {
     @Autowired
     private RulesetService rulesetService;
 
+    @CrossOrigin(origins = {"http://localhost:9030", "http://localhost:9005/", "http://localhost:9010/"})
     @GetMapping("/ruleset") // Calls service to get all ruleset names, ids, and creation dates
     public List<RulesetModel> all() {
         return rulesetService.getAll();
     }
 
+    @CrossOrigin(origins = {"http://localhost:9030", "http://localhost:9005/", "http://localhost:9010/"})
     @GetMapping("/ruleset/{id}") // Calls service to get a ruleset by its id to return the ruleset's name, id, creation date, and it's rules and conditions information
     public ResponseEntity<Ruleset> one(@PathVariable Long id) {
         return rulesetService.getById(id);
     }
 
-    @GetMapping("/ruleset-extended")
+    @CrossOrigin(origins = "http://localhost:9005/")
+    @GetMapping("/ruleset-extended") // Calls service to get all rulesets and their name, id, creation date, rules and conditions
     public List<Ruleset> allExtended() {
         return rulesetService.getAllExtended();
     }
@@ -40,6 +43,7 @@ public class RulesetController {
         return rulesetService.updateRuleset(id, ruleset);
     }
 
+    @CrossOrigin(origins = "http://localhost:9030")
     @DeleteMapping("/ruleset/{id}") // Calls service to delete an existing ruleset and it's rules and conditions
     ResponseEntity<HttpStatus> deleteRuleset(@PathVariable Long id) {
         return rulesetService.deleteRulesetById(id);
