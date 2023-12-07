@@ -71,8 +71,8 @@ This application will be responsible for creating a User Interface that will all
   - Maintenance database = postgres
   - Username = rules-engine-admin
   - Password = same password as before
-- Check "Save password?"
-Save
+  - Check "Save password?"
+- Save
 
 # Setting Up PostgreSQL Tables in pgAdmin
 
