@@ -31,18 +31,10 @@ This application will be responsible for creating a User Interface that will all
   - 1 DELETE endpoint for deleting a Ruleset and its Rules and Conditions.
 
 # Setting Up Database Locally
-- Set Up PostgreSQL Tables in pgAdmin
 - Create a user
 - Create Environmental Variables
-
-# Setting Up PostgreSQL Tables in pgAdmin
-
-- Right-click database -> Query Tool
-- Paste in code from [sql/create.ddl](https://github.com/Access-Point-Program/cohort-3-rules-engine-admin/blob/2fa165b962dda1049bb8ee32e7312352060c6410/sql/create.ddl) file
-- Click play button  (Execute/Refresh)
-- Right-click database -> Refresh
-- Verify that ruleset, rule, and condition table are under the Tables tab.
-- Verify that eventtype, facttype and valuetype are under the Types tab. 
+- Create a server
+- Set Up PostgreSQL Tables in pgAdmin
 
 # Creating User
 
@@ -69,6 +61,28 @@ This application will be responsible for creating a User Interface that will all
   - Variable value = same password as before 
 - MAKE SURE TO PUSH OK TWICE
 
+# Creating Server
+- Right-click Servers -> Register -> Server...
+- General:
+  - Name = rules-engine
+- Connection:
+  - Host name/address = localhost
+  - LEAVE PORT AS DEFAULT!!!
+  - Maintenance database = postgres
+  - Username = rules-engine-admin
+  - Password = same password as before
+  - Check "Save password?"
+- Save
+
+# Setting Up PostgreSQL Tables in pgAdmin
+
+- Right-click database -> Query Tool
+- Paste in code from [sql/create.ddl](https://github.com/Access-Point-Program/cohort-3-rules-engine-admin/blob/2fa165b962dda1049bb8ee32e7312352060c6410/sql/create.ddl) file
+- Click play button  (Execute/Refresh)
+- Right-click database -> Refresh
+- Verify that ruleset, rule, and condition table are under the Tables tab.
+- Verify that eventtype, facttype and valuetype are under the Types tab. 
+
 # Running the entire application
 
 1. Clone down the repository
@@ -83,7 +97,7 @@ This application will be responsible for creating a User Interface that will all
    - Go to the following URl 'http://localhost:9004/update-ruleset/{id}' to edit a rule ("{id}" should be replaced with the id of the rule you want to edit).
 
 # Accessing Postman Endpoints
-- Download file in repository named "Ruleset Endpoints.postman_collection.json" (If you have the repository cloned you should have it downloaded already)
+- Download file in repository named "[Ruleset Endpoints.postman_collection.json](https://github.com/Access-Point-Program/cohort-3-rules-engine-admin/blob/7ae6a172a0188bb6b8e5b7e1a70f28e58111cfb7/Ruleset%20Endpoints.postman_collection.json)" (If you have the repository cloned you should have it downloaded already)
 - In Postman, click on "Collections" on sidebar
 - Click on "Import" (top right of collections popup)
 - Select the file you just downloaded
