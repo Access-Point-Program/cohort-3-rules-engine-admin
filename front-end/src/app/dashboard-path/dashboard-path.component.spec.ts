@@ -17,4 +17,12 @@ describe('DashboardPathComponent', () => {
   it('should create "dashboard-path" component', () => {
     expect(component).toBeTruthy();
   });
+
+  fit('When dashboard-path is clicked mocked leavePage() function is called', () => {
+    fixture.detectChanges();
+    spyOn(component, 'leavePage');
+    fixture.debugElement.nativeElement.querySelector('#dashboardPath').click();
+    fixture.detectChanges();
+    expect(component.leavePage).toHaveBeenCalled();
+  });
 });
