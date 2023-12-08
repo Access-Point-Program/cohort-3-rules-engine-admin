@@ -18,7 +18,7 @@ describe('DashboardPathComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('When dashboard-path is clicked mocked leavePage() function is called', () => {
+  it('When dashboard-path is clicked mocked leavePage() function is called', () => {
     fixture.detectChanges();
     spyOn(component, 'leavePage');
     fixture.debugElement.nativeElement.querySelector('#dashboardPath').click();
