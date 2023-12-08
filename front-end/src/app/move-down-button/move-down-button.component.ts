@@ -19,7 +19,6 @@ export class MoveDownButtonComponent {
     try {
       const _parent_parent: CreateRulesetComponent = this._injector.get<CreateRulesetComponent>(CreateRulesetComponent);
       this._parentRuleset = _parent_parent;
-  
     } catch (e) {
       const _parent_parent: UpdateRulesetComponent = this._injector.get<UpdateRulesetComponent>(UpdateRulesetComponent);
       this._parentRuleset = _parent_parent;

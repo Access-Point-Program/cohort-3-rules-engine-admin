@@ -16,6 +16,7 @@ export class RulesComponentComponent implements OnInit, AfterViewInit {
   @Input() thenValue: string = "";
   @Input() ruleDatabaseId?: number;
   neverThenEntry: boolean = true;
+  
   ngOnInit() {
     if (this.givenRule != undefined){
       this.thenValue = this.givenRule.thenValue;
