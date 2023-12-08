@@ -5,7 +5,7 @@
             <div class="rounded shadow" style="border: 1px solid #DEE2E6; padding:2.5rem;">
                 <p style="color: #6C757D">Rules</p>
                 <hr style="padding: 16px;">
-                <div class="" style="height:fit-content;display:inline-block;width:100%; margin-top: -3rem;">
+                <div style="height:fit-content;display:inline-block;width:100%; margin-top: -3rem;">
                     <div>
                         <app-rules-component id="rulesComponent" class="m-1" *ngFor="let rule of ruleset" [ruleset]="ruleset" [givenRule]="rule" [childrenConditions]="rule.childrenConditions" 
                             [priority]="rule.getPriority() && rule.getPriority() !==-1 ? 
@@ -15,7 +15,6 @@
                                     roundToCeil(ruleset[(ruleset.indexOf(rule) - 1)].getPriority()) != ruleset[(ruleset.indexOf(rule) - 1)].getPriority() ?
                                     roundToCeil(ruleset[(ruleset.indexOf(rule) - 1)].getPriority()) :
                                     roundToCeil(ruleset[(ruleset.indexOf(rule) - 1)].getPriority()) + 1"
-
                             [ruleIndex]="ruleset.indexOf(rule)"></app-rules-component>
                     </div>
                     <app-add-new-rule-button id="ruleButton" (click)="onAddRuleClick()" style="display:inline-block;float:right"></app-add-new-rule-button>
