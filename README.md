@@ -87,10 +87,11 @@ This application will be responsible for creating a User Interface that will all
 - Paste in code from [sql/create.ddl](https://github.com/Access-Point-Program/cohort-3-rules-engine-admin/blob/2fa165b962dda1049bb8ee32e7312352060c6410/sql/create.ddl) file
 - Click play button  (Execute/Refresh)
 - Right-click database -> Refresh
-- Click to open the rules-engine database you created, inside the new server
+- Click to open the rules-engine database you created inside the new server
 - Click to open the "Schema" tab
-- Under the Tables tab, verify that ruleset, rule, and condition tables exist.
-- Under the Tables tab, verify that eventtype, facttype and valuetype exist. 
+- Under the "Tables" tab, verify that ruleset, rule, and condition tables exist.
+- Under the "Types" tab, verify that eventtype, facttype and valuetype exist.
+- Under the "Sequences" tab, verify that "condition_id_seq", "condition_rule_id_seq", "rule_id_seq", "rule_ruleset_id_seq", and "ruleset_id_seq" exist.
 
 # Running the entire application
 1. Clone down the repository
