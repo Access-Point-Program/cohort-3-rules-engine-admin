@@ -10,7 +10,6 @@ This application will be responsible for creating a User Interface that will all
 - Postman
 
 ### Team Members
-
 - Scott Schmelzle
 - Zach Duncan
 - Sophia Hales
@@ -18,7 +17,6 @@ This application will be responsible for creating a User Interface that will all
 - Sergio Rodas
 
 ### Requirements:
-
 - 1 React / JavaScript / Redux application.
   - 1 Page for creating a new Ruleset.
   - 1 Page for editing Rulesets that have been created.
@@ -37,7 +35,7 @@ This application will be responsible for creating a User Interface that will all
 - Set Up PostgreSQL Tables in pgAdmin
 
 # Creating User
-
+- Start by logging into the Postgres 15 Server, and expanding it.
 - Right-click Login/Group Roles -> Create -> Login/Group role
 - General: 
   - Name = rules-engine-admin
@@ -48,7 +46,6 @@ This application will be responsible for creating a User Interface that will all
 - Save
 
 # Setting Up Environmental Variables
-
 - In Windows search bar, type "Environmental variables"
 - Click "Edit the system environmental variables"
 - Click "Environmental Variables..." button (towards bottom right of screen)
@@ -60,6 +57,14 @@ This application will be responsible for creating a User Interface that will all
   - Variable name = rules_engine_password
   - Variable value = same password as before 
 - MAKE SURE TO PUSH OK TWICE
+
+# Creating the Database
+- Right-click the "Databases" directory
+- Click on "Create", "Database..."
+- General
+  - Name = rules-engine
+  - Owner = rules-engine-admin (or the user you created above)
+- Save
 
 # Creating Server
 - Right-click Servers -> Register -> Server...
@@ -75,7 +80,8 @@ This application will be responsible for creating a User Interface that will all
 - Save
 
 # Setting Up PostgreSQL Tables in pgAdmin
-
+- Log into the new server you created (with the password you used for creating your user)
+- Expand the new server once signed in
 - Right-click database -> Query Tool
 - Paste in code from [sql/create.ddl](https://github.com/Access-Point-Program/cohort-3-rules-engine-admin/blob/2fa165b962dda1049bb8ee32e7312352060c6410/sql/create.ddl) file
 - Click play button  (Execute/Refresh)
@@ -84,7 +90,6 @@ This application will be responsible for creating a User Interface that will all
 - Verify that eventtype, facttype and valuetype are under the Types tab. 
 
 # Running the entire application
-
 1. Clone down the repository
 2. Run sql code to create the required tables 
 3. Open the project and __navigate into the `front-end` directory__, then run `npm install`
