@@ -57,6 +57,7 @@ This application will be responsible for creating a User Interface that will all
   - Variable name = rules_engine_password
   - Variable value = same password as before 
 - MAKE SURE TO PUSH OK TWICE
+- After it has been saved and you close out, ensure you restart your IDE
 
 # Creating the Database
 - Right-click the "Databases" directory
