@@ -18,7 +18,6 @@ import { MoveUpButtonComponent } from '../move-up-button/move-up-button.componen
 import { ActivatedRoute, RouterModule, convertToParamMap} from '@angular/router';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
-import { Component } from '@angular/core';
 
 const fakeFetchBody = {
   "id": 1,

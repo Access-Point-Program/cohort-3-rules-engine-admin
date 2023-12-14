@@ -10,7 +10,6 @@ This application will be responsible for creating a User Interface that will all
 - Postman
 
 ### Team Members
-
 - Scott Schmelzle
 - Zach Duncan
 - Sophia Hales
@@ -18,7 +17,6 @@ This application will be responsible for creating a User Interface that will all
 - Sergio Rodas
 
 ### Requirements:
-
 - 1 React / JavaScript / Redux application.
   - 1 Page for creating a new Ruleset.
   - 1 Page for editing Rulesets that have been created.
@@ -37,7 +35,7 @@ This application will be responsible for creating a User Interface that will all
 - Set Up PostgreSQL Tables in pgAdmin
 
 # Creating User
-
+- Start by logging into the Postgres 15 Server, and expanding it.
 - Right-click Login/Group Roles -> Create -> Login/Group role
 - General: 
   - Name = rules-engine-admin
@@ -48,7 +46,6 @@ This application will be responsible for creating a User Interface that will all
 - Save
 
 # Setting Up Environmental Variables
-
 - In Windows search bar, type "Environmental variables"
 - Click "Edit the system environmental variables"
 - Click "Environmental Variables..." button (towards bottom right of screen)
@@ -60,6 +57,15 @@ This application will be responsible for creating a User Interface that will all
   - Variable name = rules_engine_password
   - Variable value = same password as before 
 - MAKE SURE TO PUSH OK TWICE
+- After it has been saved and you close out, ensure you restart your IDE
+
+# Creating the Database
+- Right-click the "Databases" directory
+- Click on "Create", "Database..."
+- General
+  - Name = rules-engine
+  - Owner = rules-engine-admin (or the user you created above)
+- Save
 
 # Creating Server
 - Right-click Servers -> Register -> Server...
@@ -75,16 +81,19 @@ This application will be responsible for creating a User Interface that will all
 - Save
 
 # Setting Up PostgreSQL Tables in pgAdmin
-
-- Right-click database -> Query Tool
+- Log into the new server you created (with the password you used for creating your user)
+- Expand the new server once signed in
+- Right-click the rules-engine database from the new server -> Query Tool
 - Paste in code from [sql/create.ddl](https://github.com/Access-Point-Program/cohort-3-rules-engine-admin/blob/2fa165b962dda1049bb8ee32e7312352060c6410/sql/create.ddl) file
 - Click play button  (Execute/Refresh)
 - Right-click database -> Refresh
-- Verify that ruleset, rule, and condition table are under the Tables tab.
-- Verify that eventtype, facttype and valuetype are under the Types tab. 
+- Click to open the rules-engine database you created inside the new server
+- Click to open the "Schema" tab
+- Under the "Tables" tab, verify that ruleset, rule, and condition tables exist.
+- Under the "Types" tab, verify that eventtype, facttype and valuetype exist.
+- Under the "Sequences" tab, verify that "condition_id_seq", "condition_rule_id_seq", "rule_id_seq", "rule_ruleset_id_seq", and "ruleset_id_seq" exist.
 
 # Running the entire application
-
 1. Clone down the repository
 2. Run sql code to create the required tables 
 3. Open the project and __navigate into the `front-end` directory__, then run `npm install`

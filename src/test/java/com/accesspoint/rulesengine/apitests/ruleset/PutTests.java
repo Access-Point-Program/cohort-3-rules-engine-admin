@@ -17,10 +17,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import java.sql.Timestamp;
 import java.util.*;
-
 import static com.accesspoint.rulesengine.entity.EventType.FORWARD;
 import static com.accesspoint.rulesengine.entity.FactType.LEFT;
 import static com.accesspoint.rulesengine.entity.FactType.RIGHT;
@@ -100,6 +98,7 @@ public class PutTests {
                 .body("rules[0].conditions[0].fact_type", equalTo(("RIGHT")))
                 .body("rules[0].conditions[0].value_type", equalTo(("END")));
     }
+
     @Test
     public void givenIncomingRuleset_whenPutEndpointIsCalledWithNameChange_thenOnlyNameIsChanged() {
         // Building out the mock ruleset
@@ -158,6 +157,7 @@ public class PutTests {
                 .body("rules[0].conditions[0].fact_type", equalTo(("RIGHT")))
                 .body("rules[0].conditions[0].value_type", equalTo(("END")));
     }
+
     @Test
     public void givenIncomingRuleset_whenPutEndpointIsCalledWithRulePriorityChanged_thenOnlyPriorityIsChanged() {
         // Building out the mock ruleset
@@ -224,6 +224,7 @@ public class PutTests {
                 .body("rules[0].conditions[0].fact_type", equalTo(("RIGHT")))
                 .body("rules[0].conditions[0].value_type", equalTo(("END")));
     }
+
     @Test
     public void givenIncomingRuleset_whenPutEndpointIsCalledWithRuleEventTypeChanged_thenOnlyEventTypeIsChanged() {
         // Building out the mock ruleset
@@ -290,6 +291,7 @@ public class PutTests {
                 .body("rules[0].conditions[0].fact_type", equalTo(("RIGHT")))
                 .body("rules[0].conditions[0].value_type", equalTo(("END")));
     }
+
     @Test
     public void givenIncomingRuleset_whenPutEndpointIsCalledWithConditionFactTypeChanged_thenOnlyFactTypeIsChanged() {
         // Building out the mock ruleset
@@ -363,6 +365,7 @@ public class PutTests {
                 .body("rules[0].conditions[0].fact_type", equalTo(("LEFT")))
                 .body("rules[0].conditions[0].value_type", equalTo(("END")));
     }
+
     @Test
     public void givenIncomingRuleset_whenPutEndpointIsCalledWithConditionValueTypeChanged_thenOnlyValueTypeIsChanged() {
         // Building out the mock ruleset
@@ -436,6 +439,7 @@ public class PutTests {
                 .body("rules[0].conditions[0].fact_type", equalTo(("RIGHT")))
                 .body("rules[0].conditions[0].value_type", equalTo(("EMPTY")));
     }
+
     @Test
     public void givenIncomingRuleset_whenPutEndpointIsCalledWithRuleAdded_thenRuleAdded() {
         // Building out the mock ruleset
@@ -530,6 +534,7 @@ public class PutTests {
                 .body("rules[1].conditions[0].fact_type", equalTo(("RIGHT")))
                 .body("rules[1].conditions[0].value_type", equalTo(("EMPTY")));
     }
+
     @Test
     public void givenIncomingRuleset_whenPutEndpointIsCalledWithRuleRemoved_thenRuleRemoved() {
         // Building out the mock ruleset
@@ -605,6 +610,7 @@ public class PutTests {
                 .body("rules[0].conditions[0].value_type", equalTo(("END")))
                 .body("rules.size()", equalTo(1));
     }
+
     @Test
     public void givenIncomingRuleset_whenPutEndpointIsCalledWithConditionAdded_thenConditionAdded() {
         // Building out the mock ruleset
@@ -689,6 +695,7 @@ public class PutTests {
                 .body("rules[0].conditions[1].fact_type", equalTo(("RIGHT")))
                 .body("rules[0].conditions[1].value_type", equalTo(("EMPTY")));
     }
+
     @Test
     public void givenIncomingRuleset_whenPutEndpointIsCalledWithConditionRemoved_thenConditionRemoved() {
         // Building out the mock ruleset
@@ -765,6 +772,7 @@ public class PutTests {
                 .body("rules[0].conditions[0].value_type", equalTo(("END")))
                 .body("rules[0].conditions.size()", equalTo(1));
     }
+
     @Test
     public void givenRuleset_whenPutEndpointNameIsBlank_thenCustomErrorIsCalled() {
         // Building out the mock ruleset
@@ -806,6 +814,7 @@ public class PutTests {
                 .statusCode(400)
                 .body(equalTo("Name cannot be empty"));
     }
+
     @Test
     public void givenRuleset_whenPutEndpointRulesIsBlank_thenCustomErrorIsCalled() {
         // Building out the mock ruleset
@@ -830,6 +839,7 @@ public class PutTests {
                 .statusCode(400)
                 .body(equalTo("Rules cannot be empty"));
     }
+
     @Test
     public void givenRuleset_whenPutEndpointRulesDNE_thenCustomErrorIsCalled() {
         // Building out the mock ruleset
@@ -851,6 +861,7 @@ public class PutTests {
                 .statusCode(400)
                 .body(equalTo("Rules cannot be empty"));
     }
+
     @Test
     public void givenRuleset_whenPutEndpointPriorityIs0_thenCustomErrorIsCalled() {
         // Building out the mock ruleset
@@ -877,6 +888,7 @@ public class PutTests {
                 .statusCode(400)
                 .body(equalTo("Rule priority cannot be 0"));
     }
+
     @Test
     public void givenRuleset_whenPutEndpointPriorityDNE_thenCustomErrorIsCalled() {
         // Building out the mock ruleset
@@ -905,6 +917,7 @@ public class PutTests {
                 .statusCode(400)
                 .body(equalTo("Rule priority cannot be 0"));
     }
+
     @Test
     public void givenRuleset_whenPutEndpointEventTypeDNE_thenCustomErrorIsCalled() {
         // Building out the mock ruleset
@@ -933,6 +946,7 @@ public class PutTests {
                 .statusCode(400)
                 .body(equalTo("Rule event type cannot be null"));
     }
+
     @Test
     public void givenRuleset_whenPutEndpointConditionsIsBlank_thenCustomErrorIsCalled() {
         // Building out the mock ruleset
@@ -965,6 +979,7 @@ public class PutTests {
                 .statusCode(400)
                 .body(equalTo("Conditions cannot be empty"));
     }
+
     @Test
     public void givenRuleset_whenPutEndpointConditionsDNE_thenCustomErrorIsCalled() {
         // Building out the mock ruleset
@@ -994,6 +1009,7 @@ public class PutTests {
                 .statusCode(400)
                 .body(equalTo("Conditions cannot be empty"));
     }
+
     @Test
     public void givenRuleset_whenPutEndpointFactTypeDNE_thenCustomErrorIsCalled() {
         // Building out the mock ruleset
@@ -1028,6 +1044,7 @@ public class PutTests {
                 .statusCode(400)
                 .body(equalTo("Condition fact type cannot be null"));
     }
+
     @Test
     public void givenRuleset_whenPutEndpointValueTypeDNE_thenCustomErrorIsCalled() {
         // Building out the mock ruleset
