@@ -18,7 +18,7 @@ export class UpdateSaveButtonComponent {
   }
 
   callPut(data: string) {
-    fetch(`http://host.docker.internal:9004/ruleset/` + this._parentRuleset.id, {
+    fetch(`/ruleset/` + this._parentRuleset.id, {
       method: 'PUT',
       body: data,
       headers: {'Content-Type': 'application/json'}

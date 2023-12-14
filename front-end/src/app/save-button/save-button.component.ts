@@ -21,10 +21,10 @@ export class SaveButtonComponent {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    this.http.post(`http://host.docker.internal:9004/ruleset`, data, { headers: headers }).subscribe({
+    this.http.post('/ruleset', data, { headers: headers }).subscribe({
       next: res => {
         window.alert("Rule Set saved!");
-        window.location.href = "http://host.docker.internal:9030/rulesets";
+        window.location.href = "http://localhost:9030/rulesets";
       },
       error: err => {
         if (err.error == "Name cannot be empty") {
