@@ -8,6 +8,6 @@ import { Component } from '@angular/core';
 export class CancelButtonComponent {
 
   redirectToDashboard(){
-    window.location.href = "http://localhost:9030/rulesets";  
+    window.location.href = "http://host.docker.internal:9030/rulesets";
   }
 }

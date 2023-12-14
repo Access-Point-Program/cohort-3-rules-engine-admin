@@ -17,10 +17,10 @@ export class UpdateSaveButtonComponent {
     this._parentRuleset = _parent_parent;
   }
 
-  callPut(data: string) { 
-    fetch(`http://localhost:9004/ruleset/` + this._parentRuleset.id, {
+  callPut(data: string) {
+    fetch(`http://host.docker.internal:9004/ruleset/` + this._parentRuleset.id, {
       method: 'PUT',
-      body: data, 
+      body: data,
       headers: {'Content-Type': 'application/json'}
     }).then((response) => {
       if(!response.ok) throw new Error();
@@ -53,7 +53,7 @@ export class UpdateSaveButtonComponent {
         rules: [],
         id: this._parentRuleset.rulesetDatabaseId
       });
-    const data = JSON.stringify(jsonDataToUse, null, 2);   
+    const data = JSON.stringify(jsonDataToUse, null, 2);
     this.updateConfirm(data);
   }
 
