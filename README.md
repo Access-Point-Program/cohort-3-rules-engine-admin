@@ -83,14 +83,14 @@ This application will be responsible for creating a User Interface that will all
 # Setting Up PostgreSQL Tables in pgAdmin
 - Log into the new server you created (with the password you used for creating your user)
 - Expand the new server once signed in
-- Right-click database tab that is inside that new server -> Query Tool
+- Right-click the rules-engine database from the new server -> Query Tool
 - Paste in code from [sql/create.ddl](https://github.com/Access-Point-Program/cohort-3-rules-engine-admin/blob/2fa165b962dda1049bb8ee32e7312352060c6410/sql/create.ddl) file
 - Click play button  (Execute/Refresh)
 - Right-click database -> Refresh
-- Click to open the database you created inside the new server
+- Click to open the rules-engine database you created, inside the new server
 - Click to open the "Schema" tab
-- Verify that ruleset, rule, and condition table are under the Tables tab.
-- Verify that eventtype, facttype and valuetype are under the Types tab. 
+- Under the Tables tab, verify that ruleset, rule, and condition tables exist.
+- Under the Tables tab, verify that eventtype, facttype and valuetype exist. 
 
 # Running the entire application
 1. Clone down the repository
