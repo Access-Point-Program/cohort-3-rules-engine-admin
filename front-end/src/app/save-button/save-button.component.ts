@@ -30,6 +30,7 @@ export class SaveButtonComponent {
         if (err.error == "Name cannot be empty") {
           window.alert("Rule Set could not be saved!\nError: " + err.error);
         }else{
+          console.log(err.error);
           window.alert("Rule Set could not be saved!\nPlease ensure all fields are filled out.");
         }
       }

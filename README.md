@@ -126,6 +126,7 @@ docker run \
     --rm \
     -d \
     --name=rules-engine-admin \
+    --env rules_engine_url=jdbc:postgresql://host.docker.internal:5432/rules-engine \
     --env rules_engine_username \
     --env rules_engine_password \
     cohort-3-rules-engine-admin:latest
