@@ -21,7 +21,7 @@ export class SaveButtonComponent {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    this.http.post(`http://localhost:9004/ruleset`, data, { headers: headers }).subscribe({
+    this.http.post('/ruleset', data, { headers: headers }).subscribe({
       next: res => {
         window.alert("Rule Set saved!");
         window.location.href = "http://localhost:9030/rulesets";
@@ -30,6 +30,7 @@ export class SaveButtonComponent {
         if (err.error == "Name cannot be empty") {
           window.alert("Rule Set could not be saved!\nError: " + err.error);
         }else{
+          console.log(err.error);
           window.alert("Rule Set could not be saved!\nPlease ensure all fields are filled out.");
         }
       }

@@ -14,7 +14,7 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
   public ruleset: RulesComponentComponent[] = [new RulesComponentComponent()]
   public rulesetDatabaseId?: number;
   public name:string = '';
-  private url: string = 'http://localhost:9004/ruleset/';
+  private url: string = '/ruleset/';
   public paramsSubscription$!: Subscription;
   public id!: string | null;
 
@@ -54,8 +54,8 @@ export class UpdateRulesetComponent implements OnInit, AfterViewInit, AfterViewC
           this.rulesetDatabaseId = response.id;
         }).catch((e) => {
           window.alert("There was an issue populating the webpage.\n\nError: " + e);
-          window.location.href = "http://localhost:9030/rulesets";  
-        }) 
+          window.location.href = "http://localhost:9030/rulesets";
+        })
       }
     );
   }

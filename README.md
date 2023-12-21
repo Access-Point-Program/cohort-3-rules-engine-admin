@@ -98,12 +98,80 @@ This application will be responsible for creating a User Interface that will all
 2. Run sql code to create the required tables 
 3. Open the project and __navigate into the `front-end` directory__, then run `npm install`
 4. After it has finished installing, __navigate back to the root directory__, and run `mvn clean install`
-5. Once the project has finished building, then you can run the executable jar file. (Below)
-(Depending on terminal '\' might need to be changed to '/') 
-`java -jar .\target\rules-engine-0.0.1-SNAPSHOT.jar`  or `java -jar ./target/rules-engine-0.0.1-SNAPSHOT.jar`
+[//]: # (5. Once the project has finished building, then you can run the executable jar file. &#40;Below&#41;)
+[//]: # (&#40;Depending on terminal '\' might need to be changed to '/'&#41; )
+[//]: # (`java -jar .\target\rules-engine-0.0.1-SNAPSHOT.jar`  or `java -jar ./target/rules-engine-0.0.1-SNAPSHOT.jar`)
+5. Follow the Docker guide below
 6.
    - Go to the following URl 'http://localhost:9004/create-ruleset' to create a rule.
    - Go to the following URl 'http://localhost:9004/update-ruleset/{id}' to edit a rule ("{id}" should be replaced with the id of the rule you want to edit).
+
+## Docker
+
+### Building a Docker Image
+
+Run the following as a build configuration or a command in the terminal.
+
+```bash
+mvn spring-boot:build-image
+```
+
+### Running the Docker Image
+
+1. Open a bash terminal and run the following command to start create and start the docker container from the image.
+
+```bash
+docker run \
+    -p 9004:9004 \
+    --rm \
+    -d \
+    --name=rules-engine-admin \
+    --env rules_engine_url=jdbc:postgresql://host.docker.internal:5432/rules-engine \
+    --env rules_engine_username \
+    --env rules_engine_password \
+    cohort-3-rules-engine-admin:latest
+```
+
+> For the environment variables replace any reference of `localhost` with `host.docker.internal`. If you are using `localhost` anywhere within the application it will need to be a configuration option that can be changed when running in a docker container.
+2. Validate that the docker container is running with the following command
+
+```bash
+docker ps
+```
+
+It should look something like this.
+
+```bash
+CONTAINER ID   IMAGE                                COMMAND              CREATED         STATUS         PORTS                    NAMES
+78264899f2d0   cohort-3-rules-engine-admin:latest   "/cnb/process/web"   3 minutes ago   Up 3 minutes   0.0.0.0:9004->9004/tcp   rules-engine-admin
+```
+
+3. Check the logs to make sure the application is correctly running. You will need the container ID from the `docker ps` command to run this.
+
+```bash
+docker logs 78264899f2d0
+```
+
+### To Stop the Docker container
+
+Run
+
+```bash
+docker ps
+```
+
+Grab the container ID.
+
+```bash
+CONTAINER ID   IMAGE                                COMMAND              CREATED         STATUS         PORTS                    NAMES
+78264899f2d0   cohort-3-rules-engine-admin:latest   "/cnb/process/web"   3 minutes ago   Up 3 minutes   0.0.0.0:9004->9004/tcp   rules-engine-admin
+```
+
+Use the container ID with the stop command.
+
+```bash
+docker stop 78264899f2d0
+```
 
 # Accessing Postman Endpoints
 - Download file in repository named "[Ruleset Endpoints.postman_collection.json](https://github.com/Access-Point-Program/cohort-3-rules-engine-admin/blob/7ae6a172a0188bb6b8e5b7e1a70f28e58111cfb7/Ruleset%20Endpoints.postman_collection.json)" (If you have the repository cloned you should have it downloaded already)
